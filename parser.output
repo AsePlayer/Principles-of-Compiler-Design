@@ -1,0 +1,222 @@
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: DeclList StmtList
+
+    2 DeclList: Decl DeclList
+    3         | Decl
+
+    4 Decl: TYPE ID SEMICOLON
+
+    5 StmtList: ε
+    6         | Stmt StmtList
+
+    7 Stmt: ID EQ ID SEMICOLON
+    8     | ID EQ NUMBER SEMICOLON
+    9     | WRITE ID SEMICOLON
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    TYPE <string> (258) 4
+    ID <string> (259) 4 7 8 9
+    SEMICOLON <character> (260) 4 7 8 9
+    EQ <character> (261) 7 8
+    NUMBER <number> (262) 8
+    WRITE (263) 9
+
+
+Nonterminals, with rules where they appear
+
+    $accept (9)
+        on left: 0
+    Program (10)
+        on left: 1
+        on right: 0
+    DeclList (11)
+        on left: 2 3
+        on right: 1 2
+    Decl (12)
+        on left: 4
+        on right: 2 3
+    StmtList (13)
+        on left: 5 6
+        on right: 1 6
+    Stmt (14)
+        on left: 7 8 9
+        on right: 6
+
+
+State 0
+
+    0 $accept: • Program $end
+
+    TYPE  shift, and go to state 1
+
+    Program   go to state 2
+    DeclList  go to state 3
+    Decl      go to state 4
+
+
+State 1
+
+    4 Decl: TYPE • ID SEMICOLON
+
+    ID  shift, and go to state 5
+
+
+State 2
+
+    0 $accept: Program • $end
+
+    $end  shift, and go to state 6
+
+
+State 3
+
+    1 Program: DeclList • StmtList
+
+    ID     shift, and go to state 7
+    WRITE  shift, and go to state 8
+
+    $default  reduce using rule 5 (StmtList)
+
+    StmtList  go to state 9
+    Stmt      go to state 10
+
+
+State 4
+
+    2 DeclList: Decl • DeclList
+    3         | Decl •
+
+    TYPE  shift, and go to state 1
+
+    $default  reduce using rule 3 (DeclList)
+
+    DeclList  go to state 11
+    Decl      go to state 4
+
+
+State 5
+
+    4 Decl: TYPE ID • SEMICOLON
+
+    SEMICOLON  shift, and go to state 12
+
+
+State 6
+
+    0 $accept: Program $end •
+
+    $default  accept
+
+
+State 7
+
+    7 Stmt: ID • EQ ID SEMICOLON
+    8     | ID • EQ NUMBER SEMICOLON
+
+    EQ  shift, and go to state 13
+
+
+State 8
+
+    9 Stmt: WRITE • ID SEMICOLON
+
+    ID  shift, and go to state 14
+
+
+State 9
+
+    1 Program: DeclList StmtList •
+
+    $default  reduce using rule 1 (Program)
+
+
+State 10
+
+    6 StmtList: Stmt • StmtList
+
+    ID     shift, and go to state 7
+    WRITE  shift, and go to state 8
+
+    $default  reduce using rule 5 (StmtList)
+
+    StmtList  go to state 15
+    Stmt      go to state 10
+
+
+State 11
+
+    2 DeclList: Decl DeclList •
+
+    $default  reduce using rule 2 (DeclList)
+
+
+State 12
+
+    4 Decl: TYPE ID SEMICOLON •
+
+    $default  reduce using rule 4 (Decl)
+
+
+State 13
+
+    7 Stmt: ID EQ • ID SEMICOLON
+    8     | ID EQ • NUMBER SEMICOLON
+
+    ID      shift, and go to state 16
+    NUMBER  shift, and go to state 17
+
+
+State 14
+
+    9 Stmt: WRITE ID • SEMICOLON
+
+    SEMICOLON  shift, and go to state 18
+
+
+State 15
+
+    6 StmtList: Stmt StmtList •
+
+    $default  reduce using rule 6 (StmtList)
+
+
+State 16
+
+    7 Stmt: ID EQ ID • SEMICOLON
+
+    SEMICOLON  shift, and go to state 19
+
+
+State 17
+
+    8 Stmt: ID EQ NUMBER • SEMICOLON
+
+    SEMICOLON  shift, and go to state 20
+
+
+State 18
+
+    9 Stmt: WRITE ID SEMICOLON •
+
+    $default  reduce using rule 9 (Stmt)
+
+
+State 19
+
+    7 Stmt: ID EQ ID SEMICOLON •
+
+    $default  reduce using rule 7 (Stmt)
+
+
+State 20
+
+    8 Stmt: ID EQ NUMBER SEMICOLON •
+
+    $default  reduce using rule 8 (Stmt)

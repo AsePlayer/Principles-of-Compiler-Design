@@ -1,9 +1,5 @@
-int x = 5;
-x = 2 + 5;
-write x;
-y = x * 2;
-write x;
-
-! == >= && || <= < > % / * +
-print()
-write()
+int x;
+x = 2;
+int chart;
+x = 333;
+3 = 5;

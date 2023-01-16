@@ -3,8 +3,10 @@
 %{
 #include <stdio.h>
 #include <string.h>
+#include "parser.tab.h"
 
 #define YY_DECL int yylex()
+extern YYSTYPE yylval;
 
 int words = 0;
 int chars = 0;
@@ -35,6 +37,8 @@ ws          {delim}+
 						
 "int"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return TYPE;
 		}
 
 "char"	{words++; chars += strlen(yytext);
@@ -74,18 +78,26 @@ ws          {delim}+
 		
 {ID}	{words++; chars += strlen(yytext);
 		 printf("%s : IDENTIFIER\n",yytext);
+		 yylval.string = strdup(yytext);
+		 return ID;
 		}
 			
 {NUMBER}	{words++; chars += strlen(yytext);
 			  printf("%s : NUMBER\n",yytext);
+			  yylval.string = strdup(yytext);
+		 	  return NUMBER;
 			}
 			
 ";"		{chars++;
 		 printf("%s : SEMICOLON\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return SEMICOLON;
 		}
 		
 "="		{chars++;
 		 printf("%s : EQUAL\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return EQ;
 		}
 
 "+"		{chars++;
@@ -172,24 +184,6 @@ ws          {delim}+
 .		{chars++;
          printf("%s : Unrecognized symbol at line %d char %d\n", yytext,lines,chars);
 		}
-		
-
 
 %%
-int main(int argc, char**argv)
-{
-	#ifdef YYDEBUG
-		yydebug = 1;
-	#endif
 
-	printf("Compiler started. \n\n");
-
-	if (argc > 1){
-	  if(!(yyin = fopen(argv[1], "r")))
-          {
-		perror(argv[1]);
-		return(1);
-	  }
-	}
-	yylex();
-}
