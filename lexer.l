@@ -48,11 +48,7 @@ ws          {delim}+
 "write" {words++; 
 		 chars += strlen(yytext);
 		 printf("%s : KEYWORD\n", yytext);
-		}
-
-"print" {words++; 
-		 chars += strlen(yytext);
-		 printf("%s : KEYWORD\n", yytext);
+		 return WRITE;
 		}
 
 "if" 	{words++; 
@@ -97,7 +93,7 @@ ws          {delim}+
 "="		{chars++;
 		 printf("%s : EQUAL\n", yytext);
 		 yylval.string = strdup(yytext);
-		 return EQ;
+		 return EQUAL;
 		}
 
 "+"		{chars++;

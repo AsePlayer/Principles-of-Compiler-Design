@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-// #include "symbolTable.h"
-// #include "AST.h"
+#include "symbolTable.h"
+#include "AST.h"
 
 extern int yylex();
 extern int yyparse();
@@ -15,7 +15,7 @@ extern int chars;
 extern int lines;
 
 void yyerror(const char* s);
-char currentScope[50]; // global or the name of the function
+char currentScope[50] = "global";
 %}
 
 %union {
@@ -28,18 +28,22 @@ char currentScope[50]; // global or the name of the function
 %token <string> TYPE
 %token <string> ID
 %token <character> SEMICOLON
-%token <character> EQ
+%token <character> EQUAL
 %token <number> NUMBER
 %token WRITE
 
 %printer { fprintf(yyoutput, "%s", $$); } ID;
 %printer { fprintf(yyoutput, "%d", $$); } NUMBER;
 
+%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr
+
 %start Program
 
 %%
 
-Program: DeclList StmtList  { 
+Program: DeclList StmtList { $$ = 1; 
+					 printf("\n--- Abstract Syntax Tree ---\n");
+					 // printAST($$, 0);
 					}
 ;
 
@@ -49,23 +53,34 @@ DeclList:	Decl DeclList	{ }
 
 
 Decl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
-									
+							  symTabAccess();
+							  int inSymTab = found($2, currentScope);
+							  printf("Looking for %s in symtab - Found: %d\n", $2, inSymTab);
+
+							  if(inSymTab == 0)
+								  addItem($2, "Var", $1, 0, currentScope);
+							  else
+								  printf("ERROR: Variable %s already declared in scope %s\n", $2, currentScope);
+								  showSymTable();
+
+							  // ---- SEMANTIC ACTIONS by PARSER ----
+							  $$ = AST_Type("Type", $1, $2);
 								}
 ;
 
-StmtList:	
+StmtList:	Stmt
 	| Stmt StmtList
 ;
 
-Stmt:	 ID EQ ID SEMICOLON 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
+Stmt:	 ID EQUAL ID SEMICOLON 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
 					// ---- SEMANTIC ACTIONS by PARSER ----
 				}
-	| ID EQ NUMBER SEMICOLON 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
+	| ID EQUAL NUMBER SEMICOLON 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
 					   // ---- SEMANTIC ACTIONS by PARSER ----
 					}
 	| WRITE ID SEMICOLON 	{ printf("\n RECOGNIZED RULE: WRITE statement\n");
 				}
-
+;
 %%
 
 int main(int argc, char**argv)
@@ -89,7 +104,6 @@ int main(int argc, char**argv)
 
 void yyerror(const char* s) {
 	// fprintf(stderr, "Parse error: %s\n", s);
-	// -1 makes it accurate for now ig
-	printf("%s : Parse error at line %d char %d\n", s,lines-1,chars);
+	printf("%s : Parse error at line %d char %d\n", s,lines,chars);
 	exit(1);
 }

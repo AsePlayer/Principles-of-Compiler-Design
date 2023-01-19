@@ -1,3 +1,9 @@
+Nonterminals useless in grammar
+
+    VarDecl
+    Expr
+
+
 Grammar
 
     0 $accept: Program $end
@@ -9,11 +15,11 @@ Grammar
 
     4 Decl: TYPE ID SEMICOLON
 
-    5 StmtList: ε
+    5 StmtList: Stmt
     6         | Stmt StmtList
 
-    7 Stmt: ID EQ ID SEMICOLON
-    8     | ID EQ NUMBER SEMICOLON
+    7 Stmt: ID EQUAL ID SEMICOLON
+    8     | ID EQUAL NUMBER SEMICOLON
     9     | WRITE ID SEMICOLON
 
 
@@ -24,7 +30,7 @@ Terminals, with rules where they appear
     TYPE <string> (258) 4
     ID <string> (259) 4 7 8 9
     SEMICOLON <character> (260) 4 7 8 9
-    EQ <character> (261) 7 8
+    EQUAL <character> (261) 7 8
     NUMBER <number> (262) 8
     WRITE (263) 9
 
@@ -33,21 +39,21 @@ Nonterminals, with rules where they appear
 
     $accept (9)
         on left: 0
-    Program (10)
+    Program <ast> (10)
         on left: 1
         on right: 0
-    DeclList (11)
+    DeclList <ast> (11)
         on left: 2 3
         on right: 1 2
-    Decl (12)
+    Decl <ast> (12)
         on left: 4
         on right: 2 3
-    StmtList (13)
+    StmtList <ast> (13)
         on left: 5 6
         on right: 1 6
-    Stmt (14)
+    Stmt <ast> (14)
         on left: 7 8 9
-        on right: 6
+        on right: 5 6
 
 
 State 0
@@ -82,8 +88,6 @@ State 3
     ID     shift, and go to state 7
     WRITE  shift, and go to state 8
 
-    $default  reduce using rule 5 (StmtList)
-
     StmtList  go to state 9
     Stmt      go to state 10
 
@@ -117,10 +121,10 @@ State 6
 
 State 7
 
-    7 Stmt: ID • EQ ID SEMICOLON
-    8     | ID • EQ NUMBER SEMICOLON
+    7 Stmt: ID • EQUAL ID SEMICOLON
+    8     | ID • EQUAL NUMBER SEMICOLON
 
-    EQ  shift, and go to state 13
+    EQUAL  shift, and go to state 13
 
 
 State 8
@@ -139,7 +143,8 @@ State 9
 
 State 10
 
-    6 StmtList: Stmt • StmtList
+    5 StmtList: Stmt •
+    6         | Stmt • StmtList
 
     ID     shift, and go to state 7
     WRITE  shift, and go to state 8
@@ -166,8 +171,8 @@ State 12
 
 State 13
 
-    7 Stmt: ID EQ • ID SEMICOLON
-    8     | ID EQ • NUMBER SEMICOLON
+    7 Stmt: ID EQUAL • ID SEMICOLON
+    8     | ID EQUAL • NUMBER SEMICOLON
 
     ID      shift, and go to state 16
     NUMBER  shift, and go to state 17
@@ -189,14 +194,14 @@ State 15
 
 State 16
 
-    7 Stmt: ID EQ ID • SEMICOLON
+    7 Stmt: ID EQUAL ID • SEMICOLON
 
     SEMICOLON  shift, and go to state 19
 
 
 State 17
 
-    8 Stmt: ID EQ NUMBER • SEMICOLON
+    8 Stmt: ID EQUAL NUMBER • SEMICOLON
 
     SEMICOLON  shift, and go to state 20
 
@@ -210,13 +215,13 @@ State 18
 
 State 19
 
-    7 Stmt: ID EQ ID SEMICOLON •
+    7 Stmt: ID EQUAL ID SEMICOLON •
 
     $default  reduce using rule 7 (Stmt)
 
 
 State 20
 
-    8 Stmt: ID EQ NUMBER SEMICOLON •
+    8 Stmt: ID EQUAL NUMBER SEMICOLON •
 
     $default  reduce using rule 8 (Stmt)

@@ -57,7 +57,7 @@ extern int yydebug;
     TYPE = 258,                    /* TYPE  */
     ID = 259,                      /* ID  */
     SEMICOLON = 260,               /* SEMICOLON  */
-    EQ = 261,                      /* EQ  */
+    EQUAL = 261,                   /* EQUAL  */
     NUMBER = 262,                  /* NUMBER  */
     WRITE = 263                    /* WRITE  */
   };
