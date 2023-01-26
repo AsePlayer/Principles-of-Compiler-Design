@@ -1,38 +1,44 @@
-Nonterminals useless in grammar
-
-    VarDecl
-    Expr
+State 0 conflicts: 4 shift/reduce
+State 7 conflicts: 4 shift/reduce, 1 reduce/reduce
+State 10 conflicts: 3 shift/reduce
 
 
 Grammar
 
     0 $accept: Program $end
 
-    1 Program: DeclList StmtList
+    1 Program: DeclList
 
     2 DeclList: Decl DeclList
     3         | Decl
 
-    4 Decl: TYPE ID SEMICOLON
+    4 Decl: VarDecl
+    5     | StmtList
 
-    5 StmtList: Stmt
-    6         | Stmt StmtList
+    6 VarDecl: TYPE ID SEMICOLON
 
-    7 Stmt: ID EQUAL ID SEMICOLON
-    8     | ID EQUAL NUMBER SEMICOLON
-    9     | WRITE ID SEMICOLON
+    7 StmtList: ε
+    8         | Stmt StmtList
+
+    9 Stmt: SEMICOLON
+   10     | Expr SEMICOLON
+
+   11 Expr: ID
+   12     | ID EQUAL ID
+   13     | ID EQUAL NUMBER
+   14     | WRITE ID
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    TYPE <string> (258) 4
-    ID <string> (259) 4 7 8 9
-    SEMICOLON <character> (260) 4 7 8 9
-    EQUAL <character> (261) 7 8
-    NUMBER <number> (262) 8
-    WRITE (263) 9
+    TYPE <string> (258) 6
+    ID <string> (259) 6 11 12 13 14
+    SEMICOLON <character> (260) 6 9 10
+    EQUAL <character> (261) 12 13
+    NUMBER <number> (262) 13
+    WRITE <string> (263) 14
 
 
 Nonterminals, with rules where they appear
@@ -46,182 +52,224 @@ Nonterminals, with rules where they appear
         on left: 2 3
         on right: 1 2
     Decl <ast> (12)
-        on left: 4
+        on left: 4 5
         on right: 2 3
-    StmtList <ast> (13)
-        on left: 5 6
-        on right: 1 6
-    Stmt <ast> (14)
-        on left: 7 8 9
-        on right: 5 6
+    VarDecl <ast> (13)
+        on left: 6
+        on right: 4
+    StmtList <ast> (14)
+        on left: 7 8
+        on right: 5 8
+    Stmt <ast> (15)
+        on left: 9 10
+        on right: 8
+    Expr <ast> (16)
+        on left: 11 12 13 14
+        on right: 10
 
 
 State 0
 
     0 $accept: • Program $end
 
-    TYPE  shift, and go to state 1
+    TYPE       shift, and go to state 1
+    ID         shift, and go to state 2
+    SEMICOLON  shift, and go to state 3
+    WRITE      shift, and go to state 4
 
-    Program   go to state 2
-    DeclList  go to state 3
-    Decl      go to state 4
+    TYPE       [reduce using rule 7 (StmtList)]
+    ID         [reduce using rule 7 (StmtList)]
+    SEMICOLON  [reduce using rule 7 (StmtList)]
+    WRITE      [reduce using rule 7 (StmtList)]
+    $default   reduce using rule 7 (StmtList)
+
+    Program   go to state 5
+    DeclList  go to state 6
+    Decl      go to state 7
+    VarDecl   go to state 8
+    StmtList  go to state 9
+    Stmt      go to state 10
+    Expr      go to state 11
 
 
 State 1
 
-    4 Decl: TYPE • ID SEMICOLON
+    6 VarDecl: TYPE • ID SEMICOLON
 
-    ID  shift, and go to state 5
+    ID  shift, and go to state 12
 
 
 State 2
 
-    0 $accept: Program • $end
+   11 Expr: ID •
+   12     | ID • EQUAL ID
+   13     | ID • EQUAL NUMBER
 
-    $end  shift, and go to state 6
+    EQUAL  shift, and go to state 13
+
+    $default  reduce using rule 11 (Expr)
 
 
 State 3
 
-    1 Program: DeclList • StmtList
+    9 Stmt: SEMICOLON •
 
-    ID     shift, and go to state 7
-    WRITE  shift, and go to state 8
-
-    StmtList  go to state 9
-    Stmt      go to state 10
+    $default  reduce using rule 9 (Stmt)
 
 
 State 4
 
-    2 DeclList: Decl • DeclList
-    3         | Decl •
+   14 Expr: WRITE • ID
 
-    TYPE  shift, and go to state 1
-
-    $default  reduce using rule 3 (DeclList)
-
-    DeclList  go to state 11
-    Decl      go to state 4
+    ID  shift, and go to state 14
 
 
 State 5
 
-    4 Decl: TYPE ID • SEMICOLON
+    0 $accept: Program • $end
 
-    SEMICOLON  shift, and go to state 12
+    $end  shift, and go to state 15
 
 
 State 6
+
+    1 Program: DeclList •
+
+    $default  reduce using rule 1 (Program)
+
+
+State 7
+
+    2 DeclList: Decl • DeclList
+    3         | Decl •
+
+    TYPE       shift, and go to state 1
+    ID         shift, and go to state 2
+    SEMICOLON  shift, and go to state 3
+    WRITE      shift, and go to state 4
+
+    $end       reduce using rule 3 (DeclList)
+    $end       [reduce using rule 7 (StmtList)]
+    TYPE       [reduce using rule 7 (StmtList)]
+    ID         [reduce using rule 7 (StmtList)]
+    SEMICOLON  [reduce using rule 7 (StmtList)]
+    WRITE      [reduce using rule 7 (StmtList)]
+    $default   reduce using rule 3 (DeclList)
+
+    DeclList  go to state 16
+    Decl      go to state 7
+    VarDecl   go to state 8
+    StmtList  go to state 9
+    Stmt      go to state 10
+    Expr      go to state 11
+
+
+State 8
+
+    4 Decl: VarDecl •
+
+    $default  reduce using rule 4 (Decl)
+
+
+State 9
+
+    5 Decl: StmtList •
+
+    $default  reduce using rule 5 (Decl)
+
+
+State 10
+
+    8 StmtList: Stmt • StmtList
+
+    ID         shift, and go to state 2
+    SEMICOLON  shift, and go to state 3
+    WRITE      shift, and go to state 4
+
+    ID         [reduce using rule 7 (StmtList)]
+    SEMICOLON  [reduce using rule 7 (StmtList)]
+    WRITE      [reduce using rule 7 (StmtList)]
+    $default   reduce using rule 7 (StmtList)
+
+    StmtList  go to state 17
+    Stmt      go to state 10
+    Expr      go to state 11
+
+
+State 11
+
+   10 Stmt: Expr • SEMICOLON
+
+    SEMICOLON  shift, and go to state 18
+
+
+State 12
+
+    6 VarDecl: TYPE ID • SEMICOLON
+
+    SEMICOLON  shift, and go to state 19
+
+
+State 13
+
+   12 Expr: ID EQUAL • ID
+   13     | ID EQUAL • NUMBER
+
+    ID      shift, and go to state 20
+    NUMBER  shift, and go to state 21
+
+
+State 14
+
+   14 Expr: WRITE ID •
+
+    $default  reduce using rule 14 (Expr)
+
+
+State 15
 
     0 $accept: Program $end •
 
     $default  accept
 
 
-State 7
-
-    7 Stmt: ID • EQUAL ID SEMICOLON
-    8     | ID • EQUAL NUMBER SEMICOLON
-
-    EQUAL  shift, and go to state 13
-
-
-State 8
-
-    9 Stmt: WRITE • ID SEMICOLON
-
-    ID  shift, and go to state 14
-
-
-State 9
-
-    1 Program: DeclList StmtList •
-
-    $default  reduce using rule 1 (Program)
-
-
-State 10
-
-    5 StmtList: Stmt •
-    6         | Stmt • StmtList
-
-    ID     shift, and go to state 7
-    WRITE  shift, and go to state 8
-
-    $default  reduce using rule 5 (StmtList)
-
-    StmtList  go to state 15
-    Stmt      go to state 10
-
-
-State 11
+State 16
 
     2 DeclList: Decl DeclList •
 
     $default  reduce using rule 2 (DeclList)
 
 
-State 12
-
-    4 Decl: TYPE ID SEMICOLON •
-
-    $default  reduce using rule 4 (Decl)
-
-
-State 13
-
-    7 Stmt: ID EQUAL • ID SEMICOLON
-    8     | ID EQUAL • NUMBER SEMICOLON
-
-    ID      shift, and go to state 16
-    NUMBER  shift, and go to state 17
-
-
-State 14
-
-    9 Stmt: WRITE ID • SEMICOLON
-
-    SEMICOLON  shift, and go to state 18
-
-
-State 15
-
-    6 StmtList: Stmt StmtList •
-
-    $default  reduce using rule 6 (StmtList)
-
-
-State 16
-
-    7 Stmt: ID EQUAL ID • SEMICOLON
-
-    SEMICOLON  shift, and go to state 19
-
-
 State 17
 
-    8 Stmt: ID EQUAL NUMBER • SEMICOLON
+    8 StmtList: Stmt StmtList •
 
-    SEMICOLON  shift, and go to state 20
+    $default  reduce using rule 8 (StmtList)
 
 
 State 18
 
-    9 Stmt: WRITE ID SEMICOLON •
+   10 Stmt: Expr SEMICOLON •
 
-    $default  reduce using rule 9 (Stmt)
+    $default  reduce using rule 10 (Stmt)
 
 
 State 19
 
-    7 Stmt: ID EQUAL ID SEMICOLON •
+    6 VarDecl: TYPE ID SEMICOLON •
 
-    $default  reduce using rule 7 (Stmt)
+    $default  reduce using rule 6 (VarDecl)
 
 
 State 20
 
-    8 Stmt: ID EQUAL NUMBER SEMICOLON •
+   12 Expr: ID EQUAL ID •
 
-    $default  reduce using rule 8 (Stmt)
+    $default  reduce using rule 12 (Expr)
+
+
+State 21
+
+   13 Expr: ID EQUAL NUMBER •
+
+    $default  reduce using rule 13 (Expr)
