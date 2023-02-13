@@ -1,3 +1,4 @@
+
 //Symbol table header
 #include <string.h>
 
@@ -34,7 +35,7 @@ void addItem(char itemName[50], char itemKind[8], char itemType[8], int arrayLen
 }
 
 void showSymTable(){
-	printf("itemID    itemName    itemKind    itemType     ArrayLength    itemSCope\n");
+	printf("itemID    itemName    itemKind    itemType     ArrayLength    itemScope\n");
 	printf("-----------------------------------------------------------------------\n");
 	for (int i=0; i<symTabIndex; i++){
 		printf("%5d %15s  %7s  %7s %6d %15s \n",symTabItems[i].itemID, symTabItems[i].itemName, symTabItems[i].itemKind, symTabItems[i].itemType, symTabItems[i].arrayLength, symTabItems[i].scope);
@@ -91,4 +92,20 @@ int compareTypes(char itemName1[50], char itemName2[50],char scope[50]){
 	}
 	else return 0;
 }
-    
+
+void updateItem(char itemName[50], char newKind[8], char newType[8], int newArrayLength, char scope[50]){
+	if(found(itemName, scope) == 1){
+		for(int i=0; i<SYMTAB_SIZE; i++){
+			int str1 = strcmp(symTabItems[i].itemName, itemName);
+			int str2 = strcmp(symTabItems[i].scope,scope);
+			if( str1 == 0 && str2 == 0){
+				strcpy(symTabItems[i].itemKind, newKind);
+				strcpy(symTabItems[i].itemType, newType);
+				symTabItems[i].arrayLength = newArrayLength;
+			}
+		}
+	}
+	else{
+		printf("Error: Item does not exist in the symbol table\n");
+	}
+}
