@@ -37,7 +37,7 @@ Terminals, with rules where they appear
     ID <string> (259) 6 11 12 13 14
     SEMICOLON <character> (260) 6 9 10
     EQUAL <character> (261) 12 13
-    NUMBER <number> (262) 13
+    NUMBER <string> (262) 13
     WRITE <string> (263) 14
 
 

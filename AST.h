@@ -1,3 +1,4 @@
+
 //Abstract Syntax Tree Implementation
 #include <string.h>
 
@@ -90,3 +91,30 @@ void printAST(struct AST* tree, int level){
 	if(tree->right != NULL) printAST(tree->right, level+1); else return;
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

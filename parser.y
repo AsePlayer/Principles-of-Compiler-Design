@@ -6,13 +6,20 @@
 
 #include "symbolTable.h"
 #include "AST.h"
+#include "IRcode.h"
+#include "Assembly.h"
 
 extern int yylex();
 extern int yyparse();
-extern FILE* yyin;
+extern FILE* yyin; 
 
+FILE * IRcode;
+FILE * MIPScode;
+
+ 
 void yyerror(const char* s);
-char currentScope[50] = "global";
+char currentScope[50] = "global"; // "global" or the name of the function
+int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %}
 
 %union {
@@ -21,12 +28,12 @@ char currentScope[50] = "global";
 	char* string;
 	struct AST* ast;
 }
-
+ 
 %token <string> TYPE
 %token <string> ID
 %token <character> SEMICOLON
 %token <character> EQUAL
-%token <number> NUMBER
+%token <string> NUMBER
 %token <string> WRITE
 
 %printer { fprintf(yyoutput, "%s", $$); } ID;
@@ -80,20 +87,162 @@ Stmt:	SEMICOLON	{}
 	| Expr SEMICOLON	{$$ = $1;}
 ;
 
-Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); }
+Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function call
+		   }
 	| ID EQUAL ID 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
-					// ---- SEMANTIC ACTIONS by PARSER ----
+					// ---- SEMANTIC ACTIONS by PARSER ---- //
 					  $$ = AST_assignment("=",$1,$3);
+
+					// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
+
+					// Check if identifiers have been declared
+
+					    if(found($1, currentScope) != 1) {
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $1, currentScope);
+							semanticCheckPassed = 0;
+						}
+					    if(found($3, currentScope) != 1){
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $1, currentScope);
+							semanticCheckPassed = 0;
+						}
+
+					// Check types
+
+						printf("\nChecking types: \n");
+						int typeMatch = compareTypes ($1, $3, currentScope);
+						if (typeMatch == 0){
+							printf("SEMANTIC ERROR: Type mismatch for variables %s and %s \n", $1, $3);
+							semanticCheckPassed = 0;
+						}
+						
+
+					if (semanticCheckPassed == 1) {
+						printf("\n\n>>> AssignStmt Rule is SEMANTICALLY correct and IR code is emitted! <<<\n\n");
+
+						// ---- EMIT IR 3-ADDRESS CODE ---- //
+						
+						// The IR code is printed to a separate file
+
+						// Temporary variables management will eventually go in here
+						// and the paramaters of the function below will change
+						// to using T0, ..., T9 variables
+
+						emitAssignment($1, $3);
+
+						// ----     EMIT MIPS CODE   ----  //
+
+						// The MIPS code is printed to a separate file
+
+						// MIPS registers management will eventually go in here
+						// and the paramaters of the function below will change
+						// to using $t0, ..., $t9 registers
+
+						emitMIPSAssignment($1, $3);
+
+
+
+					}
+					
+
 				}
-	| ID EQUAL NUMBER 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
+
+	| ID EQUAL NUMBER 	{ printf("\n RECOGNIZED RULE: Constant Assignment statement\n"); 
 					   // ---- SEMANTIC ACTIONS by PARSER ----
 					   char str[50];
-					   sprintf(str, "%d", $3); 
+					   sprintf(str, "%s", $3); // convert $3 from int to string
 					   $$ = AST_assignment("=",$1, str);
+					   
+
+ 
+					   // set $3 variable type to "number" in symbol table using addItem function
+					  
+
+
+						// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
+
+						// Check if identifiers have been declared
+
+					    if(found($1, currentScope) != 1) {
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $1, currentScope);
+							semanticCheckPassed = 0; 
+						}
+						
+						// Check types
+
+						printf("\nChecking types: \n");
+
+						printf("%s = %s\n", getVariableType($1, currentScope), getVariableType($3, currentScope));
+						
+						// printf("%s = %s\n", "int", "number");  // This temporary for now, until the line above is debugged and uncommented
+						
+						if (semanticCheckPassed == 1) {
+							printf("\n\nRule is semantically correct!\n\n");
+
+							// ---- EMIT IR 3-ADDRESS CODE ---- //
+							
+							// The IR code is printed to a separate file
+
+							// Temporary variables management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using T0, ..., T9 variables
+							// set it in the symbol table using updateItem function
+					   		updateItem($1, "Var", "int", strlen(str), currentScope);
+
+							char id1[50], id2[50];
+							sprintf(id1, "%s", $1);
+							sprintf(id2, "%s", $3);
+
+							// Temporary variables management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using T0, ..., T9 variables
+
+							emitConstantIntAssignment(id1, id2);
+
+							// ----     EMIT MIPS CODE   ----  //
+
+							// The MIPS code is printed to a separate file
+
+							// MIPS registers management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using $t0, ..., $t9 registers
+
+							emitMIPSConstantIntAssignment(id1, id2);
+
+						}
 					}
+	
 	| WRITE ID 	{ printf("\n RECOGNIZED RULE: WRITE statement\n");
 					$$ = AST_Write("write",$2,"");
+					
+					// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
+
+					// Check if identifiers have been declared
+					    if(found($2, currentScope) != 1) {
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $2, currentScope);
+							semanticCheckPassed = 0;
+						}
+
+					if (semanticCheckPassed == 1) {
+							printf("\n\nRule is semantically correct!\n\n");
+
+							// ---- EMIT IR 3-ADDRESS CODE ---- //
+							
+							// The IR code is printed to a separate file
+							
+							emitWriteId($2);
+
+							// ----     EMIT MIPS CODE   ----  //
+
+							// The MIPS code is printed to a separate file
+
+							// MIPS registers management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using $t0, ..., $t9 registers
+
+							emitMIPSWriteId($2);
+						}
 				}
+;
 
 %%
 
@@ -113,7 +262,17 @@ int main(int argc, char**argv)
 		return(1);
 	  }
 	}
+
+	// Initialize IR and MIPS files
+	initIRcodeFile(); 
+	initAssemblyFile();
+
+	// Start parser
 	yyparse();
+
+	// Add the closing part required for any MIPS file
+	emitEndOfAssemblyCode();
+	showSymTable();
 }
 
 void yyerror(const char* s) {

@@ -76,15 +76,22 @@
 
 #include "symbolTable.h"
 #include "AST.h"
+#include "IRcode.h"
+#include "Assembly.h"
 
 extern int yylex();
 extern int yyparse();
-extern FILE* yyin;
+extern FILE* yyin; 
 
+FILE * IRcode;
+FILE * MIPScode;
+
+ 
 void yyerror(const char* s);
-char currentScope[50]; // global or the name of the function
+char currentScope[50] = "global"; // "global" or the name of the function
+int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 
-#line 88 "parser.tab.c"
+#line 95 "parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -513,10 +520,10 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_uint8 yyrline[] =
 {
-       0,    41,    41,    47,    50,    53,    54,    57,    75,    76,
-      79,    80,    83,    84,    88,    94
+       0,    48,    48,    54,    57,    60,    61,    64,    82,    83,
+      86,    87,    90,    92,   149,   214
 };
 #endif
 
@@ -706,15 +713,15 @@ yy_symbol_value_print (FILE *yyo,
   switch (yykind)
     {
     case YYSYMBOL_ID: /* ID  */
-#line 32 "parser.y"
+#line 39 "parser.y"
          { fprintf(yyoutput, "%s", ((*yyvaluep).string)); }
-#line 712 "parser.tab.c"
+#line 719 "parser.tab.c"
         break;
 
     case YYSYMBOL_NUMBER: /* NUMBER  */
-#line 33 "parser.y"
-         { fprintf(yyoutput, "%d", ((*yyvaluep).number)); }
-#line 718 "parser.tab.c"
+#line 40 "parser.y"
+         { fprintf(yyoutput, "%d", ((*yyvaluep).string)); }
+#line 725 "parser.tab.c"
         break;
 
       default:
@@ -1102,30 +1109,30 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* Program: DeclList  */
-#line 41 "parser.y"
+#line 48 "parser.y"
                    { (yyval.ast) = (yyvsp[0].ast);
 					 printf("\n--- Abstract Syntax Tree ---\n\n");
 					 printAST((yyval.ast),0);
 					}
-#line 1111 "parser.tab.c"
+#line 1118 "parser.tab.c"
     break;
 
   case 3: /* DeclList: Decl DeclList  */
-#line 47 "parser.y"
+#line 54 "parser.y"
                                 { (yyvsp[-1].ast)->left = (yyvsp[0].ast);
 							  (yyval.ast) = (yyvsp[-1].ast);
 							}
-#line 1119 "parser.tab.c"
+#line 1126 "parser.tab.c"
     break;
 
   case 4: /* DeclList: Decl  */
-#line 50 "parser.y"
+#line 57 "parser.y"
                 { (yyval.ast) = (yyvsp[0].ast); }
-#line 1125 "parser.tab.c"
+#line 1132 "parser.tab.c"
     break;
 
   case 7: /* VarDecl: TYPE ID SEMICOLON  */
-#line 57 "parser.y"
+#line 64 "parser.y"
                                         { printf("\n RECOGNIZED RULE: Variable declaration %s\n", (yyvsp[-1].string));
 									// Symbol Table
 									symTabAccess();
@@ -1142,57 +1149,196 @@ yyreduce:
 								    (yyval.ast) = AST_Type("Type",(yyvsp[-2].string),(yyvsp[-1].string));
 									printf("-----------> %s", (yyval.ast)->LHS);
 								}
-#line 1146 "parser.tab.c"
+#line 1153 "parser.tab.c"
     break;
 
   case 10: /* Stmt: SEMICOLON  */
-#line 79 "parser.y"
+#line 86 "parser.y"
                         {}
-#line 1152 "parser.tab.c"
+#line 1159 "parser.tab.c"
     break;
 
   case 11: /* Stmt: Expr SEMICOLON  */
-#line 80 "parser.y"
+#line 87 "parser.y"
                                 {(yyval.ast) = (yyvsp[-1].ast);}
-#line 1158 "parser.tab.c"
+#line 1165 "parser.tab.c"
     break;
 
   case 12: /* Expr: ID  */
-#line 83 "parser.y"
-           { printf("\n RECOGNIZED RULE: Simplest expression\n"); }
-#line 1164 "parser.tab.c"
+#line 90 "parser.y"
+           { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function call
+		   }
+#line 1172 "parser.tab.c"
     break;
 
   case 13: /* Expr: ID EQUAL ID  */
-#line 84 "parser.y"
+#line 92 "parser.y"
                         { printf("\n RECOGNIZED RULE: Assignment statement\n"); 
-					// ---- SEMANTIC ACTIONS by PARSER ----
+					// ---- SEMANTIC ACTIONS by PARSER ---- //
 					  (yyval.ast) = AST_assignment("=",(yyvsp[-2].string),(yyvsp[0].string));
+
+					// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
+
+					// Check if identifiers have been declared
+
+					    if(found((yyvsp[-2].string), currentScope) != 1) {
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[-2].string), currentScope);
+							semanticCheckPassed = 0;
+						}
+					    if(found((yyvsp[0].string), currentScope) != 1){
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[-2].string), currentScope);
+							semanticCheckPassed = 0;
+						}
+
+					// Check types
+
+						printf("\nChecking types: \n");
+						int typeMatch = compareTypes ((yyvsp[-2].string), (yyvsp[0].string), currentScope);
+						if (typeMatch == 0){
+							printf("SEMANTIC ERROR: Type mismatch for variables %s and %s \n", (yyvsp[-2].string), (yyvsp[0].string));
+							semanticCheckPassed = 0;
+						}
+						
+
+					if (semanticCheckPassed == 1) {
+						printf("\n\n>>> AssignStmt Rule is SEMANTICALLY correct and IR code is emitted! <<<\n\n");
+
+						// ---- EMIT IR 3-ADDRESS CODE ---- //
+						
+						// The IR code is printed to a separate file
+
+						// Temporary variables management will eventually go in here
+						// and the paramaters of the function below will change
+						// to using T0, ..., T9 variables
+
+						emitAssignment((yyvsp[-2].string), (yyvsp[0].string));
+
+						// ----     EMIT MIPS CODE   ----  //
+
+						// The MIPS code is printed to a separate file
+
+						// MIPS registers management will eventually go in here
+						// and the paramaters of the function below will change
+						// to using $t0, ..., $t9 registers
+
+						emitMIPSAssignment((yyvsp[-2].string), (yyvsp[0].string));
+
+
+
+					}
+					
+
 				}
-#line 1173 "parser.tab.c"
+#line 1233 "parser.tab.c"
     break;
 
   case 14: /* Expr: ID EQUAL NUMBER  */
-#line 88 "parser.y"
-                                { printf("\n RECOGNIZED RULE: Assignment statement\n"); 
+#line 149 "parser.y"
+                                { printf("\n RECOGNIZED RULE: Constant Assignment statement\n"); 
 					   // ---- SEMANTIC ACTIONS by PARSER ----
 					   char str[50];
-					   sprintf(str, "%d", (yyvsp[0].number)); 
+					   sprintf(str, "%s", (yyvsp[0].string)); // convert $3 from int to string
 					   (yyval.ast) = AST_assignment("=",(yyvsp[-2].string), str);
+					   
+
+ 
+					   // set $3 variable type to "number" in symbol table using addItem function
+					  
+
+
+						// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
+
+						// Check if identifiers have been declared
+
+					    if(found((yyvsp[-2].string), currentScope) != 1) {
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[-2].string), currentScope);
+							semanticCheckPassed = 0; 
+						}
+						
+						// Check types
+
+						printf("\nChecking types: \n");
+
+						printf("%s = %s\n", getVariableType((yyvsp[-2].string), currentScope), getVariableType((yyvsp[0].string), currentScope));
+						
+						// printf("%s = %s\n", "int", "number");  // This temporary for now, until the line above is debugged and uncommented
+						
+						if (semanticCheckPassed == 1) {
+							printf("\n\nRule is semantically correct!\n\n");
+
+							// ---- EMIT IR 3-ADDRESS CODE ---- //
+							
+							// The IR code is printed to a separate file
+
+							// Temporary variables management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using T0, ..., T9 variables
+							// set it in the symbol table using updateItem function
+					   		updateItem((yyvsp[-2].string), "Var", "int", strlen(str), currentScope);
+
+							char id1[50], id2[50];
+							sprintf(id1, "%s", (yyvsp[-2].string));
+							sprintf(id2, "%s", (yyvsp[0].string));
+
+							// Temporary variables management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using T0, ..., T9 variables
+
+							emitConstantIntAssignment(id1, id2);
+
+							// ----     EMIT MIPS CODE   ----  //
+
+							// The MIPS code is printed to a separate file
+
+							// MIPS registers management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using $t0, ..., $t9 registers
+
+							emitMIPSConstantIntAssignment(id1, id2);
+
+						}
 					}
-#line 1184 "parser.tab.c"
+#line 1302 "parser.tab.c"
     break;
 
   case 15: /* Expr: WRITE ID  */
-#line 94 "parser.y"
+#line 214 "parser.y"
                         { printf("\n RECOGNIZED RULE: WRITE statement\n");
 					(yyval.ast) = AST_Write("write",(yyvsp[0].string),"");
+					
+					// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
+
+					// Check if identifiers have been declared
+					    if(found((yyvsp[0].string), currentScope) != 1) {
+							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[0].string), currentScope);
+							semanticCheckPassed = 0;
+						}
+
+					if (semanticCheckPassed == 1) {
+							printf("\n\nRule is semantically correct!\n\n");
+
+							// ---- EMIT IR 3-ADDRESS CODE ---- //
+							
+							// The IR code is printed to a separate file
+							
+							emitWriteId((yyvsp[0].string));
+
+							// ----     EMIT MIPS CODE   ----  //
+
+							// The MIPS code is printed to a separate file
+
+							// MIPS registers management will eventually go in here
+							// and the paramaters of the function below will change
+							// to using $t0, ..., $t9 registers
+
+							emitMIPSWriteId((yyvsp[0].string));
+						}
 				}
-#line 1192 "parser.tab.c"
+#line 1338 "parser.tab.c"
     break;
 
 
-#line 1196 "parser.tab.c"
+#line 1342 "parser.tab.c"
 
       default: break;
     }
@@ -1385,7 +1531,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 98 "parser.y"
+#line 247 "parser.y"
 
 
 int main(int argc, char**argv)
@@ -1404,7 +1550,17 @@ int main(int argc, char**argv)
 		return(1);
 	  }
 	}
+
+	// Initialize IR and MIPS files
+	initIRcodeFile(); 
+	initAssemblyFile();
+
+	// Start parser
 	yyparse();
+
+	// Add the closing part required for any MIPS file
+	emitEndOfAssemblyCode();
+	showSymTable();
 }
 
 void yyerror(const char* s) {
