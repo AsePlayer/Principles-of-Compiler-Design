@@ -523,7 +523,7 @@ static const yytype_int8 yytranslate[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    48,    48,    54,    57,    60,    61,    64,    82,    83,
-      86,    87,    90,    92,   149,   214
+      86,    87,    90,    92,   149,   220
 };
 #endif
 
@@ -1139,8 +1139,8 @@ yyreduce:
 									int inSymTab = found((yyvsp[-1].string), currentScope);
 									//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
 									
-									if (inSymTab == 0) 
-										addItem((yyvsp[-1].string), "Var", (yyvsp[-2].string),0, currentScope);
+									if (inSymTab == -1) 
+										addItem((yyvsp[-1].string), "Var", (yyvsp[-2].string), "", 0, currentScope);
 									else
 										printf("SEMANTIC ERROR: Var %s is already in the symbol table", (yyvsp[-1].string));
 									showSymTable();
@@ -1181,11 +1181,11 @@ yyreduce:
 
 					// Check if identifiers have been declared
 
-					    if(found((yyvsp[-2].string), currentScope) != 1) {
+					    if(found((yyvsp[-2].string), currentScope) == -1) {
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[-2].string), currentScope);
 							semanticCheckPassed = 0;
 						}
-					    if(found((yyvsp[0].string), currentScope) != 1){
+					    if(found((yyvsp[0].string), currentScope) == -1){
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[-2].string), currentScope);
 							semanticCheckPassed = 0;
 						}
@@ -1194,13 +1194,13 @@ yyreduce:
 
 						printf("\nChecking types: \n");
 						int typeMatch = compareTypes ((yyvsp[-2].string), (yyvsp[0].string), currentScope);
-						if (typeMatch == 0){
+						if (typeMatch == -1){
 							printf("SEMANTIC ERROR: Type mismatch for variables %s and %s \n", (yyvsp[-2].string), (yyvsp[0].string));
 							semanticCheckPassed = 0;
 						}
 						
 
-					if (semanticCheckPassed == 1) {
+					if (semanticCheckPassed != -1) {
 						printf("\n\n>>> AssignStmt Rule is SEMANTICALLY correct and IR code is emitted! <<<\n\n");
 
 						// ---- EMIT IR 3-ADDRESS CODE ---- //
@@ -1249,17 +1249,21 @@ yyreduce:
 						// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
 
 						// Check if identifiers have been declared
-
-					    if(found((yyvsp[-2].string), currentScope) != 1) {
+ 
+					    if(found((yyvsp[-2].string), currentScope) == -1) {
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[-2].string), currentScope);
 							semanticCheckPassed = 0; 
+									
+							printf("scope: %s\n", currentScope);
+							
 						}
+			
 						
 						// Check types
 
 						printf("\nChecking types: \n");
 
-						printf("%s = %s\n", getVariableType((yyvsp[-2].string), currentScope), getVariableType((yyvsp[0].string), currentScope));
+						printf("%s = %s\n", getVariableType((yyvsp[-2].string), currentScope), "int"/*getVariableType($3, currentScope)*/);
 						
 						// printf("%s = %s\n", "int", "number");  // This temporary for now, until the line above is debugged and uncommented
 						
@@ -1274,11 +1278,13 @@ yyreduce:
 							// and the paramaters of the function below will change
 							// to using T0, ..., T9 variables
 							// set it in the symbol table using updateItem function
-					   		updateItem((yyvsp[-2].string), "Var", "int", strlen(str), currentScope);
+					   		 
 
 							char id1[50], id2[50];
 							sprintf(id1, "%s", (yyvsp[-2].string));
 							sprintf(id2, "%s", (yyvsp[0].string));
+
+							updateItem((yyvsp[-2].string), currentScope, id2);
 
 							// Temporary variables management will eventually go in here
 							// and the paramaters of the function below will change
@@ -1295,21 +1301,21 @@ yyreduce:
 							// to using $t0, ..., $t9 registers
 
 							emitMIPSConstantIntAssignment(id1, id2);
-
+ 
 						}
 					}
-#line 1302 "parser.tab.c"
+#line 1308 "parser.tab.c"
     break;
 
   case 15: /* Expr: WRITE ID  */
-#line 214 "parser.y"
+#line 220 "parser.y"
                         { printf("\n RECOGNIZED RULE: WRITE statement\n");
 					(yyval.ast) = AST_Write("write",(yyvsp[0].string),"");
 					
 					// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
 
 					// Check if identifiers have been declared
-					    if(found((yyvsp[0].string), currentScope) != 1) {
+					    if(found((yyvsp[0].string), currentScope) == -1) {
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", (yyvsp[0].string), currentScope);
 							semanticCheckPassed = 0;
 						}
@@ -1334,11 +1340,11 @@ yyreduce:
 							emitMIPSWriteId((yyvsp[0].string));
 						}
 				}
-#line 1338 "parser.tab.c"
+#line 1344 "parser.tab.c"
     break;
 
 
-#line 1342 "parser.tab.c"
+#line 1348 "parser.tab.c"
 
       default: break;
     }
@@ -1531,7 +1537,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 247 "parser.y"
+#line 253 "parser.y"
 
 
 int main(int argc, char**argv)

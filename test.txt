@@ -1,5 +1,3 @@
 int x;
-int y;
-int z;
-z = 1;
-write z;
+x = 68;
+write x;

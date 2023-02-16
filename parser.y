@@ -67,8 +67,8 @@ VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 									int inSymTab = found($2, currentScope);
 									//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
 									
-									if (inSymTab == 0) 
-										addItem($2, "Var", $1,0, currentScope);
+									if (inSymTab == -1) 
+										addItem($2, "Var", $1, "", 0, currentScope);
 									else
 										printf("SEMANTIC ERROR: Var %s is already in the symbol table", $2);
 									showSymTable();
@@ -97,11 +97,11 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 
 					// Check if identifiers have been declared
 
-					    if(found($1, currentScope) != 1) {
+					    if(found($1, currentScope) == -1) {
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $1, currentScope);
 							semanticCheckPassed = 0;
 						}
-					    if(found($3, currentScope) != 1){
+					    if(found($3, currentScope) == -1){
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $1, currentScope);
 							semanticCheckPassed = 0;
 						}
@@ -110,13 +110,13 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 
 						printf("\nChecking types: \n");
 						int typeMatch = compareTypes ($1, $3, currentScope);
-						if (typeMatch == 0){
+						if (typeMatch == -1){
 							printf("SEMANTIC ERROR: Type mismatch for variables %s and %s \n", $1, $3);
 							semanticCheckPassed = 0;
 						}
 						
 
-					if (semanticCheckPassed == 1) {
+					if (semanticCheckPassed != -1) {
 						printf("\n\n>>> AssignStmt Rule is SEMANTICALLY correct and IR code is emitted! <<<\n\n");
 
 						// ---- EMIT IR 3-ADDRESS CODE ---- //
@@ -161,17 +161,21 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 						// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
 
 						// Check if identifiers have been declared
-
-					    if(found($1, currentScope) != 1) {
+ 
+					    if(found($1, currentScope) == -1) {
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $1, currentScope);
 							semanticCheckPassed = 0; 
+									
+							printf("scope: %s\n", currentScope);
+							
 						}
+			
 						
 						// Check types
 
 						printf("\nChecking types: \n");
 
-						printf("%s = %s\n", getVariableType($1, currentScope), getVariableType($3, currentScope));
+						printf("%s = %s\n", getVariableType($1, currentScope), "int"/*getVariableType($3, currentScope)*/);
 						
 						// printf("%s = %s\n", "int", "number");  // This temporary for now, until the line above is debugged and uncommented
 						
@@ -186,11 +190,13 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 							// and the paramaters of the function below will change
 							// to using T0, ..., T9 variables
 							// set it in the symbol table using updateItem function
-					   		updateItem($1, "Var", "int", strlen(str), currentScope);
+					   		 
 
 							char id1[50], id2[50];
 							sprintf(id1, "%s", $1);
 							sprintf(id2, "%s", $3);
+
+							updateItem($1, currentScope, id2);
 
 							// Temporary variables management will eventually go in here
 							// and the paramaters of the function below will change
@@ -207,7 +213,7 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 							// to using $t0, ..., $t9 registers
 
 							emitMIPSConstantIntAssignment(id1, id2);
-
+ 
 						}
 					}
 	
@@ -217,7 +223,7 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 					// ---- SEMANTIC ANALYSIS ACTIONS ---- //  
 
 					// Check if identifiers have been declared
-					    if(found($2, currentScope) != 1) {
+					    if(found($2, currentScope) == -1) {
 							printf("SEMANTIC ERROR: Variable %s has NOT been declared in scope %s \n", $2, currentScope);
 							semanticCheckPassed = 0;
 						}
