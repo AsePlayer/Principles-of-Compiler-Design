@@ -208,3 +208,111 @@ x = 68
 
 x = 68
 output x
+
+
+#### IR Code ####
+
+x = 68
+x = 69
+output x
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+x = 2
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+x = 2
+
+
+#### IR Code ####
+
+x = 68
+output x
+x = 69
+z = 2

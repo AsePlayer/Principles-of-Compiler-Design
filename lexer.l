@@ -98,6 +98,8 @@ ws          {delim}+
 
 "+"		{chars++;
 		 printf("%s : PLUS\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return PLUS;
 		}
 
 "-"		{chars++;
@@ -143,23 +145,33 @@ ws          {delim}+
 
 "!"		{chars++;
 		 printf("%s : UNARY NOT\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return UNARYNOT;
 		}
 
 "&&"	{chars++; chars++;
 		 printf("%s : LOGICAL AND\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return LOGICALAND;
 		}
 
 "||"	{chars++; chars++;
 		 printf("%s : LOGICAL OR\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return LOGICALOR;
 		}
 
 
 "("		{chars++;
 		 printf("%s : LEFT PARENTHESIS\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return LEFTPARENTHESIS;
 		}
 
 ")"		{chars++;
 		 printf("%s : RIGHT PARENTHESIS\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return RIGHTPARENTHESIS;
 		}
 
 "{"		{chars++;
@@ -172,6 +184,8 @@ ws          {delim}+
 
 ","		{chars++;
 		 printf("%s : COMMA\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return COMMA;
 		}
 
 

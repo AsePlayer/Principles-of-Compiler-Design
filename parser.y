@@ -32,7 +32,14 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %token <string> TYPE
 %token <string> ID
 %token <character> SEMICOLON
+%token <character> COMMA
 %token <character> EQUAL
+%token <character> PLUS
+%token <character> LEFTPARENTHESIS
+%token <character> RIGHTPARENTHESIS
+%token <character> UNARYNOT
+%token <string> LOGICALAND
+%token <string> LOGICALOR
 %token <string> NUMBER
 %token <string> WRITE
 
@@ -58,7 +65,34 @@ DeclList:	Decl DeclList	{ $1->left = $2;
 ;
 
 Decl:	VarDecl
+	| FunDecl
 	| StmtList
+;
+
+FunDecl:	TYPE ID LEFTPARENTHESIS RIGHTPARENTHESIS 	{ printf("\n RECOGNIZED RULE: Function declaration %s\n", $2);
+																// Symbol Table
+																symTabAccess();
+																int inSymTab = found($2, currentScope);
+																//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
+																// turn $2 into string
+																char funScope[50];
+																sprintf(funScope, "%s", $2);
+																// append "()" to funScope
+																strcat(funScope, "()");
+																strcat(funScope, ":");
+																// append $1 to funScope
+																strcat(funScope, $1);
+																
+																if (inSymTab == -1) 
+																	addItem($2, "Fun", $1, "Fun", 0, funScope);
+																else
+																	printf("SEMANTIC ERROR: Fun %s is already in the symbol table", $2);
+																showSymTable();
+																
+																// ---- SEMANTIC ACTIONS by PARSER ----
+																
+															}
+
 ;
 
 VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
@@ -204,7 +238,7 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 
 							emitConstantIntAssignment(id1, id2);
 
-							// ----     EMIT MIPS CODE   ----  //
+							 // ----     EMIT MIPS CODE   ----  //
 
 							// The MIPS code is printed to a separate file
 
@@ -215,6 +249,23 @@ Expr:	ID { printf("\n RECOGNIZED RULE: Simplest expression\n"); //E.g. function 
 							emitMIPSConstantIntAssignment(id1, id2);
  
 						}
+					}
+					| ID EQUAL NUMBER PLUS NUMBER { printf("\n RECOGNIZED RULE: Constant Addition statement\n"); 
+					   // ---- SEMANTIC ACTIONS by PARSER ----
+					   char str1[50];
+					   char str2[50];
+					   sprintf(str1, "%s", $3); // convert $3 from int to string
+					   sprintf(str2, "%s", $5); // convert $5 from int to string
+					   $$ = AST_assignment("+",str1, str2);
+
+					   emitMIPSAddition(str1, str2);
+
+					   // update value in symbol table
+					   char str3[50];
+					   sprintf(str3, "%d", atoi(str1) + atoi(str2));
+					   updateItem($1, currentScope, str3);
+ 
+					   // set $3 variable type to "number" in symbol table using addItem function
 					}
 	
 	| WRITE ID 	{ printf("\n RECOGNIZED RULE: WRITE statement\n");

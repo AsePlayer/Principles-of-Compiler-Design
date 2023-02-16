@@ -21,6 +21,14 @@ void emitMIPSAssignment(char * id1, char * id2){
   fprintf(MIPScode, "li $t2,$t1\n");
 }
 
+void emitMIPSAddition(char * id1, char * id2){
+  // This is the temporary approach, until register management is implemented
+
+  fprintf(MIPScode, "li $t1,%s\n", id1);
+  fprintf(MIPScode, "li $t2,%s\n", id2);
+  fprintf(MIPScode, "add $t3,$t1,$t2\n");
+}
+
 void emitMIPSConstantIntAssignment (char id1[50], char id2[50]){
      // This is the temporary approach, until register management is implemented
      // The parameters of this function should inform about registers
