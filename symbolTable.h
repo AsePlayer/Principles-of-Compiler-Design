@@ -5,15 +5,28 @@
 struct Entry
 {
 	int itemID;
+	int used;		   // has the identifier been used?
+	int arrayLength;   // if it is an array, how long is it?
 	char itemName[50];  //the name of the identifier
 	char itemKind[8];  //is it a function or a variable?
 	char itemType[8];  // Is it int, char, etc.?
 	char itemValue[50]; // the value of the identifier
 	char scope[50];     // global, or the name of the function
-	int arrayLength;
+	
+	int paramsNum;	 // if it is a function, how many parameters does it have?
+	int relatedVars; // if it is a function, how many variables does it use?
+	int relatedVarIDs[10]; // if it is a function, what are the IDs of the variables it uses?
+
 };
 
-struct Entry symTabItems[100];
+// create a struct that contains another struct
+struct SymbolTable
+{
+	struct Entry symTabItems[100];
+	struct Entry symTabScopes[100][100];
+};
+
+struct SymbolTable symTab;
 int symTabIndex = 0;
 int SYMTAB_SIZE = 20;
 
@@ -23,16 +36,36 @@ void symTabAccess(void){
 
 void addItem(char itemName[50], char itemKind[8], char itemType[8], char itemValue[50], int arrayLength, char scope[50]){
 	
-
+		struct Entry newEntry;
+		newEntry.itemID = symTabIndex;
+		strcpy(newEntry.itemName, itemName);
+		strcpy(newEntry.itemKind, itemKind);
+		strcpy(newEntry.itemType, itemType);
+		strcpy(newEntry.itemValue, itemValue);
+		strcpy(newEntry.scope, scope);
+		newEntry.arrayLength = arrayLength;
+		
 		// what about scope? should you add scope to this function?
-		symTabItems[symTabIndex].itemID = symTabIndex;
-		strcpy(symTabItems[symTabIndex].itemName, itemName);
-		strcpy(symTabItems[symTabIndex].itemKind, itemKind);
-		strcpy(symTabItems[symTabIndex].itemType, itemType);
-		strcpy(symTabItems[symTabIndex].itemValue, itemValue);
-		symTabItems[symTabIndex].arrayLength = arrayLength;
-		strcpy(symTabItems[symTabIndex].scope, scope);
-		symTabIndex++;
+		// check if scope is equal to global character array
+		if(strcmp(scope, "global") == 0){
+			symTab.symTabItems[symTabIndex] = newEntry;
+			symTabIndex++;
+		}
+		else{
+			// find function in symbol table (it has global scope)
+			int funIndex = found(scope, "global");
+			// add variable to function's relatedVarIDs array
+			if(funIndex == -1){
+				printf("ERROR: Function %s does not exist.\n", scope);
+				return;
+			}	
+			// symTab.symTabItems[funIndex].relatedVarIDs[symTab.symTabItems[funIndex].relatedVars] = symTabIndex;
+			// symTab.symTabItems[funIndex].relatedVars++;			
+			
+			// add variable to symbol table
+			symTab.symTabItems[symTabIndex] = newEntry;
+			symTabIndex++;
+		}
 	
 }
 
@@ -40,7 +73,7 @@ void showSymTable(){
 	printf(" itemID     itemName     itemKind    itemValue    itemType     ArrayLength    itemScope\n");
 	printf("------------------------------------------------------------------------------------\n");
 	for (int i=0; i<symTabIndex; i++){
-		printf("%5d %10s %14s %10s %12s %13d %15s \n",symTabItems[i].itemID, symTabItems[i].itemName, symTabItems[i].itemKind, symTabItems[i].itemValue, symTabItems[i].itemType, symTabItems[i].arrayLength, symTabItems[i].scope);
+		printf("%5d %10s %14s %10s %12s %13d %15s \n",symTab.symTabItems[i].itemID, symTab.symTabItems[i].itemName, symTab.symTabItems[i].itemKind, symTab.symTabItems[i].itemValue, symTab.symTabItems[i].itemType, symTab.symTabItems[i].arrayLength, symTab.symTabItems[i].scope);
 	}
 	
 
@@ -55,9 +88,9 @@ int found(char itemName[50], char scope[50]){
 
 	// Dirty loop, becuase it counts SYMTAB_SIZE times, no matter the size of the symbol table
 	for(int i=0; i<SYMTAB_SIZE; i++){
-		int str1 = strcmp(symTabItems[i].itemName, itemName); 
+		int str1 = strcmp(symTab.symTabItems[i].itemName, itemName); 
 		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
-		int str2 = strcmp(symTabItems[i].scope,scope); 
+		int str2 = strcmp(symTab.symTabItems[i].scope,scope); 
 		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
 		if( str1 == 0 && str2 == 0){
 			return i; // found the ID in the table
@@ -71,12 +104,12 @@ const char* getVariableType(char itemName[50], char scope[50]){
 	//return name;
 
 	for(int i=0; i<SYMTAB_SIZE; i++){
-		int str1 = strcmp(symTabItems[i].itemName, itemName); 
+		int str1 = strcmp(symTab.symTabItems[i].itemName, itemName); 
 		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
-		int str2 = strcmp(symTabItems[i].scope,scope); 
+		int str2 = strcmp(symTab.symTabItems[i].scope,scope); 
 		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
 		if( str1 == 0 && str2 == 0){
-			return symTabItems[i].itemType; // found the ID in the table
+			return symTab.symTabItems[i].itemType; // found the ID in the table
 		}
 	}
 	return NULL;
@@ -95,14 +128,14 @@ int compareTypes(char itemName1[50], char itemName2[50],char scope[50]){
 	else return -1;
 }
 
-void updateItem(char itemName[50], char scope[50], char newItemValue[50]){
+void updateItem(char itemName[50], char newItemValue[50], char scope[50]){
 
     // Search for the identifier in the symbol table
     int index = found(itemName, scope);
 
     // If the identifier is found in the symbol table, update its value
     if (index >= 0) {
-        strcpy(symTabItems[index].itemValue, newItemValue);
+        strcpy(symTab.symTabItems[index].itemValue, newItemValue);
     } else {
         // If the identifier is not found in the symbol table, add it to the symbol table
         addItem(itemName, "variable", "unknown", newItemValue, 0, scope);

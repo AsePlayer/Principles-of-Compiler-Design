@@ -44,7 +44,13 @@ ws          {delim}+
 "char"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		}
-		
+
+"fun"	{words++; chars += strlen(yytext);
+		 printf("%s : FUN\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return FUN;
+		}
+
 "write" {words++; 
 		 chars += strlen(yytext);
 		 printf("%s : KEYWORD\n", yytext);
@@ -70,6 +76,12 @@ ws          {delim}+
 		 chars += strlen(yytext);
 		 printf("%s : PUTC\n", yytext);
 		}
+
+"return"	{words++;
+			 chars += strlen(yytext);
+		 	 printf("%s : RETURN\n", yytext);
+		 	 return RETURN;
+			}
 
 		
 {ID}	{words++; chars += strlen(yytext);
@@ -104,15 +116,21 @@ ws          {delim}+
 
 "-"		{chars++;
 		 printf("%s : MINUS\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return MINUS;
 		}
 
 
 "*"		{chars++;
 		 printf("%s : MULTIPLY\n", yytext);
+		 	yylval.string = strdup(yytext);
+			return MULTIPLY;
 		}
 
 "/"		{chars++;
 		 printf("%s : DIVIDE\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return DIVIDE;
 		}
 
 "%"		{chars++;
@@ -141,6 +159,7 @@ ws          {delim}+
 
 "!="	{chars++; chars++;
 		 printf("%s : NOT EQUAL\n", yytext);
+
 		}
 
 "!"		{chars++;
@@ -175,11 +194,15 @@ ws          {delim}+
 		}
 
 "{"		{chars++;
-		 printf("%s : LEFT BRACE\n", yytext);
+		 printf("%s : LEFT BRACKET\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return LEFTCURLYBRACKET;
 		}
 
 "}"		{chars++;
-		 printf("%s : RIGHT BRACE\n", yytext);
+		 printf("%s : RIGHT BRACKET\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return RIGHCURLYBRACKET;
 		}
 
 ","		{chars++;
@@ -187,7 +210,6 @@ ws          {delim}+
 		 	yylval.string = strdup(yytext);
 		 	return COMMA;
 		}
-
 
 [(\n\r)|(\n)|(\r)|(\r\n)]		{lines++; chars=0;}
 [ \t]	{chars++;}

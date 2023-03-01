@@ -53,7 +53,7 @@ struct AST * AST_Type(char nodeType[50], char LHS[50], char RHS[50]){
 	
 }
 
-struct AST * AST_Func(char nodeType[50], char LHS[50], char RHS[50]){
+struct AST * AST_Fun(char nodeType[50], char LHS[50], char RHS[50]){
 	
 	struct AST* ASTtype = malloc(sizeof(struct AST));
 	strcpy(ASTtype->nodeType, nodeType);

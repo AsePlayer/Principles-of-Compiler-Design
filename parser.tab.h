@@ -56,17 +56,24 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     TYPE = 258,                    /* TYPE  */
     ID = 259,                      /* ID  */
-    SEMICOLON = 260,               /* SEMICOLON  */
-    COMMA = 261,                   /* COMMA  */
-    EQUAL = 262,                   /* EQUAL  */
-    PLUS = 263,                    /* PLUS  */
-    LEFTPARENTHESIS = 264,         /* LEFTPARENTHESIS  */
-    RIGHTPARENTHESIS = 265,        /* RIGHTPARENTHESIS  */
-    UNARYNOT = 266,                /* UNARYNOT  */
-    LOGICALAND = 267,              /* LOGICALAND  */
-    LOGICALOR = 268,               /* LOGICALOR  */
-    NUMBER = 269,                  /* NUMBER  */
-    WRITE = 270                    /* WRITE  */
+    RETURN = 260,                  /* RETURN  */
+    SEMICOLON = 261,               /* SEMICOLON  */
+    COMMA = 262,                   /* COMMA  */
+    EQUAL = 263,                   /* EQUAL  */
+    PLUS = 264,                    /* PLUS  */
+    MINUS = 265,                   /* MINUS  */
+    MULTIPLY = 266,                /* MULTIPLY  */
+    DIVIDE = 267,                  /* DIVIDE  */
+    LEFTPARENTHESIS = 268,         /* LEFTPARENTHESIS  */
+    RIGHTPARENTHESIS = 269,        /* RIGHTPARENTHESIS  */
+    LEFTCURLYBRACKET = 270,        /* LEFTCURLYBRACKET  */
+    RIGHCURLYBRACKET = 271,        /* RIGHCURLYBRACKET  */
+    UNARYNOT = 272,                /* UNARYNOT  */
+    LOGICALAND = 273,              /* LOGICALAND  */
+    LOGICALOR = 274,               /* LOGICALOR  */
+    NUMBER = 275,                  /* NUMBER  */
+    WRITE = 276,                   /* WRITE  */
+    FUN = 277                      /* FUN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -82,7 +89,7 @@ union YYSTYPE
 	char* string;
 	struct AST* ast;
 
-#line 86 "parser.tab.h"
+#line 93 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

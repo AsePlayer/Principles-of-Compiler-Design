@@ -1,9 +1,19 @@
 int x;
 int y;
 int z;
-x = 68;
-write x;
+x = 68 + 1;
 x = 69;
 x = 420 + 69;
 z = 2;
-y = 5 + 64;
+y = 5 + 64 * 5;
+z = z + 1;
+
+fun int bruh() {
+    int wow;
+    wow = 5;
+    int z;
+    z = wow + 5;
+}
+
+z = 2;
+z = 4;
