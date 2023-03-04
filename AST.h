@@ -6,6 +6,7 @@ struct AST{
 	char nodeType[50];
 	char LHS[50];
 	char RHS[50];
+	char value[50];
 	
 	struct AST * left;
 	struct AST * right;
@@ -15,14 +16,18 @@ struct AST{
 
 
 
-struct AST * AST_assignment(char nodeType[50], char LHS[50], char RHS[50]){
+struct AST * AST_assignment(char nodeType[50], char value[50], char LHS[50], char RHS[50]){
 	
 
 	struct AST* ASTassign = malloc(sizeof(struct AST));
 	strcpy(ASTassign->nodeType, nodeType);
+	strcpy(ASTassign->value, value);
 	strcpy(ASTassign->LHS, LHS);
 	strcpy(ASTassign->RHS, RHS);
+	// print value of the node
+	printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", ASTassign->nodeType, ASTassign->value, ASTassign->LHS, ASTassign->RHS);
 	
+
 
 /*
        =
@@ -39,9 +44,12 @@ struct AST * AST_BinaryExpression(char nodeType[50], char LHS[50], char RHS[50])
 	strcpy(ASTBinExp->nodeType, nodeType);
 	strcpy(ASTBinExp->LHS, LHS);
 	strcpy(ASTBinExp->RHS, RHS);
+	printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", ASTBinExp->nodeType, ASTBinExp->value, ASTBinExp->LHS, ASTBinExp->RHS);
+
 	return ASTBinExp;
-	
 }
+
+
 struct AST * AST_Type(char nodeType[50], char LHS[50], char RHS[50]){
 
 	struct AST* ASTtype = malloc(sizeof(struct AST));

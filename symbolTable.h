@@ -141,3 +141,11 @@ void updateItem(char itemName[50], char newItemValue[50], char scope[50]){
         addItem(itemName, "variable", "unknown", newItemValue, 0, scope);
     }
 }
+
+const char * getValue(int itemID){
+	if(itemID == -1 || itemID > symTabIndex){
+		printf("ERROR: Item not found in symbol table.\n");
+		return NULL;
+	}
+	return symTab.symTabItems[itemID].itemValue;
+}

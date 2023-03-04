@@ -14,7 +14,7 @@ extern int yyparse();
 extern FILE* yyin; 
 
 FILE * IRcode;
-FILE * MIPScode;
+FILE * MIPScode; 
 
 
 void yyerror(const char* s);
@@ -74,6 +74,14 @@ Decl:	FunDecl
 	| StmtList
 ; 
 
+StmtList:	
+	| Stmt StmtList
+;
+
+Stmt:	SEMICOLON	{}
+	| Expr SEMICOLON	{$$ = $1;}
+;
+
 FunDecl:	FUN TYPE ID {
 printf("\n RECOGNIZED RULE: Function declaration %s\n", $3);
 																// Symbol Table
@@ -94,7 +102,8 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", $3);
 																showSymTable();
 
 																// ---- SEMANTIC ACTIONS by PARSER ----	
-																
+																AST_Fun("Fun", $2, $3);
+																//printf("-----------> %s", $$->LHS);
 } 
 LEFTPARENTHESIS RIGHTPARENTHESIS Block	{ 
 											// change current scope back to global
@@ -123,25 +132,75 @@ VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 								}
 ;
 
-StmtList:	
-	| Stmt StmtList
-;
-
-Stmt:	SEMICOLON	{}
-	| Expr SEMICOLON	{$$ = $1;}
-;
 
 
 Primary: ID
 	| NUMBER
 	| LEFTPARENTHESIS Expr RIGHTPARENTHESIS
 ;
+ 
 
-Expr: Primary 
+Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); } 
+     | ID EQUAL Expr   {
+        // Update the value of the variable in the symbol table
+        int inSymTab = found($1, currentScope);
+        if (inSymTab == -1) {
+            printf("SEMANTIC ERROR: Variable '%s' is not in the symbol table\n", $1);
+            semanticCheckPassed = 0; 
+        } else {
+			// print the Expr
+			printf( "Expr: %s", $3->value);
+            updateItem($1, $3->value, currentScope);
+            $$ = AST_BinaryExpression("=", $1, $3->value);
+        }
+     }   
+     | Expr PLUS Expr   { 
+		// calculate the value of the expression
+		int total = atoi($1->value) + atoi($3->value);  
+		$$ = AST_BinaryExpression("+", $1, $3); 
+		// convert value to string
+		char stringVal[50];
+		sprintf(stringVal, "%d", total);
+		// set the value of the expression
+		sprintf($$->value, "%s", stringVal);
+		// printf("Expr PLUS: %d", total);
+		printf( "Expr: %s ", $$->value);
+		}
+     | Expr MINUS Expr  { 
+		// calculate the value of the expression
+		int total = atoi($1->value) - atoi($3->value); 
+		$$ = AST_BinaryExpression("-", $1, $3);
+		// convert value to string
+		char stringVal[50];
+		sprintf(stringVal, "%d", total);
+		// set the value of the expression
+		sprintf($$->value, "%s", stringVal);
+	 }
+     | Expr MULTIPLY Expr  {
+		// calculate the value of the expression
+		int total = atoi($1->value) * atoi($3->value);
+		$$ = AST_BinaryExpression("*", $1, $3);
+		// convert value to string
+		char stringVal[50];
+		sprintf(stringVal, "%d", total);
+		// set the value of the expression
+		sprintf($$->value, "%s", stringVal);
+	 }
+     | Expr DIVIDE Expr { 
+
+     }
+     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS    {  }
+     ;
+
+/* Expr: Primary 
     | Expr PLUS Expr {
         $$ = AST_BinaryExpression("+", $1, $3);
+		// calculate the value of the expression
+		// $$->value = $1->value + $3->value;
 		printf("\n--- Abstract Syntax Tree ---\n\n");
 		printAST($$,0);
+
+		//printf("PLUSPLUS val1: %s val2: %s \n", val1, val2);
     } // addition
     | Expr MINUS Expr {
         $$ = AST_BinaryExpression("-", $1, $3);
@@ -170,10 +229,26 @@ Expr: Primary
 		sprintf(val, "%s", $3);
 		printf("var: %s val: %s \n", var, val);
 
+		// check if val is a number
+		if (isdigit(val[0])) {
+			// update symbol table 
+			updateItem($1, $3, currentScope);
+			$$ = AST_assignment("=", $3, var, val);
+		}
+		else {
+
+		sprintf(val, "%s",  $3->value);
+		}
+
+		// get the value of the expression
+
+		// print identifier and value
+		printf(" =LOOKIN FOR WOW var: %s val: %s \n", var, val);
+
 
 		// update symbol table 
 		updateItem($1, $3, currentScope);
-        $$ = AST_assignment("=", var, val);		
+        $$ = AST_assignment("=", $3, var, val);		
 
 		showSymTable();
 		// print the AST
@@ -182,7 +257,7 @@ Expr: Primary
 
 		// printAST($$,0);
     } // assignment statement 
-;
+; */
 	/* | ID EQUAL Expr 	{ printf("\n RECOGNIZED RULE: Assignment statement\n"); 
 						// ---- SEMANTIC ACTIONS by PARSER ---- //
 						  $$ = AST_assignment("=",$1,$3);
@@ -215,7 +290,7 @@ Expr: Primary
 						}
 						
 						// ---- END OF SEMANTIC ANALYSIS ACTIONS ---- //
-						updateItem($1, $3, currentScope);
+						updateItem($1, $3, currentScope); 
 	}
 ; */
 
