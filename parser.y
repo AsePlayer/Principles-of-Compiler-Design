@@ -14,7 +14,7 @@ extern int yyparse();
 extern FILE* yyin; 
 
 FILE * IRcode;
-FILE * MIPScode; 
+FILE * MIPScode;
 
 
 void yyerror(const char* s);
@@ -40,6 +40,8 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %token <character> RIGHTPARENTHESIS
 %token <character> LEFTCURLYBRACKET
 %token <character> RIGHCURLYBRACKET
+%token <character> LEFTBRACKET
+%token <character> RIGHTBRACKET
 %token <character> UNARYNOT
 %token <string> LOGICALAND
 %token <string> LOGICALOR
@@ -49,6 +51,12 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 
 %printer { fprintf(yyoutput, "%s", $$); } ID;
 %printer { fprintf(yyoutput, "%d", $$); } NUMBER;
+
+%left PLUS MINUS
+%left MULTIPLY DIVIDE
+%right UNARYNOT
+%left LOGICALAND
+%left LOGICALOR
 
 %type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr FunDecl
 
@@ -130,7 +138,34 @@ VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 								    $$ = AST_Type("Type",$1,$2);
 									printf("-----------> %s", $$->LHS);
 								}
-;
+| TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON { 
+    // Symbol Table
+    symTabAccess();
+    int inSymTab = found($2, currentScope);
+    if (inSymTab == -1) {
+        // Add the array name to the symbol table
+		// turn $4 into number
+        addItem($2, "Arr", $1, "", atoi($4), currentScope);
+    } else {
+        printf("SEMANTIC ERROR: Array %s is already in the symbol table\n", $2);
+    }
+	// for loop that makes empty entries as many times as the number in $4
+	int i;
+	for (i = 0; i < atoi($4); i++) {
+		// add i char to the end of $2
+		char *arrName = malloc(strlen($2) + 2);
+		strcpy(arrName, $2);
+		char iChar[2];
+		sprintf(iChar, "%d", i);
+		strcat(arrName, iChar);
+		addItem($2, "Var", $1, "", 0, currentScope);
+	}
+    showSymTable();
+
+    // ---- SEMANTIC ACTIONS by PARSER ----
+    $$ = AST_Type("Type", $1, $2);
+    printf("-----------> %s", $$->LHS);
+}; 
 
 
 
@@ -170,6 +205,8 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
 		// calculate the value of the expression
 		int total = atoi($1->value) - atoi($3->value); 
 		$$ = AST_BinaryExpression("-", $1, $3);
+		// print what is being subtracted
+		printf( "Expr: %s - %s ", $1->value, $3->value);
 		// convert value to string
 		char stringVal[50];
 		sprintf(stringVal, "%d", total);
@@ -190,7 +227,89 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
 
      }
      | LEFTPARENTHESIS Expr RIGHTPARENTHESIS    {  }
-     ;
+	 | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr {
+    // Check if the array is in the symbol table
+    int inSymTab = found($1, currentScope);
+    if (inSymTab == -1) {
+        printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", $1);
+        semanticCheckPassed = 0;
+    } else {
+        // Get the type of the array from the symbol table
+        // char* type = getType($1, currentScope);
+        if (strcmp("Arr", "Arr") != 0) {
+            printf("SEMANTIC ERROR: %s is not an array\n", $1);
+            semanticCheckPassed = 0;
+        } else {
+            // Check if the index is within bounds
+            int size = getArraySize($1, currentScope);
+            if (atoi($3) >= size) {
+                printf("SEMANTIC ERROR: Index out of bounds for array %s\n", $1);
+                semanticCheckPassed = 0;
+            } else { 
+                // Construct the AST for the array indexing
+                // $$ = AST_ArrayIndex($1, $3);
+				// updateItemByID
+				
+				// turn $3 into number
+				int index = atoi($3);
+				updateItemByID(inSymTab + index, $3);
+				// print updating id (inSymTab + index)
+				printf("Updating id: %d", inSymTab + index);
+            }
+        }
+    }
+}
+;
+
+UnaryOp: MINUS
+	| UNARYNOT
+;
+
+BinaryOp: PLUS
+	| MINUS
+	| MULTIPLY
+	| DIVIDE
+	| LOGICALAND
+	| LOGICALOR
+;
+
+%%
+
+int main(int argc, char**argv)
+{
+	strcpy(currentScope, "global");
+/*
+	#ifdef YYDEBUG
+		yydebug = 1;
+	#endif
+*/
+	printf("\n\n##### COMPILER STARTED #####\n\n");
+	
+	if (argc > 1){
+	  if(!(yyin = fopen(argv[1], "r")))
+          {
+		perror(argv[1]);
+		return(1);
+	  }
+	}
+
+	// Initialize IR and MIPS files
+	initIRcodeFile(); 
+	initAssemblyFile();
+
+	// Start parser
+	yyparse();
+
+	// Add the closing part required for any MIPS file
+	emitEndOfAssemblyCode();
+	showSymTable();
+}
+
+void yyerror(const char* s) {
+	fprintf(stderr, "Parse error: %s\n", s);
+	exit(1);
+}
+
 
 /* Expr: Primary 
     | Expr PLUS Expr {
@@ -294,17 +413,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
 	}
 ; */
 
-UnaryOp: MINUS
-	| UNARYNOT
-;
 
-BinaryOp: PLUS
-	| MINUS
-	| MULTIPLY
-	| DIVIDE
-	| LOGICALAND
-	| LOGICALOR
-;
 
 /* Body: LCURL RCURL	{ $$ = AST_Body("Body", $1, $2); }
 	| LCURL StmtList RCURL	{ $$ = AST_Body("Body", $1, $2, $3); }
@@ -491,40 +600,3 @@ BinaryOp: PLUS
 						}
 				}
 ; */
-
-%%
-
-int main(int argc, char**argv)
-{
-	strcpy(currentScope, "global");
-/*
-	#ifdef YYDEBUG
-		yydebug = 1;
-	#endif
-*/
-	printf("\n\n##### COMPILER STARTED #####\n\n");
-	
-	if (argc > 1){
-	  if(!(yyin = fopen(argv[1], "r")))
-          {
-		perror(argv[1]);
-		return(1);
-	  }
-	}
-
-	// Initialize IR and MIPS files
-	initIRcodeFile(); 
-	initAssemblyFile();
-
-	// Start parser
-	yyparse();
-
-	// Add the closing part required for any MIPS file
-	emitEndOfAssemblyCode();
-	showSymTable();
-}
-
-void yyerror(const char* s) {
-	fprintf(stderr, "Parse error: %s\n", s);
-	exit(1);
-}

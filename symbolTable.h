@@ -115,6 +115,22 @@ const char* getVariableType(char itemName[50], char scope[50]){
 	return NULL;
 }
 
+int getArraySize(char itemName[50], char scope[50]){
+	//char *name = "int";
+	//return name;
+
+	for(int i=0; i<SYMTAB_SIZE; i++){
+		int str1 = strcmp(symTab.symTabItems[i].itemName, itemName); 
+		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
+		int str2 = strcmp(symTab.symTabItems[i].scope,scope); 
+		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
+		if( str1 == 0 && str2 == 0){
+			return symTab.symTabItems[i].arrayLength; // found the ID in the table
+		}
+	}
+	return NULL;
+}
+
 int compareTypes(char itemName1[50], char itemName2[50],char scope[50]){
 	const char* idType1 = getVariableType(itemName1, scope);
 	const char* idType2 = getVariableType(itemName2, scope);
@@ -140,6 +156,17 @@ void updateItem(char itemName[50], char newItemValue[50], char scope[50]){
         // If the identifier is not found in the symbol table, add it to the symbol table
         addItem(itemName, "variable", "unknown", newItemValue, 0, scope);
     }
+}
+
+// Make a function like updateItem but it updates based on id
+void updateItemByID(int itemID, char newItemValue[50]){
+	// If the identifier is found in the symbol table, update its value
+	if (itemID >= 0) {
+		strcpy(symTab.symTabItems[itemID].itemValue, newItemValue);
+	} else {
+		// If the identifier is not found in the symbol table, add it to the symbol table
+		printf("ERROR: Item not found in symbol table.\n");
+	}
 }
 
 const char * getValue(int itemID){

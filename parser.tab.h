@@ -68,12 +68,14 @@ extern int yydebug;
     RIGHTPARENTHESIS = 269,        /* RIGHTPARENTHESIS  */
     LEFTCURLYBRACKET = 270,        /* LEFTCURLYBRACKET  */
     RIGHCURLYBRACKET = 271,        /* RIGHCURLYBRACKET  */
-    UNARYNOT = 272,                /* UNARYNOT  */
-    LOGICALAND = 273,              /* LOGICALAND  */
-    LOGICALOR = 274,               /* LOGICALOR  */
-    NUMBER = 275,                  /* NUMBER  */
-    WRITE = 276,                   /* WRITE  */
-    FUN = 277                      /* FUN  */
+    LEFTBRACKET = 272,             /* LEFTBRACKET  */
+    RIGHTBRACKET = 273,            /* RIGHTBRACKET  */
+    UNARYNOT = 274,                /* UNARYNOT  */
+    LOGICALAND = 275,              /* LOGICALAND  */
+    LOGICALOR = 276,               /* LOGICALOR  */
+    NUMBER = 277,                  /* NUMBER  */
+    WRITE = 278,                   /* WRITE  */
+    FUN = 279                      /* FUN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -89,7 +91,7 @@ union YYSTYPE
 	char* string;
 	struct AST* ast;
 
-#line 93 "parser.tab.h"
+#line 95 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

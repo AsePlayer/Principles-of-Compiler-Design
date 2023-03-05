@@ -193,14 +193,26 @@ ws          {delim}+
 		 	return RIGHTPARENTHESIS;
 		}
 
-"{"		{chars++;
+"["		{chars++;
 		 printf("%s : LEFT BRACKET\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return LEFTBRACKET;
+		}
+
+"]"		{chars++;
+		 printf("%s : RIGHT BRACKET\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return RIGHTBRACKET;
+		}
+
+"{"		{chars++;
+		 printf("%s : LEFT CURLY BRACKET\n", yytext);
 		 	yylval.string = strdup(yytext);
 		 	return LEFTCURLYBRACKET;
 		}
 
 "}"		{chars++;
-		 printf("%s : RIGHT BRACKET\n", yytext);
+		 printf("%s : RIGHT CURLY BRACKET\n", yytext);
 		 	yylval.string = strdup(yytext);
 		 	return RIGHCURLYBRACKET;
 		}
