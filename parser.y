@@ -48,6 +48,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %token <string> NUMBER
 %token <string> WRITE
 %token <string> FUN
+%token <string> IF WHILE 
 
 %printer { fprintf(yyoutput, "%s", $$); } ID;
 %printer { fprintf(yyoutput, "%d", $$); } NUMBER;
@@ -237,6 +238,24 @@ VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 									printf("-----------> %s", $$->LHS);
 
 									emitVariableDeclaration(currentScope, $1, $2, "0");
+								}
+| TYPE ID EQUAL Expr SEMICOLON { printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
+									// Symbol Table 
+									symTabAccess();
+									int inSymTab = found($2, currentScope);
+									//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
+									
+									if (inSymTab == -1)  
+										addItem($2, "Var", $1, $4->value, 0, currentScope); 
+									else
+										printf("SEMANTIC ERROR: Var %s is already in the symbol table", $2);
+									showSymTable();
+									
+								  // ---- SEMANTIC ACTIONS by PARSER ----
+								    $$ = AST_Type("Type",$1,$2);
+									printf("-----------> %s", $$->LHS);
+
+									emitVariableDeclaration(currentScope, $1, $2, $4->value);
 								}
 | TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON { 
     // Symbol Table

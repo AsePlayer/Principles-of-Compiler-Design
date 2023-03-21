@@ -11,41 +11,43 @@ Terminals unused in grammar
     LOGICALAND
     LOGICALOR
     WRITE
+    IF
+    WHILE
 
 
 Rules useless in grammar
 
-   40 Primary: ID
-   41        | NUMBER
-   42        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   43        | ID LEFTBRACKET Expr RIGHTBRACKET
+   41 Primary: ID
+   42        | NUMBER
+   43        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
+   44        | ID LEFTBRACKET Expr RIGHTBRACKET
 
-   44 UnaryOp: MINUS
-   45        | UNARYNOT
+   45 UnaryOp: MINUS
+   46        | UNARYNOT
 
-   46 BinaryOp: PLUS
-   47         | MINUS
-   48         | MULTIPLY
-   49         | DIVIDE
-   50         | LOGICALAND
-   51         | LOGICALOR
+   47 BinaryOp: PLUS
+   48         | MINUS
+   49         | MULTIPLY
+   50         | DIVIDE
+   51         | LOGICALAND
+   52         | LOGICALOR
 
 
 Rules useless in parser due to conflicts
 
    21 FunCall: ε
 
-   39 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   40 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
 
 
 State 0 conflicts: 7 shift/reduce, 1 reduce/reduce
 State 10 conflicts: 7 shift/reduce, 8 reduce/reduce
 State 12 conflicts: 5 shift/reduce, 1 reduce/reduce
-State 38 conflicts: 4 shift/reduce
-State 41 conflicts: 1 shift/reduce
-State 61 conflicts: 4 shift/reduce, 7 reduce/reduce
-State 69 conflicts: 7 shift/reduce, 1 reduce/reduce
-State 71 conflicts: 1 shift/reduce
+State 39 conflicts: 4 shift/reduce
+State 42 conflicts: 1 shift/reduce
+State 64 conflicts: 4 shift/reduce, 7 reduce/reduce
+State 72 conflicts: 7 shift/reduce, 1 reduce/reduce
+State 74 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -91,99 +93,102 @@ Grammar
    25 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET
 
    26 VarDecl: TYPE ID SEMICOLON
-   27        | TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON
+   27        | TYPE ID EQUAL Expr SEMICOLON
+   28        | TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON
 
-   28 Expr: NUMBER
-   29     | ID
-   30     | ID LEFTBRACKET Expr RIGHTBRACKET
-   31     | ID EQUAL Expr
-   32     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
-   33     | Expr PLUS Expr
-   34     | Expr MINUS Expr
-   35     | Expr MULTIPLY Expr
-   36     | Expr DIVIDE Expr
-   37     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   38     | ID LEFTBRACKET NUMBER RIGHTBRACKET
-   39     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   29 Expr: NUMBER
+   30     | ID
+   31     | ID LEFTBRACKET Expr RIGHTBRACKET
+   32     | ID EQUAL Expr
+   33     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   34     | Expr PLUS Expr
+   35     | Expr MINUS Expr
+   36     | Expr MULTIPLY Expr
+   37     | Expr DIVIDE Expr
+   38     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
+   39     | ID LEFTBRACKET NUMBER RIGHTBRACKET
+   40     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    TYPE <string> (258) 14 15 16 17 24 26 27
-    ID <string> (259) 14 15 16 17 20 24 26 27 29 30 31 32 38 39
+    TYPE <string> (258) 14 15 16 17 24 26 27 28
+    ID <string> (259) 14 15 16 17 20 24 26 27 28 30 31 32 33 39 40
     RETURN <string> (260) 19
-    SEMICOLON <character> (261) 9 10 11 12 26 27
+    SEMICOLON <character> (261) 9 10 11 12 26 27 28
     COMMA <character> (262) 14 16
-    EQUAL <character> (263) 31 32 39
-    PLUS <character> (264) 33
-    MINUS <character> (265) 34
-    MULTIPLY <character> (266) 35
-    DIVIDE <character> (267) 36
-    LEFTPARENTHESIS <character> (268) 20 24 37
-    RIGHTPARENTHESIS <character> (269) 20 24 37
+    EQUAL <character> (263) 27 32 33 40
+    PLUS <character> (264) 34
+    MINUS <character> (265) 35
+    MULTIPLY <character> (266) 36
+    DIVIDE <character> (267) 37
+    LEFTPARENTHESIS <character> (268) 20 24 38
+    RIGHTPARENTHESIS <character> (269) 20 24 38
     LEFTCURLYBRACKET <character> (270) 25
     RIGHCURLYBRACKET <character> (271) 25
-    LEFTBRACKET <character> (272) 27 30 32 38 39
-    RIGHTBRACKET <character> (273) 27 30 32 38 39
+    LEFTBRACKET <character> (272) 28 31 33 39 40
+    RIGHTBRACKET <character> (273) 28 31 33 39 40
     UNARYNOT <character> (274)
     LOGICALAND <string> (275)
     LOGICALOR <string> (276)
-    NUMBER <string> (277) 27 28 32 38 39
+    NUMBER <string> (277) 28 29 33 39 40
     WRITE <string> (278)
     FUN <string> (279) 24
+    IF <string> (280)
+    WHILE <string> (281)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (25)
+    $accept (27)
         on left: 0
-    Program <ast> (26)
+    Program <ast> (28)
         on left: 1
         on right: 0
-    DeclList <ast> (27)
+    DeclList <ast> (29)
         on left: 2 3
         on right: 1 2 25
-    Decl <ast> (28)
+    Decl <ast> (30)
         on left: 4 5 6
         on right: 2 3
-    StmtList <ast> (29)
+    StmtList <ast> (31)
         on left: 7 8
         on right: 6 8 25
-    Stmt <ast> (30)
+    Stmt <ast> (32)
         on left: 9 10 11 12
         on right: 8
-    ParamList <ast> (31)
+    ParamList <ast> (33)
         on left: 13 14 15
         on right: 14 24
-    Param <ast> (32)
+    Param <ast> (34)
         on left: 16 17 18
         on right: 16 20
-    ReturnStmt (33)
+    ReturnStmt (35)
         on left: 19
         on right: 11
-    FunCall (34)
+    FunCall (36)
         on left: 20 21
         on right: 12
-    FunDecl <ast> (35)
+    FunDecl <ast> (37)
         on left: 24
         on right: 4
-    $@1 (36)
+    $@1 (38)
         on left: 22
         on right: 24
-    $@2 (37)
+    $@2 (39)
         on left: 23
         on right: 24
-    Block <ast> (38)
+    Block <ast> (40)
         on left: 25
         on right: 24
-    VarDecl <ast> (39)
-        on left: 26 27
+    VarDecl <ast> (41)
+        on left: 26 27 28
         on right: 5
-    Expr <ast> (40)
-        on left: 28 29 30 31 32 33 34 35 36 37 38 39
-        on right: 10 19 30 31 32 33 34 35 36 37 39
+    Expr <ast> (42)
+        on left: 29 30 31 32 33 34 35 36 37 38 39 40
+        on right: 10 19 27 31 32 33 34 35 36 37 38 40
 
 
 State 0
@@ -223,7 +228,8 @@ State 0
 State 1
 
    26 VarDecl: TYPE • ID SEMICOLON
-   27        | TYPE • ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON
+   27        | TYPE • ID EQUAL Expr SEMICOLON
+   28        | TYPE • ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON
 
     ID  shift, and go to state 18
 
@@ -231,18 +237,18 @@ State 1
 State 2
 
    20 FunCall: ID • LEFTPARENTHESIS Param RIGHTPARENTHESIS
-   29 Expr: ID •
-   30     | ID • LEFTBRACKET Expr RIGHTBRACKET
-   31     | ID • EQUAL Expr
-   32     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
-   38     | ID • LEFTBRACKET NUMBER RIGHTBRACKET
-   39     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   30 Expr: ID •
+   31     | ID • LEFTBRACKET Expr RIGHTBRACKET
+   32     | ID • EQUAL Expr
+   33     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   39     | ID • LEFTBRACKET NUMBER RIGHTBRACKET
+   40     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
 
     EQUAL            shift, and go to state 19
     LEFTPARENTHESIS  shift, and go to state 20
     LEFTBRACKET      shift, and go to state 21
 
-    $default  reduce using rule 29 (Expr)
+    $default  reduce using rule 30 (Expr)
 
 
 State 3
@@ -265,7 +271,7 @@ State 4
 
 State 5
 
-   37 Expr: LEFTPARENTHESIS • Expr RIGHTPARENTHESIS
+   38 Expr: LEFTPARENTHESIS • Expr RIGHTPARENTHESIS
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
@@ -276,9 +282,9 @@ State 5
 
 State 6
 
-   28 Expr: NUMBER •
+   29 Expr: NUMBER •
 
-    $default  reduce using rule 28 (Expr)
+    $default  reduce using rule 29 (Expr)
 
 
 State 7
@@ -408,10 +414,10 @@ State 16
 State 17
 
    10 Stmt: Expr • SEMICOLON
-   33 Expr: Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
 
     SEMICOLON  shift, and go to state 31
     PLUS       shift, and go to state 32
@@ -423,70 +429,72 @@ State 17
 State 18
 
    26 VarDecl: TYPE ID • SEMICOLON
-   27        | TYPE ID • LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON
+   27        | TYPE ID • EQUAL Expr SEMICOLON
+   28        | TYPE ID • LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON
 
     SEMICOLON    shift, and go to state 36
-    LEFTBRACKET  shift, and go to state 37
+    EQUAL        shift, and go to state 37
+    LEFTBRACKET  shift, and go to state 38
 
 
 State 19
 
-   31 Expr: ID EQUAL • Expr
+   32 Expr: ID EQUAL • Expr
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
     NUMBER           shift, and go to state 6
 
-    Expr  go to state 38
+    Expr  go to state 39
 
 
 State 20
 
    20 FunCall: ID LEFTPARENTHESIS • Param RIGHTPARENTHESIS
 
-    TYPE  shift, and go to state 39
+    TYPE  shift, and go to state 40
 
     $default  reduce using rule 18 (Param)
 
-    Param  go to state 40
+    Param  go to state 41
 
 
 State 21
 
-   30 Expr: ID LEFTBRACKET • Expr RIGHTBRACKET
-   32     | ID LEFTBRACKET • NUMBER RIGHTBRACKET EQUAL Expr
-   38     | ID LEFTBRACKET • NUMBER RIGHTBRACKET
-   39     | ID LEFTBRACKET • NUMBER RIGHTBRACKET EQUAL Expr
+   31 Expr: ID LEFTBRACKET • Expr RIGHTBRACKET
+   33     | ID LEFTBRACKET • NUMBER RIGHTBRACKET EQUAL Expr
+   39     | ID LEFTBRACKET • NUMBER RIGHTBRACKET
+   40     | ID LEFTBRACKET • NUMBER RIGHTBRACKET EQUAL Expr
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
-    NUMBER           shift, and go to state 41
+    NUMBER           shift, and go to state 42
 
-    Expr  go to state 42
+    Expr  go to state 43
 
 
 State 22
 
-   29 Expr: ID •
-   30     | ID • LEFTBRACKET Expr RIGHTBRACKET
-   31     | ID • EQUAL Expr
-   32     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
-   38     | ID • LEFTBRACKET NUMBER RIGHTBRACKET
-   39     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   30 Expr: ID •
+   31     | ID • LEFTBRACKET Expr RIGHTBRACKET
+   32     | ID • EQUAL Expr
+   33     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
+   39     | ID • LEFTBRACKET NUMBER RIGHTBRACKET
+   40     | ID • LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr
 
     EQUAL        shift, and go to state 19
     LEFTBRACKET  shift, and go to state 21
 
-    $default  reduce using rule 29 (Expr)
+    $default  reduce using rule 30 (Expr)
 
 
 State 23
 
    19 ReturnStmt: RETURN Expr •
-   33 Expr: Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
 
     PLUS      shift, and go to state 32
     MINUS     shift, and go to state 33
@@ -498,24 +506,24 @@ State 23
 
 State 24
 
-   33 Expr: Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
-   37     | LEFTPARENTHESIS Expr • RIGHTPARENTHESIS
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
+   38     | LEFTPARENTHESIS Expr • RIGHTPARENTHESIS
 
     PLUS              shift, and go to state 32
     MINUS             shift, and go to state 33
     MULTIPLY          shift, and go to state 34
     DIVIDE            shift, and go to state 35
-    RIGHTPARENTHESIS  shift, and go to state 43
+    RIGHTPARENTHESIS  shift, and go to state 44
 
 
 State 25
 
    24 FunDecl: FUN TYPE • ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
 
-    ID  shift, and go to state 44
+    ID  shift, and go to state 45
 
 
 State 26
@@ -562,18 +570,7 @@ State 31
 
 State 32
 
-   33 Expr: Expr PLUS • Expr
-
-    ID               shift, and go to state 22
-    LEFTPARENTHESIS  shift, and go to state 5
-    NUMBER           shift, and go to state 6
-
-    Expr  go to state 45
-
-
-State 33
-
-   34 Expr: Expr MINUS • Expr
+   34 Expr: Expr PLUS • Expr
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
@@ -582,9 +579,9 @@ State 33
     Expr  go to state 46
 
 
-State 34
+State 33
 
-   35 Expr: Expr MULTIPLY • Expr
+   35 Expr: Expr MINUS • Expr
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
@@ -593,15 +590,26 @@ State 34
     Expr  go to state 47
 
 
-State 35
+State 34
 
-   36 Expr: Expr DIVIDE • Expr
+   36 Expr: Expr MULTIPLY • Expr
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
     NUMBER           shift, and go to state 6
 
     Expr  go to state 48
+
+
+State 35
+
+   37 Expr: Expr DIVIDE • Expr
+
+    ID               shift, and go to state 22
+    LEFTPARENTHESIS  shift, and go to state 5
+    NUMBER           shift, and go to state 6
+
+    Expr  go to state 49
 
 
 State 36
@@ -613,111 +621,108 @@ State 36
 
 State 37
 
-   27 VarDecl: TYPE ID LEFTBRACKET • NUMBER RIGHTBRACKET SEMICOLON
+   27 VarDecl: TYPE ID EQUAL • Expr SEMICOLON
 
-    NUMBER  shift, and go to state 49
+    ID               shift, and go to state 22
+    LEFTPARENTHESIS  shift, and go to state 5
+    NUMBER           shift, and go to state 6
+
+    Expr  go to state 50
 
 
 State 38
 
-   31 Expr: ID EQUAL Expr •
-   33     | Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
+   28 VarDecl: TYPE ID LEFTBRACKET • NUMBER RIGHTBRACKET SEMICOLON
+
+    NUMBER  shift, and go to state 51
+
+
+State 39
+
+   32 Expr: ID EQUAL Expr •
+   34     | Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
 
     PLUS      shift, and go to state 32
     MINUS     shift, and go to state 33
     MULTIPLY  shift, and go to state 34
     DIVIDE    shift, and go to state 35
 
-    PLUS      [reduce using rule 31 (Expr)]
-    MINUS     [reduce using rule 31 (Expr)]
-    MULTIPLY  [reduce using rule 31 (Expr)]
-    DIVIDE    [reduce using rule 31 (Expr)]
-    $default  reduce using rule 31 (Expr)
-
-
-State 39
-
-   16 Param: TYPE • ID COMMA Param
-   17      | TYPE • ID
-
-    ID  shift, and go to state 50
+    PLUS      [reduce using rule 32 (Expr)]
+    MINUS     [reduce using rule 32 (Expr)]
+    MULTIPLY  [reduce using rule 32 (Expr)]
+    DIVIDE    [reduce using rule 32 (Expr)]
+    $default  reduce using rule 32 (Expr)
 
 
 State 40
 
-   20 FunCall: ID LEFTPARENTHESIS Param • RIGHTPARENTHESIS
+   16 Param: TYPE • ID COMMA Param
+   17      | TYPE • ID
 
-    RIGHTPARENTHESIS  shift, and go to state 51
+    ID  shift, and go to state 52
 
 
 State 41
 
-   28 Expr: NUMBER •
-   32     | ID LEFTBRACKET NUMBER • RIGHTBRACKET EQUAL Expr
-   38     | ID LEFTBRACKET NUMBER • RIGHTBRACKET
-   39     | ID LEFTBRACKET NUMBER • RIGHTBRACKET EQUAL Expr
+   20 FunCall: ID LEFTPARENTHESIS Param • RIGHTPARENTHESIS
 
-    RIGHTBRACKET  shift, and go to state 52
-
-    RIGHTBRACKET  [reduce using rule 28 (Expr)]
-    $default      reduce using rule 28 (Expr)
+    RIGHTPARENTHESIS  shift, and go to state 53
 
 
 State 42
 
-   30 Expr: ID LEFTBRACKET Expr • RIGHTBRACKET
-   33     | Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
+   29 Expr: NUMBER •
+   33     | ID LEFTBRACKET NUMBER • RIGHTBRACKET EQUAL Expr
+   39     | ID LEFTBRACKET NUMBER • RIGHTBRACKET
+   40     | ID LEFTBRACKET NUMBER • RIGHTBRACKET EQUAL Expr
+
+    RIGHTBRACKET  shift, and go to state 54
+
+    RIGHTBRACKET  [reduce using rule 29 (Expr)]
+    $default      reduce using rule 29 (Expr)
+
+
+State 43
+
+   31 Expr: ID LEFTBRACKET Expr • RIGHTBRACKET
+   34     | Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
 
     PLUS          shift, and go to state 32
     MINUS         shift, and go to state 33
     MULTIPLY      shift, and go to state 34
     DIVIDE        shift, and go to state 35
-    RIGHTBRACKET  shift, and go to state 53
-
-
-State 43
-
-   37 Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS •
-
-    $default  reduce using rule 37 (Expr)
+    RIGHTBRACKET  shift, and go to state 55
 
 
 State 44
+
+   38 Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS •
+
+    $default  reduce using rule 38 (Expr)
+
+
+State 45
 
    24 FunDecl: FUN TYPE ID • $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
 
     $default  reduce using rule 22 ($@1)
 
-    $@1  go to state 54
-
-
-State 45
-
-   33 Expr: Expr • PLUS Expr
-   33     | Expr PLUS Expr •
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
-
-    MULTIPLY  shift, and go to state 34
-    DIVIDE    shift, and go to state 35
-
-    $default  reduce using rule 33 (Expr)
+    $@1  go to state 56
 
 
 State 46
 
-   33 Expr: Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   34     | Expr MINUS Expr •
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
+   34 Expr: Expr • PLUS Expr
+   34     | Expr PLUS Expr •
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
 
     MULTIPLY  shift, and go to state 34
     DIVIDE    shift, and go to state 35
@@ -727,223 +732,259 @@ State 46
 
 State 47
 
-   33 Expr: Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   35     | Expr MULTIPLY Expr •
-   36     | Expr • DIVIDE Expr
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   35     | Expr MINUS Expr •
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
+
+    MULTIPLY  shift, and go to state 34
+    DIVIDE    shift, and go to state 35
 
     $default  reduce using rule 35 (Expr)
 
 
 State 48
 
-   33 Expr: Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
-   36     | Expr DIVIDE Expr •
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   36     | Expr MULTIPLY Expr •
+   37     | Expr • DIVIDE Expr
 
     $default  reduce using rule 36 (Expr)
 
 
 State 49
 
-   27 VarDecl: TYPE ID LEFTBRACKET NUMBER • RIGHTBRACKET SEMICOLON
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
+   37     | Expr DIVIDE Expr •
 
-    RIGHTBRACKET  shift, and go to state 55
+    $default  reduce using rule 37 (Expr)
 
 
 State 50
 
+   27 VarDecl: TYPE ID EQUAL Expr • SEMICOLON
+   34 Expr: Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
+
+    SEMICOLON  shift, and go to state 57
+    PLUS       shift, and go to state 32
+    MINUS      shift, and go to state 33
+    MULTIPLY   shift, and go to state 34
+    DIVIDE     shift, and go to state 35
+
+
+State 51
+
+   28 VarDecl: TYPE ID LEFTBRACKET NUMBER • RIGHTBRACKET SEMICOLON
+
+    RIGHTBRACKET  shift, and go to state 58
+
+
+State 52
+
    16 Param: TYPE ID • COMMA Param
    17      | TYPE ID •
 
-    COMMA  shift, and go to state 56
+    COMMA  shift, and go to state 59
 
     $default  reduce using rule 17 (Param)
 
 
-State 51
+State 53
 
    20 FunCall: ID LEFTPARENTHESIS Param RIGHTPARENTHESIS •
 
     $default  reduce using rule 20 (FunCall)
 
 
-State 52
-
-   32 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET • EQUAL Expr
-   38     | ID LEFTBRACKET NUMBER RIGHTBRACKET •
-   39     | ID LEFTBRACKET NUMBER RIGHTBRACKET • EQUAL Expr
-
-    EQUAL  shift, and go to state 57
-
-    $default  reduce using rule 38 (Expr)
-
-
-State 53
-
-   30 Expr: ID LEFTBRACKET Expr RIGHTBRACKET •
-
-    $default  reduce using rule 30 (Expr)
-
-
 State 54
 
-   24 FunDecl: FUN TYPE ID $@1 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
+   33 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET • EQUAL Expr
+   39     | ID LEFTBRACKET NUMBER RIGHTBRACKET •
+   40     | ID LEFTBRACKET NUMBER RIGHTBRACKET • EQUAL Expr
 
-    LEFTPARENTHESIS  shift, and go to state 58
+    EQUAL  shift, and go to state 60
+
+    $default  reduce using rule 39 (Expr)
 
 
 State 55
 
-   27 VarDecl: TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET • SEMICOLON
+   31 Expr: ID LEFTBRACKET Expr RIGHTBRACKET •
 
-    SEMICOLON  shift, and go to state 59
+    $default  reduce using rule 31 (Expr)
 
 
 State 56
 
-   16 Param: TYPE ID COMMA • Param
+   24 FunDecl: FUN TYPE ID $@1 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
 
-    TYPE  shift, and go to state 39
-
-    $default  reduce using rule 18 (Param)
-
-    Param  go to state 60
+    LEFTPARENTHESIS  shift, and go to state 61
 
 
 State 57
 
-   32 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL • Expr
-   39     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL • Expr
+   27 VarDecl: TYPE ID EQUAL Expr SEMICOLON •
+
+    $default  reduce using rule 27 (VarDecl)
+
+
+State 58
+
+   28 VarDecl: TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET • SEMICOLON
+
+    SEMICOLON  shift, and go to state 62
+
+
+State 59
+
+   16 Param: TYPE ID COMMA • Param
+
+    TYPE  shift, and go to state 40
+
+    $default  reduce using rule 18 (Param)
+
+    Param  go to state 63
+
+
+State 60
+
+   33 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL • Expr
+   40     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL • Expr
 
     ID               shift, and go to state 22
     LEFTPARENTHESIS  shift, and go to state 5
     NUMBER           shift, and go to state 6
 
-    Expr  go to state 61
+    Expr  go to state 64
 
 
-State 58
+State 61
 
    24 FunDecl: FUN TYPE ID $@1 LEFTPARENTHESIS • ParamList RIGHTPARENTHESIS $@2 Block
 
-    TYPE  shift, and go to state 62
+    TYPE  shift, and go to state 65
 
     $default  reduce using rule 13 (ParamList)
 
-    ParamList  go to state 63
+    ParamList  go to state 66
 
 
-State 59
+State 62
 
-   27 VarDecl: TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON •
+   28 VarDecl: TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON •
 
-    $default  reduce using rule 27 (VarDecl)
+    $default  reduce using rule 28 (VarDecl)
 
 
-State 60
+State 63
 
    16 Param: TYPE ID COMMA Param •
 
     $default  reduce using rule 16 (Param)
 
 
-State 61
+State 64
 
-   32 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr •
-   33     | Expr • PLUS Expr
-   34     | Expr • MINUS Expr
-   35     | Expr • MULTIPLY Expr
-   36     | Expr • DIVIDE Expr
-   39     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr •
+   33 Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr •
+   34     | Expr • PLUS Expr
+   35     | Expr • MINUS Expr
+   36     | Expr • MULTIPLY Expr
+   37     | Expr • DIVIDE Expr
+   40     | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr •
 
     PLUS      shift, and go to state 32
     MINUS     shift, and go to state 33
     MULTIPLY  shift, and go to state 34
     DIVIDE    shift, and go to state 35
 
-    SEMICOLON         reduce using rule 32 (Expr)
-    SEMICOLON         [reduce using rule 39 (Expr)]
-    PLUS              [reduce using rule 32 (Expr)]
-    PLUS              [reduce using rule 39 (Expr)]
-    MINUS             [reduce using rule 32 (Expr)]
-    MINUS             [reduce using rule 39 (Expr)]
-    MULTIPLY          [reduce using rule 32 (Expr)]
-    MULTIPLY          [reduce using rule 39 (Expr)]
-    DIVIDE            [reduce using rule 32 (Expr)]
-    DIVIDE            [reduce using rule 39 (Expr)]
-    RIGHTPARENTHESIS  reduce using rule 32 (Expr)
-    RIGHTPARENTHESIS  [reduce using rule 39 (Expr)]
-    RIGHTBRACKET      reduce using rule 32 (Expr)
-    RIGHTBRACKET      [reduce using rule 39 (Expr)]
-    $default          reduce using rule 32 (Expr)
+    SEMICOLON         reduce using rule 33 (Expr)
+    SEMICOLON         [reduce using rule 40 (Expr)]
+    PLUS              [reduce using rule 33 (Expr)]
+    PLUS              [reduce using rule 40 (Expr)]
+    MINUS             [reduce using rule 33 (Expr)]
+    MINUS             [reduce using rule 40 (Expr)]
+    MULTIPLY          [reduce using rule 33 (Expr)]
+    MULTIPLY          [reduce using rule 40 (Expr)]
+    DIVIDE            [reduce using rule 33 (Expr)]
+    DIVIDE            [reduce using rule 40 (Expr)]
+    RIGHTPARENTHESIS  reduce using rule 33 (Expr)
+    RIGHTPARENTHESIS  [reduce using rule 40 (Expr)]
+    RIGHTBRACKET      reduce using rule 33 (Expr)
+    RIGHTBRACKET      [reduce using rule 40 (Expr)]
+    $default          reduce using rule 33 (Expr)
 
 
-State 62
+State 65
 
    14 ParamList: TYPE • ID COMMA ParamList
    15          | TYPE • ID
 
-    ID  shift, and go to state 64
+    ID  shift, and go to state 67
 
 
-State 63
+State 66
 
    24 FunDecl: FUN TYPE ID $@1 LEFTPARENTHESIS ParamList • RIGHTPARENTHESIS $@2 Block
 
-    RIGHTPARENTHESIS  shift, and go to state 65
+    RIGHTPARENTHESIS  shift, and go to state 68
 
 
-State 64
+State 67
 
    14 ParamList: TYPE ID • COMMA ParamList
    15          | TYPE ID •
 
-    COMMA  shift, and go to state 66
+    COMMA  shift, and go to state 69
 
     $default  reduce using rule 15 (ParamList)
 
 
-State 65
+State 68
 
    24 FunDecl: FUN TYPE ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS • $@2 Block
 
     $default  reduce using rule 23 ($@2)
 
-    $@2  go to state 67
+    $@2  go to state 70
 
 
-State 66
+State 69
 
    14 ParamList: TYPE ID COMMA • ParamList
 
-    TYPE  shift, and go to state 62
+    TYPE  shift, and go to state 65
 
     $default  reduce using rule 13 (ParamList)
 
-    ParamList  go to state 68
+    ParamList  go to state 71
 
 
-State 67
+State 70
 
    24 FunDecl: FUN TYPE ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 • Block
 
-    LEFTCURLYBRACKET  shift, and go to state 69
+    LEFTCURLYBRACKET  shift, and go to state 72
 
-    Block  go to state 70
+    Block  go to state 73
 
 
-State 68
+State 71
 
    14 ParamList: TYPE ID COMMA ParamList •
 
     $default  reduce using rule 14 (ParamList)
 
 
-State 69
+State 72
 
    25 Block: LEFTCURLYBRACKET • DeclList StmtList RIGHCURLYBRACKET
 
@@ -965,7 +1006,7 @@ State 69
     FUN              [reduce using rule 7 (StmtList)]
     $default         reduce using rule 7 (StmtList)
 
-    DeclList    go to state 71
+    DeclList    go to state 74
     Decl        go to state 10
     StmtList    go to state 11
     Stmt        go to state 12
@@ -976,14 +1017,14 @@ State 69
     Expr        go to state 17
 
 
-State 70
+State 73
 
    24 FunDecl: FUN TYPE ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block •
 
     $default  reduce using rule 24 (FunDecl)
 
 
-State 71
+State 74
 
    25 Block: LEFTCURLYBRACKET DeclList • StmtList RIGHCURLYBRACKET
 
@@ -996,21 +1037,21 @@ State 71
     SEMICOLON  [reduce using rule 21 (FunCall)]
     $default   reduce using rule 7 (StmtList)
 
-    StmtList    go to state 72
+    StmtList    go to state 75
     Stmt        go to state 12
     ReturnStmt  go to state 13
     FunCall     go to state 14
     Expr        go to state 17
 
 
-State 72
+State 75
 
    25 Block: LEFTCURLYBRACKET DeclList StmtList • RIGHCURLYBRACKET
 
-    RIGHCURLYBRACKET  shift, and go to state 73
+    RIGHCURLYBRACKET  shift, and go to state 76
 
 
-State 73
+State 76
 
    25 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET •
 

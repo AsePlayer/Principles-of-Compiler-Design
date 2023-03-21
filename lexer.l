@@ -35,7 +35,19 @@ ws          {delim}+
 							}
 						}
 						
+"void"	{words++; chars += strlen(yytext);
+		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return TYPE;
+		}
+
 "int"	{words++; chars += strlen(yytext);
+		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return TYPE;
+		}
+
+"bool"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
 		 return TYPE;
@@ -43,6 +55,20 @@ ws          {delim}+
 
 "char"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return TYPE;
+		}
+
+"float"	{words++; chars += strlen(yytext);
+		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return TYPE;
+		}
+
+"double"	{words++; chars += strlen(yytext);
+		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return TYPE;
 		}
 
 "fun"	{words++; chars += strlen(yytext);
@@ -60,6 +86,7 @@ ws          {delim}+
 "if" 	{words++; 
 		 chars += strlen(yytext);
 		 printf("%s : IF\n", yytext);
+		 return IF;
 		}
 
 "else" 	{words++; 
@@ -70,6 +97,7 @@ ws          {delim}+
 "while"	{words++; 
 		 chars += strlen(yytext);
 		 printf("%s : WHILE\n", yytext);
+		 return WHILE;
 		}
 
 "putc" 	{words++; 

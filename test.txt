@@ -9,3 +9,7 @@ fun int add(int hisHolyParam1, int hisHolyParam2) {
     return result;
 }
 
+bool wowzers;
+char in;
+double my = 1 + 5 * 10 + 1;
+void trowsers;

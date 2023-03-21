@@ -271,3 +271,60 @@ add(
 
 #### IR Code ####
 
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+VAR: my -> double = 0
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+VAR: my -> double = 2
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+VAR: my -> double = 2
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 2 + 2
+VAR: my -> double = 4
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 2 + 2
+VAR: my -> double = 4
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> double = 52
+VAR: trowsers -> void = 0

@@ -75,7 +75,9 @@ extern int yydebug;
     LOGICALOR = 276,               /* LOGICALOR  */
     NUMBER = 277,                  /* NUMBER  */
     WRITE = 278,                   /* WRITE  */
-    FUN = 279                      /* FUN  */
+    FUN = 279,                     /* FUN  */
+    IF = 280,                      /* IF  */
+    WHILE = 281                    /* WHILE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -91,7 +93,7 @@ union YYSTYPE
 	char* string;
 	struct AST* ast;
 
-#line 95 "parser.tab.h"
+#line 97 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
