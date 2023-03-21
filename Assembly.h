@@ -48,6 +48,11 @@ void emitMIPSWriteId(char * id){
     fprintf(MIPScode, "move $a0,%s\n", "$t0");
 }
 
+void emitMIPSFunctionDeclaration(char* functionName, char* returnValue) {
+    // Write the function declaration to the MIPScode file
+    fprintf(MIPScode, "%s:\n", functionName);
+}
+
 void emitEndOfAssemblyCode(){
     fprintf(MIPScode, "# -----------------\n");
     fprintf(MIPScode, "#  Done, terminate program.\n\n");

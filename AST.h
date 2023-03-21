@@ -77,12 +77,12 @@ struct AST * AST_Block(char nodeType[50], struct AST * declList, struct AST * st
 	struct AST* ASTblock = malloc(sizeof(struct AST));
 	strcpy(ASTblock->nodeType, nodeType);
 	ASTblock->left = stmtList; // append the statement list to the left pointer of the block node
-
+	ASTblock->right = declList; // append the declaration list to the right pointer of the block node
 	// Traverse the statement list and append each statement to the left of the block node
 	if(stmtList != NULL) {
 		struct AST * current = stmtList;
 		while(current->left != NULL) {
-			// printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", current->nodeType, current->value, current->LHS, current->RHS);
+			printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", current->nodeType, current->value, current->LHS, current->RHS);
 			ASTblock->right = AST_BinaryExpression(current->nodeType, current->LHS, current->RHS);
 			current = current->left;
 			// create a AST_BinaryExpression node using the current node's LHS and RHS
@@ -92,7 +92,19 @@ struct AST * AST_Block(char nodeType[50], struct AST * declList, struct AST * st
 
 			// print value of the node
 		}
-		//current->left = declList;
+		// current->left = declList;
+	}
+
+	if(declList != NULL) {
+		struct AST * current = declList;
+		while(current->left != NULL) {
+			printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", current->nodeType, current->value, current->LHS, current->RHS);
+			ASTblock->right = AST_BinaryExpression(current->nodeType, current->LHS, current->RHS);
+			current = current->left;
+			// create a AST_BinaryExpression node using the current node's LHS and RHS
+			// append the new node to the left of the current node
+			// set the current node's LHS and RHS to NULL
+		}
 	}
 
 	return ASTblock;

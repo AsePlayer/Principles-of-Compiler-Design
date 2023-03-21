@@ -1,28 +1,11 @@
-int x;
-int y;
-int z;
-int zz;
-int ok;
-int oo;
-x = 68 + 1 + 1 + 30 + 99 + 99 + 1;
-y = 69;
-z = 68 + 1 - 1 + 30 + 99 - 99 + 1 - 1 * 7;
-zz = 8 * 3 + 10 / 2 - 4;
 
-ok = 1 + 1 + 1;
-oo = 1 - 1 + 1;
-
-int arr[10];
-arr[1] = 5;
-arr[2] = 4;
-arr[5] = 10;
-x = arr[5];
-y = arr[2];
-
-fun int bruh() {
-    int bruh;
-    bruh = 2;
-    int bruh2;
-    bruh2 = 2;
-    bruh = 5 + 55;
+fun int add(int hisHolyParam1, int hisHolyParam2) {
+    int result;
+    result = 1 + 19999;
+    int penen;
+    penen = 2222;
+    int ok;
+    ok = 1 + 5 * 10 + 1 + result;
+    return result;
 }
+

@@ -58,7 +58,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %left LOGICALAND
 %left LOGICALOR
 
-%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr FunDecl Block ParamList Param
+%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr FunDecl Block 
 
 %start Program
 
@@ -94,28 +94,13 @@ Stmt:	SEMICOLON	{}
 	| FunCall SEMICOLON { }
 ;
 
-ParamList:	
-|
-TYPE ID COMMA ParamList	
-	{ printf("\n RECOGNIZED RULE: Parameter list %s\n", $2); 
-	emitFunctionParameter(currentScope, $2, $1);
-	char parameterList[50];
-	  while($4 != NULL) {
-		// append the parameter list in an array
-		strcat(parameterList, $2);
-		  
-		$4 = $4->left;
-	  }
-	printf("Parameter list %s\n", parameterList);
-	}
-	| TYPE ID {
-		printf("\n RECOGNIZED RULE: Parameter list %s\n", $2); 
-		emitFunctionParameter(currentScope, $2, $1);
-		}
+ParamList:	TYPE ID COMMA ParamList	
+	| TYPE ID 
+	|
 ;
 
-Param: TYPE ID COMMA Param
-	| TYPE ID { }
+Params: Primary COMMA Params
+	| Primary 
 	|
 ;
 
@@ -139,12 +124,11 @@ ReturnStmt:	RETURN Expr {
 }
 ;
 
-FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS {
+FunCall:	ID LEFTPARENTHESIS Params RIGHTPARENTHESIS {
 	printf("\n RECOGNIZED RULE: Function call %s\n", $1);
 	// Symbol Table
  
 }
-| 
 ;
 
 
@@ -166,32 +150,42 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", $3);
 																else
 																	printf("SEMANTIC ERROR: Fun %s is already in the symbol table", funScope);
 																showSymTable();
-																emitFunctionDeclaration(currentScope, $3, $2); 
 
 																// ---- SEMANTIC ACTIONS by PARSER ----	
 																// $$ = AST_Fun("Fun", $2, $3);
 																
 																//printf("-----------> %s", $$->LHS);
 } 
-LEFTPARENTHESIS ParamList RIGHTPARENTHESIS {emitFunctionBlockStart();}  Block	{ 
+LEFTPARENTHESIS ParamList RIGHTPARENTHESIS Block	{ 
 											// change current scope back to global
 											
 											$$ = AST_Fun("Fun", $2, $3);
-											// $$->right = AST_Block("Block", $8, $8); 
+											$$->right = AST_Block("Block", $8, $8); 
 											// $$->left = AST_Block("Params", $2, $3);
 											// add the block to the right hand side of the function
 											// maybe if the scope is not global, don't run the code and update the symbol table
 											// the code should really only run on a function call
 
 											// implement emitFunctionDeclaration(char* functionName, char** parameterList, int numParameters)
-											
-											// print ParamList
-											
+											char *parameterList[50];
+											int numParameters = 0;
+
+											// loop through the parameter list and add them to the parameterList
+											// print paramlist
+											// while($8->left != NULL) {
+											// 	printf("ParamList: %s\n", $8->left->LHS);
+											// 	printf("Value: %s\n", $8->left->RHS);
+											// 	// printf("Value: %s\n", $8->left->RHS);  
+											// 	// add the parameter to the parameter list
+											// 	parameterList[numParameters] = $8->left->RHS;
+											// 	numParameters++;
+											// 	$8 = $8->left;
+											// }
+
 											// print the entire parameter list 
-											// emit function name
-											emitFunctionBlockEnd();
+											emitFunctionDeclaration($3, parameterList, numParameters);
 											strcpy(currentScope, "global"); 
-										} 
+										}
 ; 
  
 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET {
@@ -199,13 +193,13 @@ Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET {
 	// print the AST
 	printf("\n--- Abstract Syntax Tree 2 ---\n\n");
 	printAST($$,0);
-	while($2->left != NULL) {
-		printf("DeclList: %s\n", $2->left->LHS);
-		printf("Value: %s\n", $2->left->RHS);  
+	// while($2->left != NULL) {
+	// 	printf("DeclList: %s\n", $2->left->LHS);
+	// 	printf("Value: %s\n", $2->left->RHS);  
 		 
-		$2 = $2->left;
-		$$ = $2; 
-	}
+	// 	$2 = $2->left;
+	// 	$$ = $2;
+	// }
 	// while($3->left != NULL) {
 	// 	printf("StmtList: %s\n", $3->left->LHS);
 	// 	printf("Value: %s\n", $3->left->RHS);
@@ -235,8 +229,6 @@ VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 								  // ---- SEMANTIC ACTIONS by PARSER ----
 								    $$ = AST_Type("Type",$1,$2);
 									printf("-----------> %s", $$->LHS);
-
-									emitVariableDeclaration(currentScope, $1, $2, "0");
 								}
 | TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON { 
     // Symbol Table
@@ -298,7 +290,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
  
 					// print the Expr
 					updateItem(value, $3, currentScope);
-					// $$ = AST_BinaryExpression("=", $1, value); 
+					// $$ = AST_BinaryExpression("=", $1, value);
 				}
 		}
 		else {
@@ -307,9 +299,6 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
             updateItem($1, $3->value, currentScope);
             $$ = AST_BinaryExpression("=", $1, $3->value);
         }
-
-		emitAssignment(currentScope, $1, $3->value);
-	 
      }   
 	 | ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr {
 		// Update the value of the variable in the symbol table
@@ -344,34 +333,6 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
 		}
 	 }
      | Expr PLUS Expr   { 
-
-		// check if the variables are in the symbol table
-		int inSymTab1 = found($1, currentScope);
-		int inSymTab2 = found($3, currentScope);
-		if (inSymTab1 == -1) {
-			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
-			semanticCheckPassed = 0;
-		} else if (inSymTab2 == -1) {
-			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
-			semanticCheckPassed = 0;
-		} else {
-
-		}
-		if(inSymTab1 != -1) {
-			// get the value of the variable
-			char* value = getValue(inSymTab1);
-			// Create a new node for the variable
-			sprintf($1->value, "%s", value);
-		}
-		if(inSymTab2 != -1) {
-			// get the value of the variable
-			char* value = getValue(inSymTab2);
-			// Create a new node for the variable
-			sprintf($3->value, "%s", value);
-		}
-		// print the results
-		printf( "PEEEN: %s + %s ", $1->value, $3->value);
-
 		// calculate the value of the expression
 		int total = atoi($1->value) + atoi($3->value);  
 		$$ = AST_BinaryExpression("+", $1, $3); 
@@ -382,8 +343,6 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
 		sprintf($$->value, "%s", stringVal);
 		// printf("Expr PLUS: %d", total);
 		printf( "Expr: %s ", $$->value);
-
-		emitBinaryOperation(currentScope, "+", $1->value, $3->value);
 		}
      | Expr MINUS Expr  { 
 		// calculate the value of the expression
@@ -406,18 +365,9 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); }
 		sprintf(stringVal, "%d", total);
 		// set the value of the expression
 		sprintf($$->value, "%s", stringVal);
-
-		emitBinaryOperation(currentScope, "*", $1->value, $3->value); 
-
 	 }
      | Expr DIVIDE Expr { 
 		// calculate the value of the expression
-		// dont let divide by 0
-		if (atoi($3->value) == 0) {
-			printf("SEMANTIC ERROR: Cannot divide by 0\n");
-			semanticCheckPassed = 0;
-		}
-
 		int total = atoi($1->value) / atoi($3->value);
 		$$ = AST_BinaryExpression("/", $1, $3);
 		// convert value to string
