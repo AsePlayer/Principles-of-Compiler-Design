@@ -328,3 +328,214 @@ BINARY: 1 + 50
 BINARY: 51 + 1
 VAR: my -> double = 52
 VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> int = 0
+VAR: in -> int = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> int = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> int = 0
+VAR: in -> int = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> int = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: 5 * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+VAR: fool -> bool = 0

@@ -55,29 +55,41 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     TYPE = 258,                    /* TYPE  */
-    ID = 259,                      /* ID  */
-    RETURN = 260,                  /* RETURN  */
-    SEMICOLON = 261,               /* SEMICOLON  */
-    COMMA = 262,                   /* COMMA  */
-    EQUAL = 263,                   /* EQUAL  */
-    PLUS = 264,                    /* PLUS  */
-    MINUS = 265,                   /* MINUS  */
-    MULTIPLY = 266,                /* MULTIPLY  */
-    DIVIDE = 267,                  /* DIVIDE  */
-    LEFTPARENTHESIS = 268,         /* LEFTPARENTHESIS  */
-    RIGHTPARENTHESIS = 269,        /* RIGHTPARENTHESIS  */
-    LEFTCURLYBRACKET = 270,        /* LEFTCURLYBRACKET  */
-    RIGHCURLYBRACKET = 271,        /* RIGHCURLYBRACKET  */
-    LEFTBRACKET = 272,             /* LEFTBRACKET  */
-    RIGHTBRACKET = 273,            /* RIGHTBRACKET  */
-    UNARYNOT = 274,                /* UNARYNOT  */
-    LOGICALAND = 275,              /* LOGICALAND  */
-    LOGICALOR = 276,               /* LOGICALOR  */
-    NUMBER = 277,                  /* NUMBER  */
-    WRITE = 278,                   /* WRITE  */
-    FUN = 279,                     /* FUN  */
-    IF = 280,                      /* IF  */
-    WHILE = 281                    /* WHILE  */
+    INT = 259,                     /* INT  */
+    FLOAT = 260,                   /* FLOAT  */
+    CHAR = 261,                    /* CHAR  */
+    BOOL = 262,                    /* BOOL  */
+    STRING = 263,                  /* STRING  */
+    VOID = 264,                    /* VOID  */
+    ID = 265,                      /* ID  */
+    RETURN = 266,                  /* RETURN  */
+    SEMICOLON = 267,               /* SEMICOLON  */
+    COMMA = 268,                   /* COMMA  */
+    EQUAL = 269,                   /* EQUAL  */
+    PLUS = 270,                    /* PLUS  */
+    MINUS = 271,                   /* MINUS  */
+    MULTIPLY = 272,                /* MULTIPLY  */
+    DIVIDE = 273,                  /* DIVIDE  */
+    LEFTPARENTHESIS = 274,         /* LEFTPARENTHESIS  */
+    RIGHTPARENTHESIS = 275,        /* RIGHTPARENTHESIS  */
+    LEFTCURLYBRACKET = 276,        /* LEFTCURLYBRACKET  */
+    RIGHCURLYBRACKET = 277,        /* RIGHCURLYBRACKET  */
+    LEFTBRACKET = 278,             /* LEFTBRACKET  */
+    RIGHTBRACKET = 279,            /* RIGHTBRACKET  */
+    UNARYNOT = 280,                /* UNARYNOT  */
+    LOGICALAND = 281,              /* LOGICALAND  */
+    LOGICALOR = 282,               /* LOGICALOR  */
+    NUMBER = 283,                  /* NUMBER  */
+    WRITE = 284,                   /* WRITE  */
+    FUN = 285,                     /* FUN  */
+    IF = 286,                      /* IF  */
+    WHILE = 287,                   /* WHILE  */
+    LESS_THAN = 288,               /* LESS_THAN  */
+    GREATER_THAN = 289,            /* GREATER_THAN  */
+    LESS_THAN_OR_EQUAL_TO = 290,   /* LESS_THAN_OR_EQUAL_TO  */
+    GREATER_THAN_OR_EQUAL_TO = 291, /* GREATER_THAN_OR_EQUAL_TO  */
+    EQUAL_TO = 292,                /* EQUAL_TO  */
+    NOT_EQUAL_TO = 293             /* NOT_EQUAL_TO  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -93,7 +105,7 @@ union YYSTYPE
 	char* string;
 	struct AST* ast;
 
-#line 97 "parser.tab.h"
+#line 109 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

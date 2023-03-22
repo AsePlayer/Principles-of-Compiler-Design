@@ -38,37 +38,31 @@ ws          {delim}+
 "void"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
-		 return TYPE;
+		 return VOID;
 		}
 
 "int"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
-		 return TYPE;
+		 return INT;
 		}
 
 "bool"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
-		 return TYPE;
+		 return BOOL;
 		}
 
 "char"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
-		 return TYPE;
+		 return CHAR;
 		}
 
 "float"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
-		 return TYPE;
-		}
-
-"double"	{words++; chars += strlen(yytext);
-		 printf("%s : TYPE\n", yytext);
-		 yylval.string = strdup(yytext);
-		 return TYPE;
+		 return FLOAT;
 		}
 
 "fun"	{words++; chars += strlen(yytext);
@@ -167,27 +161,38 @@ ws          {delim}+
 
 "<"		{chars++;
 		 printf("%s : LESS THAN\n", yytext);
+			yylval.string = strdup(yytext);
+		 	return LESS_THAN;
 		}
 
 "<="	{chars++; chars++;
 		 printf("%s : LESS THAN OR EQUAL\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return LESS_THAN_OR_EQUAL_TO;
 		}
 
 ">"		{chars++;
 		 printf("%s : GREATER THAN\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return GREATER_THAN;
 		}
 
 ">="	{chars++; chars++;
 		 printf("%s : GREATER THAN OR EQUAL\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return GREATER_THAN_OR_EQUAL_TO;
 		}
 
 "=="	{chars++; chars++;
 		 printf("%s : EQUAL\n", yytext);
+		 	yylval.string = strdup(yytext);
+		 	return EQUAL_TO;
 		}
 
 "!="	{chars++; chars++;
 		 printf("%s : NOT EQUAL\n", yytext);
-
+		 	yylval.string = strdup(yytext);
+		 	return NOT_EQUAL_TO;
 		}
 
 "!"		{chars++;

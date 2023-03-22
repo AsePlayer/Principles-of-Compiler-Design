@@ -30,6 +30,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 }
  
 %token <string> TYPE
+%token <string> INT FLOAT CHAR BOOL STRING VOID 
 %token <string> ID
 %token <string> RETURN
 %token <character> SEMICOLON
@@ -49,6 +50,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %token <string> WRITE
 %token <string> FUN
 %token <string> IF WHILE 
+%token <string> LESS_THAN GREATER_THAN LESS_THAN_OR_EQUAL_TO GREATER_THAN_OR_EQUAL_TO EQUAL_TO NOT_EQUAL_TO
 
 %printer { fprintf(yyoutput, "%s", $$); } ID;
 %printer { fprintf(yyoutput, "%d", $$); } NUMBER;
@@ -59,7 +61,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %left LOGICALAND
 %left LOGICALOR
 
-%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr FunDecl Block ParamList Param
+%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr FunDecl Block ParamList Param Type
 
 %start Program
 
@@ -95,9 +97,25 @@ Stmt:	SEMICOLON	{}
 	| FunCall SEMICOLON { }
 ;
 
+Type:	INT { strcpy($$->nodeType, "int"); strcpy($$->value, "0");}
+	| FLOAT { strcpy($$->nodeType, "float"); strcpy($$->value, "0.0");}
+	| CHAR { strcpy($$->nodeType, "char"); strcpy($$->value, "");}
+	| BOOL { strcpy($$->nodeType, "bool"); strcpy($$->value, "0");}
+	| STRING { strcpy($$->nodeType, "string"); strcpy($$->value, "");} 
+	| VOID { strcpy($$->nodeType, "void"); }
+;
+
+/* Type:	INT { $$ = "int"; }
+	| FLOAT { $$ = "float"; }
+	| CHAR { $$ = "char"; }
+	| BOOL { $$ = "bool"; }
+	| STRING { $$ = "string"; } 
+	| VOID { $$ = "void"; }
+; */
+
 ParamList:	
 |
-TYPE ID COMMA ParamList	
+Type ID COMMA ParamList	
 	{ printf("\n RECOGNIZED RULE: Parameter list %s\n", $2); 
 	emitFunctionParameter(currentScope, $2, $1);
 	char parameterList[50];
@@ -109,14 +127,14 @@ TYPE ID COMMA ParamList
 	  }
 	printf("Parameter list %s\n", parameterList);
 	}
-	| TYPE ID {
+	| Type ID {
 		printf("\n RECOGNIZED RULE: Parameter list %s\n", $2); 
 		emitFunctionParameter(currentScope, $2, $1);
 		}
 ;
 
-Param: TYPE ID COMMA Param
-	| TYPE ID { }
+Param: Type ID COMMA Param
+	| Type ID { }
 	|
 ;
 
@@ -140,7 +158,7 @@ ReturnStmt:	RETURN Expr {
 }
 ;
 
-FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS {
+FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS { 
 	printf("\n RECOGNIZED RULE: Function call %s\n", $1);
 	// Symbol Table
  
@@ -149,7 +167,7 @@ FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS {
 ;
 
 
-FunDecl:	FUN TYPE ID {
+FunDecl:	FUN Type ID {
 printf("\n RECOGNIZED RULE: Function declaration %s\n", $3);
 																// Symbol Table
 																symTabAccess();
@@ -173,8 +191,9 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", $3);
 																// $$ = AST_Fun("Fun", $2, $3);
 																
 																//printf("-----------> %s", $$->LHS);
+																
 } 
-LEFTPARENTHESIS ParamList RIGHTPARENTHESIS {emitFunctionBlockStart();}  Block	{ 
+LEFTPARENTHESIS ParamList RIGHTPARENTHESIS {emitFunctionBlockStart();}  Block	{  
 											// change current scope back to global
 											
 											$$ = AST_Fun("Fun", $2, $3);
@@ -221,25 +240,25 @@ Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET {
 ;
 
  
-VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
+VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
 									// Symbol Table
 									symTabAccess();
 									int inSymTab = found($2, currentScope);
 									//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
 									
 									if (inSymTab == -1)  
-										addItem($2, "Var", $1, "", 0, currentScope);
+										addItem($2, "Var", $1->nodeType, $1->value, 0, currentScope);
 									else
 										printf("SEMANTIC ERROR: Var %s is already in the symbol table", $2);
 									showSymTable();
 									
 								  // ---- SEMANTIC ACTIONS by PARSER ----
-								    $$ = AST_Type("Type",$1,$2);
+								    $$ = AST_Type("Type",$1->nodeType, $1->value);
 									printf("-----------> %s", $$->LHS);
 
 									emitVariableDeclaration(currentScope, $1, $2, "0");
 								}
-| TYPE ID EQUAL Expr SEMICOLON { printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
+| Type ID EQUAL Expr SEMICOLON { printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
 									// Symbol Table 
 									symTabAccess();
 									int inSymTab = found($2, currentScope);
@@ -257,7 +276,7 @@ VarDecl:	TYPE ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 
 									emitVariableDeclaration(currentScope, $1, $2, $4->value);
 								}
-| TYPE ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON { 
+| Type ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON { 
     // Symbol Table
     symTabAccess();
     int inSymTab = found($2, currentScope);

@@ -11,5 +11,8 @@ fun int add(int hisHolyParam1, int hisHolyParam2) {
 
 bool wowzers;
 char in;
-double my = 1 + 5 * 10 + 1;
+float my = 1 + 5 * 10 + 1;
 void trowsers;
+
+float empty;
+bool fool;
