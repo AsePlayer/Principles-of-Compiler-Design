@@ -11,3 +11,10 @@ result5 = array[1] * array[1];
 
 char floaties[4];
 float why;
+
+why = array[1] <= array[1] - 1;
+bool because = array[1] < array[2];
+
+int bruh;
+bruh = 12 / (1 + 3) - 9 * 6;
+because = bruh == -51;

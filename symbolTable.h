@@ -44,6 +44,19 @@ void addItem(char itemName[50], char itemKind[8], char itemType[8], char itemVal
 		strcpy(newEntry.itemValue, itemValue);
 		strcpy(newEntry.scope, scope);
 		newEntry.arrayLength = arrayLength;
+
+
+		// Check if the variable is an bool. This can only be 1 or 0.
+		if(strcmp(newEntry.itemType, "bool") == 0) {
+			// only allow 1 or 0
+			if(strcmp(newEntry.itemValue, "1") == 0 || strcmp(newEntry.itemValue, "0") == 0){
+				strcpy(newEntry.itemValue, itemValue);
+			}
+			else{
+				strcpy(newEntry.itemValue, "0");
+				printf("ERROR: Invalid value for bool variable. Must be 1 or 0.\n");
+			}
+		}
 		
 		// what about scope? should you add scope to this function?
 		// check if scope is equal to global character array
@@ -151,7 +164,19 @@ void updateItem(char itemName[50], char newItemValue[50], char scope[50]){
 
     // If the identifier is found in the symbol table, update its value
     if (index >= 0) {
-        strcpy(symTab.symTabItems[index].itemValue, newItemValue);
+		// Check if the variable is an bool. This can only be 1 or 0.
+		if(strcmp(symTab.symTabItems[index].itemType, "bool") == 0) {
+			// only allow 1 or 0
+			if(strcmp(newItemValue, "1") == 0 || strcmp(newItemValue, "0") == 0){
+				strcpy(symTab.symTabItems[index].itemValue, newItemValue);
+			}
+			else{
+				printf("ERROR: Invalid value for bool variable. Must be 1 or 0.\n");
+			}
+		}
+		else {
+        	strcpy(symTab.symTabItems[index].itemValue, newItemValue);
+		}
     } else {
         // If the identifier is not found in the symbol table, add it to the symbol table
         addItem(itemName, "variable", "unknown", newItemValue, 0, scope);

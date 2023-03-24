@@ -2157,3 +2157,505 @@ EQUAL: array = 4
 BINARY: 6 * 6
 EQUAL: result5 = 36
 VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 0
+EQUAL: because = why
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 0
+EQUAL: because = 3
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 3
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 3
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 3
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 1
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+EQUAL: why = 1
+VAR: because -> bool = 1
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: oneEqualone -> bool = 1
+VAR: oneNotEqual -> bool = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 1
+EQUAL: bruh = 2
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 1
+BINARY: 2 * 2
+EQUAL: bruh = 4
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 1
+BINARY: 2 * 2
+BINARY: 4 * 2
+EQUAL: bruh = 8
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 3 + 3
+BINARY: 2 * 6
+EQUAL: bruh = 12
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 3 + 3
+BINARY: 2 * 6
+EQUAL: bruh = 12
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 3 + 3
+BINARY: 2 * 6
+EQUAL: bruh = 12
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 3 + 3
+BINARY: 2 * 6
+EQUAL: bruh = 12
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 3 + 3
+BINARY: 2 * 6
+EQUAL: bruh = 12
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+EQUAL: bruh = 3
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+EQUAL: bruh = -51
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+EQUAL: bruh = -51
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+EQUAL: bruh = -51
+EQUAL: because = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+BINARY: -51 * 1
+EQUAL: bruh = -51
+EQUAL: because = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+EQUAL: bruh = -51
+EQUAL: because = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+EQUAL: bruh = -51
+EQUAL: because = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+BINARY: 6 - 1
+EQUAL: why = 0
+VAR: because -> bool = 1
+VAR: bruh -> int = 0
+BINARY: 1 + 3
+BINARY: 12! / 4
+BINARY: 9 * 6
+BINARY: 3 - 54
+EQUAL: bruh = -51
+EQUAL: because = 1

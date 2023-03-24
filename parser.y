@@ -57,7 +57,8 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
-%right UNARYNOT
+%left UNARYNOT
+
 %left LOGICALAND
 %left LOGICALOR
 
@@ -227,7 +228,7 @@ VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 									symTabAccess();
 									int inSymTab = found($2, currentScope);
 									//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
-									 
+									
 									if (inSymTab == -1)  
 										addItem($2, "Var", $1->nodeType, $1->value, 0, currentScope);
 									else
@@ -275,7 +276,7 @@ VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 	if(strcmp($1, "int") == 0)
 		strcpy(defaultVal, "0");
 	else if(strcmp($1, "float") == 0)
-		strcpy(defaultVal, "0.0");
+		strcpy(defaultVal, "0.0");	// if I don't do this, the default value is corrupted (0.!)
 	else if(strcmp($1, "char") == 0)
 		strcpy(defaultVal, "");
 	
@@ -301,14 +302,16 @@ VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 
 Primary: ID 
 	| NUMBER
-	| LEFTPARENTHESIS Expr RIGHTPARENTHESIS 
+	| LEFTPARENTHESIS Expr RIGHTPARENTHESIS
 	| ID LEFTBRACKET Expr RIGHTBRACKET 
 ;
 
  
 
 Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nodeType, "%s", "number"); } 
+	| MINUS NUMBER       { $$ = $2; sprintf($$->value, "-%s", $2); sprintf($$->nodeType, "%s", "number"); }
 	| ID                { $$ = $1; sprintf($$->value, "%s", $1); }
+	| LEFTPARENTHESIS Expr RIGHTPARENTHESIS %prec UNARYNOT   {$$ = $2; sprintf($$->value, "%s", $2->value);}
 	| ID LEFTBRACKET Expr RIGHTBRACKET 
 	{
 		int inSymTab = found($1, currentScope);
@@ -318,7 +321,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		} 
 		else {
 			int size = getArraySize($1, currentScope);
-			int index = atoi($3->value);
+			int index = atoi($3->value);  
 
 				if (index >= size) {
 					printf("SEMANTIC ERROR: Index out of bounds for array %s\n", $1);
@@ -387,7 +390,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 			printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", $1);
 			semanticCheckPassed = 0;
 		}
-		else {
+		else {  
 			// $1 is an array's index, not the id.
 
 			int size = getArraySize($1, currentScope);
@@ -607,7 +610,312 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// IR time
 		emitBinaryOperation(currentScope, "/", $1->value, $3->value);
      }
-     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS    {$$ = $2; sprintf($$->value, "%s", $2->value); }
+	 | Expr EQUAL_TO Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) == atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n"); 
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression("==", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
+	 | Expr NOT_EQUAL_TO Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) != atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression("!=", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
+	 | Expr LESS_THAN Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table  
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) < atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression("<", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
+	 | Expr LESS_THAN_OR_EQUAL_TO Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) <= atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression("<=", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
+	 | Expr GREATER_THAN Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) > atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression(">", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
+	 | Expr GREATER_THAN_OR_EQUAL_TO Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) >= atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression(">=", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
 ;
 
 UnaryOp: MINUS
