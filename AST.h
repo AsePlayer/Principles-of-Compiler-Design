@@ -7,14 +7,13 @@ struct AST{
 	char LHS[50];
 	char RHS[50];
 	char value[50];
+	char defaultVal[50];
 	
 	struct AST * left;
 	struct AST * right;
 	// review pointers to structs in C 
 	// complete the tree struct with pointers
 };
-
-
 
 struct AST * AST_assignment(char nodeType[50], char value[50], char LHS[50], char RHS[50]){
 	
@@ -47,6 +46,30 @@ struct AST * AST_BinaryExpression(char nodeType[50], char LHS[50], char RHS[50])
 	printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", ASTBinExp->nodeType, ASTBinExp->value, ASTBinExp->LHS, ASTBinExp->RHS);
 
 	return ASTBinExp;
+}
+
+struct AST * AST_Number(char nodeType[50], char value[50]){
+
+	struct AST* ASTnum = malloc(sizeof(struct AST));
+	strcpy(ASTnum->nodeType, nodeType);
+	strcpy(ASTnum->value, value);
+	printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", ASTnum->nodeType, ASTnum->value, ASTnum->LHS, ASTnum->RHS);
+	
+	return ASTnum;
+	
+}
+
+struct AST * AST_Array(char nodeType[50], char value[50], char LHS[50], char RHS[50]){
+
+	struct AST* ASTarray = malloc(sizeof(struct AST));
+	strcpy(ASTarray->nodeType, nodeType);
+	strcpy(ASTarray->value, value);
+	strcpy(ASTarray->LHS, LHS);
+	strcpy(ASTarray->RHS, RHS);
+	printf("Node type: %s, value: %s, LHS: %s, RHS: %s\n", ASTarray->nodeType, ASTarray->value, ASTarray->LHS, ASTarray->RHS);
+	
+	return ASTarray;
+	
 }
 
 

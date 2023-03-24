@@ -174,5 +174,6 @@ const char * getValue(int itemID){
 		printf("ERROR: Item not found in symbol table.\n");
 		return NULL;
 	}
+	//printf("found value: %s\n", symTab.symTabItems[itemID].itemValue);
 	return symTab.symTabItems[itemID].itemValue;
 }

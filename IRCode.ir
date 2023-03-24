@@ -539,3 +539,1621 @@ VAR: my -> float = 52
 VAR: trowsers -> void = 0
 VAR: empty -> float = 0
 VAR: fool -> bool = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: er * number
+BINARY: nuá + 0
+BINARY: 0 + number
+VAR: my -> float = 0
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+VAR: fool -> bool = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: er * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+VAR: fool -> bool = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: er * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+VAR: fool -> bool = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: er * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+VAR: fool -> bool = 0
+
+
+#### IR Code ####
+
+VAR: wowzers -> bool = 0
+VAR: in -> char = 0
+BINARY: er * 10
+BINARY: 1 + 50
+BINARY: 51 + 1
+VAR: my -> float = 52
+VAR: trowsers -> void = 0
+VAR: empty -> float = 0
+VAR: fool -> bool = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 1 + 1
+EQUAL: result = 2
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 1 + 1
+EQUAL: result = 2
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 1 + 1
+EQUAL: result = 2
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 1 + 1
+EQUAL: result = 2
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: anotherResult -> int = 0
+BINARY: 5 + 5
+EQUAL: anotherResult = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+BINARY: 5 + 5
+EQUAL: result2 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+BINARY: 5 + 5
+EQUAL: result2 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + (null)
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 5 + 3
+EQUAL: result = 
+VAR: result2 -> int = 0
+BINARY: 5 + 
+EQUAL: result2 = 
+VAR: result3 -> int = 0
+BINARY: 0 + 
+EQUAL: result3 = 
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 5 + 3
+EQUAL: result = 
+VAR: result2 -> int = 0
+BINARY: 5 + 
+EQUAL: result2 = 
+VAR: result3 -> int = 0
+BINARY: 0 + 
+EQUAL: result3 = 
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: result5 + 1
+EQUAL: result4 = 1
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: result5 + 1
+EQUAL: result4 = 1
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: result5 + 1
+EQUAL: result4 = 1
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: 10 + 1
+EQUAL: result4 = 11
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: 10 + 1
+EQUAL: result4 = 11
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: 10 + 1
+EQUAL: result4 = 11
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + result
+EQUAL: result2 = 5
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: 1 + result4
+EQUAL: result4 = 1
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 + 3
+EQUAL: result = 5
+VAR: result2 -> int = 0
+BINARY: 5 + 5
+EQUAL: result2 = 10
+VAR: result3 -> int = 0
+BINARY: 5 + 5
+EQUAL: result3 = 10
+VAR: result4 -> int = 0
+BINARY: 5 + 5
+EQUAL: result4 = 10
+BINARY: 10 + 1
+EQUAL: result4 = 11
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 - 3
+EQUAL: result = -1
+VAR: result2 -> int = 0
+BINARY: 5 + -1
+EQUAL: result2 = 4
+VAR: result3 -> int = 0
+BINARY: -1 + -1
+EQUAL: result3 = -2
+VAR: result4 -> int = 0
+BINARY: -1 + 5
+EQUAL: result4 = 4
+BINARY: 4 + 1
+EQUAL: result4 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: 2 - 3
+EQUAL: result = -1
+VAR: result2 -> int = 0
+BINARY: 5 + -1
+EQUAL: result2 = 4
+VAR: result3 -> int = 0
+BINARY: -1 - -1
+EQUAL: result3 = 0
+VAR: result4 -> int = 0
+BINARY: -1 + 5
+EQUAL: result4 = 4
+BINARY: 4 + 1
+EQUAL: result4 = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+BINARY: 0 * 5
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+BINARY: 0 * 5
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+BINARY: 0 * 5
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 0
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er * 1
+EQUAL: result = 
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+EQUAL: result = 5
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+BINARY: er / 1
+BINARY: 5 * 5
+EQUAL: result = 25
+
+
+#### IR Code ####
+
+VAR: result -> int = 0
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+BINARY: number * number
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+BINARY: 25 * 5
+EQUAL: numbers = 125
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+BINARY: 25 * 0
+EQUAL: numbers = 0
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY:  * 
+BINARY: 0 * 0
+EQUAL: [] = 0
+EQUAL: [] = 5
+
+
+#### IR Code ####
+
+BINARY:  * 
+BINARY: 0 * 0
+EQUAL: [] = 0
+EQUAL: [] = 5
+
+
+#### IR Code ####
+
+BINARY:  * 
+BINARY: 0 * 0
+EQUAL: [] = 0
+EQUAL: [] = 5
+
+
+#### IR Code ####
+
+BINARY:  * 
+BINARY: 0 * 0
+EQUAL: [] = 0
+EQUAL: [] = 5
+
+
+#### IR Code ####
+
+BINARY:  * 
+BINARY: 0 * 0
+EQUAL: [] = 0
+EQUAL: [] = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+BINARY: 25 * 0
+EQUAL: numbers = 0
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY:  * 
+EQUAL: ArrVar = 0
+EQUAL: ArrVar = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 5 * 5
+EQUAL: numbers = 25
+EQUAL: numbers = 5
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY:  * 
+EQUAL: Arr = 0
+EQUAL: Arr = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+EQUAL: result5 = 
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+VAR: result5 -> int = 0
+EQUAL: result5 = 
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: result5 = 
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+VAR: result5 -> int = 0
+EQUAL: result5 = 
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+BINARY: 7 * 7
+EQUAL: numbers = 49
+EQUAL: numbers = 8
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+BINARY:  * 
+EQUAL: numbers = 3
+EQUAL: numbers = 4
+
+
+#### IR Code ####
+
+BINARY:  * 
+EQUAL: numbers = 3
+EQUAL: numbers = 4
+
+
+#### IR Code ####
+
+BINARY:  * 
+EQUAL: numbers = 3
+EQUAL: numbers = 4
+
+
+#### IR Code ####
+
+BINARY:  * 
+EQUAL: numbers = 3
+EQUAL: numbers = 4
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY: er * 5
+EQUAL: result5 = 5
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+EQUAL: result5 = 6
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: numbers = 1
+EQUAL: numbers = 2
+EQUAL: numbers = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY:  * 5
+EQUAL: result5 = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 5
+EQUAL: result5 = 30
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0
+
+
+#### IR Code ####
+
+VAR: result5 -> int = 0
+EQUAL: array = 1
+EQUAL: array = 2
+EQUAL: array = 4
+BINARY: 6 * 6
+EQUAL: result5 = 36
+VAR: why -> float = 0

@@ -502,16 +502,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  31
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   102
+#define YYLAST   105
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  39
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  17
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  47
+#define YYNRULES  45
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  83
+#define YYNSTATES  81
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   293
@@ -566,9 +566,9 @@ static const yytype_int16 yyrline[] =
 {
        0,    70,    70,    77,    80,    83,    84,    85,    88,    89,
       94,    95,    96,    97,   100,   101,   102,   103,   104,   105,
-     116,   118,   130,   136,   137,   138,   141,   161,   166,   170,
-     196,   170,   217,   243,   261,   279,   317,   318,   319,   320,
-     352,   384,   426,   438,   451,   467,   468,   500
+     108,   109,   112,   117,   118,   119,   122,   143,   148,   152,
+     178,   152,   199,   225,   243,   261,   310,   311,   312,   340,
+     381,   412,   458,   504,   557,   610
 };
 #endif
 
@@ -617,15 +617,15 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      18,   -16,   -16,   -16,   -16,   -16,   -16,    35,    22,   -16,
-      22,   -16,    77,     7,   -16,    18,   -16,    28,     2,     4,
-       6,   -16,   -16,    55,    22,    77,    33,    43,    78,    72,
+      18,   -16,   -16,   -16,   -16,   -16,   -16,    55,    22,   -16,
+      22,   -16,    86,     7,   -16,    18,   -16,    28,     2,     4,
+       6,   -16,   -16,    64,    22,    86,    22,    29,    87,    81,
       10,   -16,   -16,   -16,    -8,   -16,   -16,   -16,    22,    22,
-      22,    22,    78,    21,    -6,    20,    -7,   -16,   -16,   -16,
-      22,    14,    51,    51,   -16,   -16,    42,   -16,    46,   -16,
-      56,    62,    38,    77,    22,    77,   -16,    64,   -16,    78,
-      81,    79,   -16,    84,   -16,    77,    80,   -16,    18,   -16,
-      28,    76,   -16
+      22,    22,    87,    21,    -6,    -7,   -16,   -16,   -16,    22,
+      22,    36,    36,   -16,   -16,    42,   -16,    44,    23,    71,
+      49,    86,    22,    86,   -16,    47,   -16,    87,    50,    48,
+     -16,    57,   -16,    86,    51,   -16,    18,   -16,    28,    53,
+     -16
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -633,29 +633,29 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       8,    14,    15,    16,    17,    18,    19,    37,     0,    10,
+       8,    14,    15,    17,    16,    18,    19,    37,     0,    10,
        0,    36,     0,     0,     2,     4,     7,     8,     0,     0,
        0,     5,     6,     0,     0,    25,     0,    37,    26,     0,
        0,     1,     3,     9,     0,    12,    13,    11,     0,     0,
-       0,     0,    39,     0,     0,    36,     0,    45,    29,    33,
-       0,     0,    41,    42,    43,    44,    24,    27,    46,    38,
-       0,     0,     0,    25,     0,    20,    34,     0,    23,    40,
-       0,     0,    35,    22,    30,    20,     0,    21,     8,    31,
-       8,     0,    32
+       0,     0,    39,     0,     0,     0,    45,    29,    33,     0,
+       0,    41,    42,    43,    44,    24,    27,    38,     0,     0,
+       0,    25,     0,    20,    34,     0,    23,    40,     0,     0,
+      35,    22,    30,    20,     0,    21,     8,    31,     8,     0,
+      32
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -16,   -16,   -14,   -16,   -15,   -16,   -12,    25,    39,   -16,
+     -16,   -16,   -14,   -16,   -15,   -16,   -12,    -2,    16,   -16,
      -16,   -16,   -16,   -16,   -16,   -16,    -5
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,    13,    14,    15,    16,    17,    18,    71,    44,    19,
-      20,    21,    60,    76,    79,    22,    23
+       0,    13,    14,    15,    16,    17,    18,    69,    44,    19,
+      20,    21,    58,    74,    77,    22,    23
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -663,17 +663,17 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      30,    32,    33,    28,    49,    29,    50,    31,    38,    39,
-      40,    41,    34,    43,    57,    51,    35,    59,    36,    42,
-      48,    46,     1,     2,     3,     4,     5,     6,     7,     8,
-       9,    56,    27,    52,    53,    54,    55,    10,     7,     8,
-       9,    10,    62,    27,    58,    61,    11,    10,    12,    24,
-      11,    43,    10,    70,    25,    63,    11,    24,    26,    69,
-      64,    45,    67,    70,    80,    81,    26,    37,    40,    41,
-      38,    39,    40,    41,    66,    65,    72,    38,    39,    40,
-      41,     1,     2,     3,     4,     5,     6,    38,    39,    40,
-      41,    73,    47,    38,    39,    40,    41,    75,    82,    74,
-      77,    78,    68
+      30,    32,    33,    28,    48,    29,    49,    31,    38,    39,
+      40,    41,    34,    43,    56,    50,    35,    57,    36,    42,
+      47,    45,     1,     2,     3,     4,     5,     6,     7,     8,
+       9,    55,    27,    51,    52,    53,    54,    10,     7,     8,
+       9,    10,    63,    24,    59,    60,    11,    10,    12,    43,
+      11,    68,    26,    40,    41,    61,    11,    67,    62,    70,
+      71,    68,    78,    79,    38,    39,    40,    41,    72,    24,
+      73,    75,    76,    65,    25,    80,    37,    66,    26,    38,
+      39,    40,    41,    64,     0,     0,    38,    39,    40,    41,
+       1,     2,     3,     4,     5,     6,    38,    39,    40,    41,
+       0,    46,    38,    39,    40,    41
 };
 
 static const yytype_int8 yycheck[] =
@@ -682,13 +682,13 @@ static const yytype_int8 yycheck[] =
       17,    18,    10,    25,    20,    23,    12,    24,    12,    24,
       10,    26,     4,     5,     6,     7,     8,     9,    10,    11,
       12,    10,    10,    38,    39,    40,    41,    19,    10,    11,
-      12,    19,    28,    10,    24,    50,    28,    19,    30,    14,
-      28,    63,    19,    65,    19,    13,    28,    14,    23,    64,
-      14,    28,    24,    75,    78,    80,    23,    12,    17,    18,
-      15,    16,    17,    18,    12,    19,    12,    15,    16,    17,
-      18,     4,     5,     6,     7,     8,     9,    15,    16,    17,
-      18,    10,    20,    15,    16,    17,    18,    13,    22,    20,
-      75,    21,    63
+      12,    19,    19,    14,    49,    50,    28,    19,    30,    61,
+      28,    63,    23,    17,    18,    13,    28,    62,    14,    12,
+      10,    73,    76,    78,    15,    16,    17,    18,    20,    14,
+      13,    73,    21,    24,    19,    22,    12,    61,    23,    15,
+      16,    17,    18,    12,    -1,    -1,    15,    16,    17,    18,
+       4,     5,     6,     7,     8,     9,    15,    16,    17,    18,
+      -1,    20,    15,    16,    17,    18
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -699,11 +699,11 @@ static const yytype_int8 yystos[] =
       19,    28,    30,    40,    41,    42,    43,    44,    45,    48,
       49,    50,    54,    55,    14,    19,    23,    10,    55,    55,
       45,     0,    41,    43,    10,    12,    12,    12,    15,    16,
-      17,    18,    55,    45,    47,    28,    55,    20,    10,    12,
-      14,    23,    55,    55,    55,    55,    10,    20,    24,    24,
-      51,    55,    28,    13,    14,    19,    12,    24,    47,    55,
-      45,    46,    12,    10,    20,    13,    52,    46,    21,    53,
-      41,    43,    22
+      17,    18,    55,    45,    47,    55,    20,    10,    12,    14,
+      23,    55,    55,    55,    55,    10,    20,    24,    51,    55,
+      55,    13,    14,    19,    12,    24,    47,    55,    45,    46,
+      12,    10,    20,    13,    52,    46,    21,    53,    41,    43,
+      22
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -713,7 +713,7 @@ static const yytype_int8 yyr1[] =
       44,    44,    44,    44,    45,    45,    45,    45,    45,    45,
       46,    46,    46,    47,    47,    47,    48,    49,    49,    51,
       52,    50,    53,    54,    54,    54,    55,    55,    55,    55,
-      55,    55,    55,    55,    55,    55,    55,    55
+      55,    55,    55,    55,    55,    55
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -723,7 +723,7 @@ static const yytype_int8 yyr2[] =
        1,     2,     2,     2,     1,     1,     1,     1,     1,     1,
        0,     4,     2,     4,     2,     0,     2,     4,     0,     0,
        0,     9,     4,     3,     5,     6,     1,     1,     4,     3,
-       6,     3,     3,     3,     3,     3,     4,     6
+       6,     3,     3,     3,     3,     3
 };
 
 
@@ -1259,7 +1259,7 @@ yyreduce:
 
   case 14: /* Type: INT  */
 #line 100 "parser.y"
-            { strcpy((yyval.ast)->nodeType, "int"); strcpy((yyval.ast)->value, "0");}
+          { strcpy((yyval.ast)->nodeType, "int"); strcpy((yyval.ast)->value, "0");}
 #line 1264 "parser.tab.c"
     break;
 
@@ -1269,15 +1269,15 @@ yyreduce:
 #line 1270 "parser.tab.c"
     break;
 
-  case 16: /* Type: CHAR  */
+  case 16: /* Type: BOOL  */
 #line 102 "parser.y"
-               { strcpy((yyval.ast)->nodeType, "char"); strcpy((yyval.ast)->value, "");}
+               { strcpy((yyval.ast)->nodeType, "bool"); strcpy((yyval.ast)->value, "0");}
 #line 1276 "parser.tab.c"
     break;
 
-  case 17: /* Type: BOOL  */
+  case 17: /* Type: CHAR  */
 #line 103 "parser.y"
-               { strcpy((yyval.ast)->nodeType, "bool"); strcpy((yyval.ast)->value, "0");}
+               { strcpy((yyval.ast)->nodeType, "char"); strcpy((yyval.ast)->value, "");}
 #line 1282 "parser.tab.c"
     break;
 
@@ -1289,76 +1289,68 @@ yyreduce:
 
   case 19: /* Type: VOID  */
 #line 105 "parser.y"
-               { strcpy((yyval.ast)->nodeType, "void"); }
+               { strcpy((yyval.ast)->nodeType, "void"); strcpy((yyval.ast)->value, "");}
 #line 1294 "parser.tab.c"
     break;
 
   case 21: /* ParamList: Type ID COMMA ParamList  */
-#line 119 "parser.y"
-        { printf("\n RECOGNIZED RULE: Parameter list %s\n", (yyvsp[-2].string)); 
-	emitFunctionParameter(currentScope, (yyvsp[-2].string), (yyvsp[-3].ast));
-	char parameterList[50];
-	  while((yyvsp[0].ast) != NULL) {
-		// append the parameter list in an array
-		strcat(parameterList, (yyvsp[-2].string));
-		  
-		(yyvsp[0].ast) = (yyvsp[0].ast)->left;
-	  }
-	printf("Parameter list %s\n", parameterList);
+#line 109 "parser.y"
+                                  { printf("\n RECOGNIZED RULE: Parameter list %s\n", (yyvsp[-2].string)); 
+	  	emitFunctionParameter(currentScope, (yyvsp[-2].string), (yyvsp[-3].ast));
+	}
+#line 1302 "parser.tab.c"
+    break;
+
+  case 22: /* ParamList: Type ID  */
+#line 112 "parser.y"
+                  {	printf("\n RECOGNIZED RULE: Parameter %s\n", (yyvsp[0].string)); 
+		emitFunctionParameter(currentScope, (yyvsp[0].string), (yyvsp[-1].ast));
 	}
 #line 1310 "parser.tab.c"
     break;
 
-  case 22: /* ParamList: Type ID  */
-#line 130 "parser.y"
-                  {
-		printf("\n RECOGNIZED RULE: Parameter list %s\n", (yyvsp[0].string)); 
-		emitFunctionParameter(currentScope, (yyvsp[0].string), (yyvsp[-1].ast));
-		}
-#line 1319 "parser.tab.c"
-    break;
-
   case 24: /* Param: Type ID  */
-#line 137 "parser.y"
+#line 118 "parser.y"
                   { }
-#line 1325 "parser.tab.c"
+#line 1316 "parser.tab.c"
     break;
 
   case 26: /* ReturnStmt: RETURN Expr  */
-#line 141 "parser.y"
+#line 122 "parser.y"
                             {
 	printf("\n RECOGNIZED RULE: Return statement: %s with value:%s\n", (yyvsp[0].ast), (yyvsp[0].ast)->value);
 	// Symbol Table 
 	symTabAccess();
 	int inSymTab = found((yyvsp[0].ast), currentScope);
-	//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
+	
+	// currently this code has a problem, not every Expr will be in the symbol table
+
 	// get value from symbol table if inSymTab
 	if(inSymTab != -1) {
 		// get the value from the symbol table
 		char value[50];
 		sprintf(value, "%s", getValue(inSymTab));
 		printf("value: %s\n", value);
-
-	} 
+	}
 	else {
 		printf("not found %s in symtab - semantic error", (yyvsp[0].ast));
 	}
 }
-#line 1348 "parser.tab.c"
+#line 1340 "parser.tab.c"
     break;
 
   case 27: /* FunCall: ID LEFTPARENTHESIS Param RIGHTPARENTHESIS  */
-#line 161 "parser.y"
+#line 143 "parser.y"
                                                           { 
 	printf("\n RECOGNIZED RULE: Function call %s\n", (yyvsp[-3].string));
 	// Symbol Table
  
 }
-#line 1358 "parser.tab.c"
+#line 1350 "parser.tab.c"
     break;
 
   case 29: /* $@1: %empty  */
-#line 170 "parser.y"
+#line 152 "parser.y"
                             {
 printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 																// Symbol Table
@@ -1385,17 +1377,17 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 																//printf("-----------> %s", $$->LHS);
 																
 }
-#line 1389 "parser.tab.c"
+#line 1381 "parser.tab.c"
     break;
 
   case 30: /* $@2: %empty  */
-#line 196 "parser.y"
+#line 178 "parser.y"
                                            {emitFunctionBlockStart();}
-#line 1395 "parser.tab.c"
+#line 1387 "parser.tab.c"
     break;
 
   case 31: /* FunDecl: FUN Type ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block  */
-#line 196 "parser.y"
+#line 178 "parser.y"
                                                                                 {  
 											// change current scope back to global
 											
@@ -1415,11 +1407,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 											emitFunctionBlockEnd();
 											strcpy(currentScope, "global"); 
 										}
-#line 1419 "parser.tab.c"
+#line 1411 "parser.tab.c"
     break;
 
   case 32: /* Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET  */
-#line 217 "parser.y"
+#line 199 "parser.y"
                                                            {
 	(yyval.ast) = AST_Block("Block", (yyvsp[-2].ast), (yyvsp[-1].ast)); 
 	// print the AST
@@ -1443,17 +1435,17 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 	// loop through the statement list and look for return statements
 	
 }
-#line 1447 "parser.tab.c"
+#line 1439 "parser.tab.c"
     break;
 
   case 33: /* VarDecl: Type ID SEMICOLON  */
-#line 243 "parser.y"
+#line 225 "parser.y"
                                         { printf("\n RECOGNIZED RULE: Variable declaration %s\n", (yyvsp[-1].string));
 									// Symbol Table
 									symTabAccess();
 									int inSymTab = found((yyvsp[-1].string), currentScope);
 									//printf("looking for %s in symtab - found: %d \n", $2, inSymTab);
-									
+									 
 									if (inSymTab == -1)  
 										addItem((yyvsp[-1].string), "Var", (yyvsp[-2].ast)->nodeType, (yyvsp[-2].ast)->value, 0, currentScope);
 									else
@@ -1462,15 +1454,15 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 									
 								  // ---- SEMANTIC ACTIONS by PARSER ----
 								    (yyval.ast) = AST_Type("Type",(yyvsp[-2].ast)->nodeType, (yyvsp[-2].ast)->value);
-									printf("-----------> %s", (yyval.ast)->LHS);
+									printf("-----------> %s\n", (yyval.ast)->LHS);
 
 									emitVariableDeclaration(currentScope, (yyvsp[-2].ast), (yyvsp[-1].string), "0");
 								}
-#line 1470 "parser.tab.c"
+#line 1462 "parser.tab.c"
     break;
 
   case 34: /* VarDecl: Type ID EQUAL Expr SEMICOLON  */
-#line 261 "parser.y"
+#line 243 "parser.y"
                                { printf("\n RECOGNIZED RULE: Variable declaration %s\n", (yyvsp[-3].string));
 									// Symbol Table 
 									symTabAccess();
@@ -1489,84 +1481,129 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 
 									emitVariableDeclaration(currentScope, (yyvsp[-4].ast), (yyvsp[-3].string), (yyvsp[-1].ast)->value);
 								}
-#line 1493 "parser.tab.c"
+#line 1485 "parser.tab.c"
     break;
 
-  case 35: /* VarDecl: Type ID LEFTBRACKET NUMBER RIGHTBRACKET SEMICOLON  */
-#line 279 "parser.y"
-                                                    { 
+  case 35: /* VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON  */
+#line 261 "parser.y"
+                                                  { 
     // Symbol Table
     symTabAccess();
     int inSymTab = found((yyvsp[-4].string), currentScope);
     if (inSymTab == -1) {
         // Add the array name to the symbol table
 		// turn $4 into number
-        addItem((yyvsp[-4].string), "Arr", (yyvsp[-5].ast), "", atoi((yyvsp[-2].string)), currentScope);
+        addItem((yyvsp[-4].string), "Arr", (yyvsp[-5].ast), "", atoi((yyvsp[-2].ast)->value), currentScope);
     } else {
         printf("SEMANTIC ERROR: Array %s is already in the symbol table\n", (yyvsp[-4].string));
     }
 	// for loop that makes empty entries as many times as the number in $4
 	int i;
-	for (i = 0; i < atoi((yyvsp[-2].string)); i++) {
+	char defaultVal[3];
+	if(strcmp((yyvsp[-5].ast), "int") == 0)
+		strcpy(defaultVal, "0");
+	else if(strcmp((yyvsp[-5].ast), "float") == 0)
+		strcpy(defaultVal, "0.0");
+	else if(strcmp((yyvsp[-5].ast), "char") == 0)
+		strcpy(defaultVal, "");
+	
+	for (i = 0; i < atoi((yyvsp[-2].ast)->value); i++) {
 		// add i char to the end of $2
 		char *arrName = malloc(strlen((yyvsp[-4].string)) + 2);
 		strcpy(arrName, (yyvsp[-4].string));
 		char iChar[2];
 		sprintf(iChar, "%d", i);
 		strcat(arrName, iChar);
-		addItem((yyvsp[-4].string), "Var", (yyvsp[-5].ast), "", 0, currentScope);
+		printf("the value of $$ is %s\n", (yyval.ast)->value);
+		addItem((yyvsp[-4].string), "ArrVar", (yyvsp[-5].ast), defaultVal, 0, currentScope);
+		(yyval.ast) = AST_Type("[]",(yyvsp[-5].ast),(yyvsp[-4].string));
 	}
     showSymTable();
 
     // ---- SEMANTIC ACTIONS by PARSER ----
-    (yyval.ast) = AST_Type("Type", (yyvsp[-5].ast), (yyvsp[-4].string));
-    printf("-----------> %s", (yyval.ast)->LHS);
+    (yyval.ast) = AST_Type("[]", (yyvsp[-5].ast), (yyvsp[-4].string));
+    //printf("-----------> %s", $$->LHS);
 }
-#line 1526 "parser.tab.c"
+#line 1528 "parser.tab.c"
     break;
 
   case 36: /* Expr: NUMBER  */
-#line 317 "parser.y"
-                        { (yyval.ast) = (yyvsp[0].string); sprintf((yyval.ast)->value, "%s", (yyvsp[0].string)); }
-#line 1532 "parser.tab.c"
+#line 310 "parser.y"
+                        { (yyval.ast) = (yyvsp[0].string); sprintf((yyval.ast)->value, "%s", (yyvsp[0].string)); sprintf((yyval.ast)->nodeType, "%s", "number"); }
+#line 1534 "parser.tab.c"
     break;
 
   case 37: /* Expr: ID  */
-#line 318 "parser.y"
+#line 311 "parser.y"
                             { (yyval.ast) = (yyvsp[0].string); sprintf((yyval.ast)->value, "%s", (yyvsp[0].string)); }
-#line 1538 "parser.tab.c"
+#line 1540 "parser.tab.c"
     break;
 
   case 38: /* Expr: ID LEFTBRACKET Expr RIGHTBRACKET  */
-#line 319 "parser.y"
-                                           { (yyval.ast) = (yyvsp[-3].string); sprintf((yyval.ast)->value, "%s", (yyvsp[-3].string)); }
-#line 1544 "parser.tab.c"
+#line 313 "parser.y"
+        {
+		int inSymTab = found((yyvsp[-3].string), currentScope);
+
+		if(inSymTab == 1) {
+			printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", (yyvsp[-3].string));
+		} 
+		else {
+			int size = getArraySize((yyvsp[-3].string), currentScope);
+			int index = atoi((yyvsp[-1].ast)->value);
+
+				if (index >= size) {
+					printf("SEMANTIC ERROR: Index out of bounds for array %s\n", (yyvsp[-3].string));
+					semanticCheckPassed = 0;
+				} else { 
+					// Construct the AST for the array indexing
+					// $$ = AST_BinaryExpression($1, $3);
+					sprintf((yyval.ast)->value, "%s", getValue(inSymTab + index));
+					sprintf((yyval.ast)->nodeType, "%s", "[]"); 
+					printf("Setting value of %s to %s" , (yyvsp[-3].string), getValue(inSymTab + index));
+					// printf("hey guy, I am actually updating the symbol table here with %s\n", $3->value);
+					// updateItemByID(inSymTab + index, $$->value);
+
+					// sprintf($$->nodeType, "%s", "Arr"); 
+					// turn $3 into number 
+				} 
+		} 
+	}
+#line 1572 "parser.tab.c"
     break;
 
   case 39: /* Expr: ID EQUAL Expr  */
-#line 320 "parser.y"
-                       {
+#line 340 "parser.y"
+                      {
         // Update the value of the variable in the symbol table
-		int inSymTab = found((yyvsp[-2].string), currentScope);
-        if (inSymTab == -1) {
-            printf("SEMANTIC ERROR: Variable '%s' is not in the symbol table\n", (yyvsp[-2].string));
-            semanticCheckPassed = 0; 
-        } 
-		else if(getVariableType((yyvsp[-2].string), currentScope) == "Arr") {
-			int size = getArraySize((yyvsp[-2].string), currentScope);
-				if (atoi((yyvsp[0].ast)) >= size) {
-					printf("SEMANTIC ERROR: Index out of bounds for array %s\n", (yyvsp[-2].string));
-					semanticCheckPassed = 0;
-				} else {
-					char* value = getValue(inSymTab + atoi((yyvsp[0].ast)));
-					// Create a new node for the array element
-					sprintf((yyvsp[0].ast)->value, "%s", value);
- 
-					// print the Expr
-					updateItem(value, (yyvsp[0].ast), currentScope);
-					// $$ = AST_BinaryExpression("=", $1, value); 
-				}
+		int inSymTab = found((yyvsp[-2].string), currentScope);  
+
+		// check if Expr nodeType is a number
+		if((yyvsp[0].ast)->nodeType == "number") { 
+			// Numbers don't exist in the symbol table. Skip this check.
+				
 		}
+		else if (inSymTab == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[0].ast)->value);
+			semanticCheckPassed = 0;
+		}
+  
+		// else if(getVariableType($1, currentScope) == "Arr") {
+		// 	// $1 is an array's index, not the id.
+		// 	int size = getArraySize($1, currentScope);
+		// 		if (atoi($3) >= size) {
+		// 			printf("SEMANTIC ERROR: Index out of bounds for array %s\n", $1);
+		// 			semanticCheckPassed = 0;
+		// 		} else {
+		// 			char* value = getValue(inSymTab + atoi($3));
+		// 			// Create a new node for the array element
+		// 			sprintf($3->value, "%s", value);
+		// 			printf("hey guys, I am actually updating the symbol table here with %s\n", $1);
+ 
+		// 			// print the Expr
+		// 			updateItemByID(inSymTab + atoi($3->value), $3->value);
+		// 			// $$ = AST_BinaryExpression("=", $1, value); 
+		// 		}
+		// }
 		else {
 			// print the Expr
 			printf( "Expr: %s", (yyvsp[0].ast)->value);
@@ -1577,231 +1614,271 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		emitAssignment(currentScope, (yyvsp[-2].string), (yyvsp[0].ast)->value);
 	 
      }
-#line 1581 "parser.tab.c"
-    break;
-
-  case 40: /* Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr  */
-#line 352 "parser.y"
-                                                         {
-		// Update the value of the variable in the symbol table
-		int inSymTab = found((yyvsp[-5].string), currentScope);
-		if (inSymTab == -1) {
-        printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", (yyvsp[-5].string));
-        semanticCheckPassed = 0;
-		} else {
-			// Get the type of the array from the symbol table
-			// char* type = getType($1, currentScope);
-			if (strcmp("Arr", "Arr") != 0) {
-				printf("SEMANTIC ERROR: %s is not an array\n", (yyvsp[-5].string));
-				semanticCheckPassed = 0;
-			} else {
-				// Check if the index is within bounds
-				int size = getArraySize((yyvsp[-5].string), currentScope);
-				if (atoi((yyvsp[-3].string)) >= size) {
-					printf("SEMANTIC ERROR: Index out of bounds for array %s\n", (yyvsp[-5].string));
-					semanticCheckPassed = 0;
-				} else { 
-					// Construct the AST for the array indexing
-					// $$ = AST_ArrayIndex($1, $3);
-					// updateItemByID 
-					
-					// turn $3 into number
-					int index = atoi((yyvsp[-3].string));
-					updateItemByID(inSymTab + index, (yyvsp[0].ast));
-					// print updating id (inSymTab + index)
-					printf("Updating id: %d", inSymTab + index);
-				}
-			}
-		}
-	 }
 #line 1618 "parser.tab.c"
     break;
 
-  case 41: /* Expr: Expr PLUS Expr  */
-#line 384 "parser.y"
-                        { 
+  case 40: /* Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr  */
+#line 381 "parser.y"
+                                                       {
+		 // Update the value of the variable in the symbol table
+		int inSymTab = found((yyvsp[-5].string), currentScope);  
 
-		// check if the variables are in the symbol table
+		// check if Expr nodeType is a number
+		if (inSymTab == -1) {
+			printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", (yyvsp[-5].string));
+			semanticCheckPassed = 0;
+		}
+		else {
+			// $1 is an array's index, not the id.
+
+			int size = getArraySize((yyvsp[-5].string), currentScope);
+				if (atoi((yyvsp[-3].ast)) >= size) {
+					printf("SEMANTIC ERROR: Index out of bounds for array %s\n", (yyvsp[-5].string));
+					semanticCheckPassed = 0;
+				} else {
+					char* value = getValue(inSymTab + atoi((yyvsp[-3].ast)));
+					// Create a new node for the array element
+					printf("hey guys, I am actually updating the symbol table here with %s\n", (yyvsp[-5].string));
+ 
+					// print the Expr
+					updateItemByID(inSymTab + atoi((yyvsp[-3].ast)->value), (yyvsp[0].ast)->value);
+					
+					(yyval.ast) = AST_BinaryExpression("[]", (yyvsp[-5].string), value); 
+				}
+		}
+
+		emitAssignment(currentScope, (yyvsp[-5].string), (yyvsp[-3].ast)->value);
+		
+	 }
+#line 1654 "parser.tab.c"
+    break;
+
+  case 41: /* Expr: Expr PLUS Expr  */
+#line 412 "parser.y"
+                        { 
+		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
 		int inSymTab2 = found((yyvsp[0].ast), currentScope);
-		if (inSymTab1 == -1) {
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp((yyvsp[-2].ast)->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
 			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[-2].ast)->value);
 			semanticCheckPassed = 0;
-		} else if (inSymTab2 == -1) {
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf((yyvsp[-2].ast)->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp((yyvsp[0].ast)->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
 			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[0].ast)->value);
-			semanticCheckPassed = 0;
-		} else {
-
+			semanticCheckPassed = 0; 
+		} 
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf((yyvsp[0].ast)->value, "%s", getValue(inSymTab2));
 		}
-		if(inSymTab1 != -1) {
-			// get the value of the variable
-			char* value = getValue(inSymTab1);
-			// Create a new node for the variable
-			sprintf((yyvsp[-2].ast)->value, "%s", value);
-		}
-		if(inSymTab2 != -1) {
-			// get the value of the variable
-			char* value = getValue(inSymTab2);
-			// Create a new node for the variable
-			sprintf((yyvsp[0].ast)->value, "%s", value);
-		}
-		// print the results
-		printf( "PEEEN: %s + %s ", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
-
-		// calculate the value of the expression
-		int total = atoi((yyvsp[-2].ast)->value) + atoi((yyvsp[0].ast)->value);  
+		// Generate AST for the addition
 		(yyval.ast) = AST_BinaryExpression("+", (yyvsp[-2].ast), (yyvsp[0].ast)); 
-		// convert value to string
-		char stringVal[50];
-		sprintf(stringVal, "%d", total);
-		// set the value of the expression
-		sprintf((yyval.ast)->value, "%s", stringVal);
-		// printf("Expr PLUS: %d", total);
-		printf( "Expr: %s ", (yyval.ast)->value);
 
+		// Perform the addition, and update the value of the expression
+		char stringVal[50];
+		sprintf(stringVal, "%d", atoi((yyvsp[-2].ast)->value) + atoi((yyvsp[0].ast)->value));
+		sprintf((yyval.ast)->value, "%s", stringVal);
+
+		// IR time
 		emitBinaryOperation(currentScope, "+", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 		}
-#line 1665 "parser.tab.c"
+#line 1705 "parser.tab.c"
     break;
 
   case 42: /* Expr: Expr MINUS Expr  */
-#line 426 "parser.y"
+#line 458 "parser.y"
                         { 
-		// calculate the value of the expression
-		int total = atoi((yyvsp[-2].ast)->value) - atoi((yyvsp[0].ast)->value); 
-		(yyval.ast) = AST_BinaryExpression("-", (yyvsp[-2].ast), (yyvsp[0].ast));
-		// print what is being subtracted
-		printf( "Expr: %s - %s ", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
-		// convert value to string
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
+		int inSymTab2 = found((yyvsp[0].ast), currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp((yyvsp[-2].ast)->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[-2].ast)->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf((yyvsp[-2].ast)->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp((yyvsp[0].ast)->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[0].ast)->value);
+			semanticCheckPassed = 0; 
+		}  
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf((yyvsp[0].ast)->value, "%s", getValue(inSymTab2));
+		}
 		char stringVal[50];
-		sprintf(stringVal, "%d", total);
-		// set the value of the expression
+		// Perform the addition
+		sprintf(stringVal, "%d", atoi((yyvsp[-2].ast)->value) - atoi((yyvsp[0].ast)->value));
+		// Generate AST for the multiplication
+		(yyval.ast) = AST_BinaryExpression("-", (yyvsp[-2].ast), (yyvsp[0].ast)); 
+		// Update the value of the expression
 		sprintf((yyval.ast)->value, "%s", stringVal);
+
+		// IR time
+		emitBinaryOperation(currentScope, "-", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 	 }
-#line 1682 "parser.tab.c"
+#line 1756 "parser.tab.c"
     break;
 
   case 43: /* Expr: Expr MULTIPLY Expr  */
-#line 438 "parser.y"
+#line 504 "parser.y"
                            {
-		// calculate the value of the expression
-		int total = atoi((yyvsp[-2].ast)->value) * atoi((yyvsp[0].ast)->value);
-		(yyval.ast) = AST_BinaryExpression("*", (yyvsp[-2].ast), (yyvsp[0].ast));
-		// convert value to string
+		printf("EXPR1 is %s", (yyvsp[-2].ast)->nodeType);
+		printf("EXPR2 is %s", (yyvsp[0].ast)->nodeType); 
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
+		int inSymTab2 = found((yyvsp[0].ast), currentScope);
+		
+		printf("inSymTab1: %d" , inSymTab1);
+		printf("inSymTab2: %d" , inSymTab2);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp((yyvsp[-2].ast)->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[-2].ast)->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf((yyvsp[-2].ast)->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp((yyvsp[0].ast)->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[0].ast)->value);
+			semanticCheckPassed = 0; 
+		} 
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf((yyvsp[0].ast)->value, "%s", getValue(inSymTab2));
+		}
+ 
 		char stringVal[50];
-		sprintf(stringVal, "%d", total);
-		// set the value of the expression
+		// Perform the addition
+		sprintf(stringVal, "%d", atoi((yyvsp[-2].ast)->value) * atoi((yyvsp[0].ast)->value));
+		// Generate AST for the multiplication
+		(yyval.ast) = AST_BinaryExpression("*", (yyvsp[-2].ast), (yyvsp[0].ast)); 
+		// Update the value of the expression
 		sprintf((yyval.ast)->value, "%s", stringVal);
 
-		emitBinaryOperation(currentScope, "*", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value); 
+		// IR time
+		emitBinaryOperation(currentScope, "*", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 
 	 }
-#line 1700 "parser.tab.c"
+#line 1814 "parser.tab.c"
     break;
 
   case 44: /* Expr: Expr DIVIDE Expr  */
-#line 451 "parser.y"
+#line 557 "parser.y"
                         { 
-		// calculate the value of the expression
-		// dont let divide by 0
-		if (atoi((yyvsp[0].ast)->value) == 0) {
-			printf("SEMANTIC ERROR: Cannot divide by 0\n");
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
+		int inSymTab2 = found((yyvsp[0].ast), currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp((yyvsp[-2].ast)->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[-2].ast)->value);
 			semanticCheckPassed = 0;
 		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf((yyvsp[-2].ast)->value, "%s", getValue(inSymTab1));
+		}
 
-		int total = atoi((yyvsp[-2].ast)->value) / atoi((yyvsp[0].ast)->value);
-		(yyval.ast) = AST_BinaryExpression("/", (yyvsp[-2].ast), (yyvsp[0].ast));
-		// convert value to string
+		// check if Expr $3's nodeType is a number
+		if(strcmp((yyvsp[0].ast)->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", (yyvsp[0].ast)->value);
+			semanticCheckPassed = 0; 
+		} 
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf((yyvsp[0].ast)->value, "%s", getValue(inSymTab2));
+		}
+
+		// Perform the addition, and update the value of the expression
 		char stringVal[50];
-		sprintf(stringVal, "%d", total);
-		// set the value of the expression
-		sprintf((yyval.ast)->value, "%s", stringVal);
+		if(atoi((yyvsp[0].ast)->value) == 0) {
+			printf("SEMANTIC ERROR: Cannot divide by 0!\n");
+			exit(1);
+			semanticCheckPassed = 0;
+		}
+		else {
+			sprintf(stringVal, "%d", atoi((yyvsp[-2].ast)->value) / atoi((yyvsp[0].ast)->value));
+			// Generate AST for the addition
+			(yyval.ast) = AST_BinaryExpression("/", (yyvsp[-2].ast), (yyvsp[0].ast));  
+			sprintf((yyval.ast)->value, "%s", stringVal);
+		}
+
+		// IR time
+		emitBinaryOperation(currentScope, "/", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
      }
-#line 1721 "parser.tab.c"
+#line 1872 "parser.tab.c"
     break;
 
   case 45: /* Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS  */
-#line 467 "parser.y"
+#line 610 "parser.y"
                                                 {(yyval.ast) = (yyvsp[-1].ast); sprintf((yyval.ast)->value, "%s", (yyvsp[-1].ast)->value); }
-#line 1727 "parser.tab.c"
-    break;
-
-  case 46: /* Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET  */
-#line 468 "parser.y"
-                                              {
-		// check if ID is in the symbol table and if itemKind is "Arr"
-		int inSymTab = found((yyvsp[-3].string), currentScope);
-		if (inSymTab == -1) {
-			printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", (yyvsp[-3].string));
-			semanticCheckPassed = 0;
-		} else {
-			// Get the type of the array from the symbol table
-			if (strcmp("Arr", "Arr") != 0) {
-				printf("SEMANTIC ERROR: %s is not an array\n", (yyvsp[-3].string));
-				semanticCheckPassed = 0;
-			} else {
-				// Check if the index is within bounds
-				int size = getArraySize((yyvsp[-3].string), currentScope);
-				if (atoi((yyvsp[-1].string)) >= size) {
-					printf("SEMANTIC ERROR: Index out of bounds for array %s\n", (yyvsp[-3].string));
-					semanticCheckPassed = 0;
-				} else {
-					// Get the value of the array element from the symbol table
-					// call const char * getValue(int itemID)
-					// print the inSymTab + atoi($3)
-					printf("inSymTab + atoi($3): %d", inSymTab + atoi((yyvsp[-1].string)));
-					char* value = getValue(inSymTab + atoi((yyvsp[-1].string)));
-					// Create a new node for the array element
-					(yyval.ast) = AST_BinaryExpression("[]", (yyvsp[-3].string), (yyvsp[-1].string));
-					sprintf((yyval.ast)->value, "%s", value);
-					// "value of array is "
-					printf("value of array %s is %s", (yyvsp[-3].string), (yyval.ast)->value); 
-				}
-			}
-		}
-	 }
-#line 1764 "parser.tab.c"
-    break;
-
-  case 47: /* Expr: ID LEFTBRACKET NUMBER RIGHTBRACKET EQUAL Expr  */
-#line 500 "parser.y"
-                                                         {
-    // Check if the array is in the symbol table
-    int inSymTab = found((yyvsp[-5].string), currentScope);
-    if (inSymTab == -1) {
-        printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", (yyvsp[-5].string));
-        semanticCheckPassed = 0;
-    } else {
-        // Get the type of the array from the symbol table
-        // char* type = getType($1, currentScope);
-        if (strcmp("Arr", "Arr") != 0) {
-            printf("SEMANTIC ERROR: %s is not an array\n", (yyvsp[-5].string));
-            semanticCheckPassed = 0;
-        } else {
-            // Check if the index is within bounds
-            int size = getArraySize((yyvsp[-5].string), currentScope);
-            if (atoi((yyvsp[-3].string)) >= size) {
-                printf("SEMANTIC ERROR: Index out of bounds for array %s\n", (yyvsp[-5].string));
-                semanticCheckPassed = 0;
-            } else { 
-                // Construct the AST for the array indexing
-                // $$ = AST_ArrayIndex($1, $3);
-				// updateItemByID
-				
-				// turn $3 into number
-				int index = atoi((yyvsp[-3].string));
-				updateItemByID(inSymTab + index, (yyvsp[0].ast));
-				// print updating id (inSymTab + index)
-				printf("Updating id: %d", inSymTab + index);
-            }
-        }
-    }
-}
-#line 1801 "parser.tab.c"
+#line 1878 "parser.tab.c"
     break;
 
 
-#line 1805 "parser.tab.c"
+#line 1882 "parser.tab.c"
 
       default: break;
     }
@@ -1994,7 +2071,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 546 "parser.y"
+#line 625 "parser.y"
 
 
 int main(int argc, char**argv)

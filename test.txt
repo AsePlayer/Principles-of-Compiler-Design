@@ -1,18 +1,13 @@
-
-fun int add(int hisHolyParam1, int hisHolyParam2) {
-    int result;
-    result = 1 + 19999;
-    int penen;
-    penen = 2222;
-    int ok;
-    ok = 1 + 5 * 10 + 1 + result;
-    return result;
+fun int scopeTest() {
+    int result5;
 }
+int result5;
+int array[5];
+array[1] = 6;
+array[2] = 7;
+array[4] = 8;
 
-bool wowzers;
-char in;
-float my = 1 + 5 * 10 + 1;
-void trowsers;
+result5 = array[1] * array[1];
 
-float empty;
-bool fool;
+char floaties[4];
+float why;
