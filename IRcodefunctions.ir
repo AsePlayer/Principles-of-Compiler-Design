@@ -1295,3 +1295,303 @@ FUN: scopeTest -> int:
 BLOCK START
 VAR: result5 -> int = 0
 BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+FUN: scopeTest2 -> int:
+BLOCK START
+VAR: result7 -> int = 0
+BLOCK END
+BLOCK END

@@ -55,12 +55,13 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %printer { fprintf(yyoutput, "%s", $$); } ID;
 %printer { fprintf(yyoutput, "%d", $$); } NUMBER;
 
+%left LOGICALOR
+%left LOGICALAND
+%left LESS_THAN GREATER_THAN LESS_THAN_OR_EQUAL_TO GREATER_THAN_OR_EQUAL_TO EQUAL_TO NOT_EQUAL_TO 
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
 %left UNARYNOT
 
-%left LOGICALAND
-%left LOGICALOR
 
 %type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr FunDecl Block ParamList Param Type
 
@@ -69,7 +70,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %%
 
 Program: DeclList  { $$ = $1;
-					 printf("\n--- Abstract Syntax Tree ---\n\n");
+					 printf("\n--- Abstract Syntax Tree ---\n\n"); 
 					 printAST($$,0);
 					}
 
@@ -109,7 +110,7 @@ Type: INT { strcpy($$->nodeType, "int"); strcpy($$->value, "0");}			// int defau
 ParamList:	
 	| Type ID COMMA ParamList { printf("\n RECOGNIZED RULE: Parameter list %s\n", $2); 
 	  	emitFunctionParameter(currentScope, $2, $1);
-	}
+	}  
 	| Type ID {	printf("\n RECOGNIZED RULE: Parameter %s\n", $2); 
 		emitFunctionParameter(currentScope, $2, $1);
 	}
@@ -312,7 +313,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 	| MINUS NUMBER       { $$ = $2; sprintf($$->value, "-%s", $2); sprintf($$->nodeType, "%s", "number"); }
 	| ID                { $$ = $1; sprintf($$->value, "%s", $1); }
 	| LEFTPARENTHESIS Expr RIGHTPARENTHESIS %prec UNARYNOT   {$$ = $2; sprintf($$->value, "%s", $2->value);}
-	| UNARYNOT Expr { $$ = $2;
+	| UNARYNOT Expr { $$ = $2; 
 
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($2, currentScope);
@@ -695,7 +696,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("==", $1, $3);
+		$$ = AST_BinaryExpression("==", $1, $3); 
 		sprintf($$->value, "%s", stringVal);
 	 }
 	 | Expr NOT_EQUAL_TO Expr {
@@ -849,7 +850,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 
 		// Generate AST for the less than expression
 		$$ = AST_BinaryExpression("<=", $1, $3);
-		sprintf($$->value, "%s", stringVal);
+		sprintf($$->value, "%s", stringVal); 
 	 }
 	 | Expr GREATER_THAN Expr {
 		// Check if the variables are in the symbol table
@@ -953,6 +954,118 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		$$ = AST_BinaryExpression(">=", $1, $3);
 		sprintf($$->value, "%s", stringVal);
 	 }
+	 | Expr LOGICALAND Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+			printf("NODETYPE: %s\n\n\n\n\n\n\n", $1->nodeType);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+						printf("NODETYPE: %s\n\n\n\n\n\n\n", $1->nodeType);
+
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) && atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+				printf("ATTEMPTED: %s && %s", $1->value, $3->value);
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression("||", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }
+	 | Expr LOGICALOR Expr {
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($1, currentScope);
+		int inSymTab2 = found($3, currentScope);
+  
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($1->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);
+						printf("NODETYPE: %s\n\n\n\n\n\n\n", $1->nodeType);
+
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($1->value, "%s", getValue(inSymTab1));
+		}
+
+		// check if Expr $3's nodeType is a number
+		if(strcmp($3->nodeType, "number") == 0) { 
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if (inSymTab2 == -1) {
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+						printf("NODETYPE: %s\n\n\n\n\n\n\n", $3->nodeType);
+
+			semanticCheckPassed = 0; 
+		}
+		// Variable is in the symbol table
+		else if(inSymTab2 != -1) {  
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab2));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($1->value) || atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n");  
+		}
+
+		printf("ATTEMPTED: %s || %s", $1->value, $3->value);
+
+		// Generate AST for the less than expression
+		$$ = AST_BinaryExpression("number", $1, $3);
+		sprintf($$->value, "%s", stringVal);
+	 }	 
 ;
 
 UnaryOp: MINUS
