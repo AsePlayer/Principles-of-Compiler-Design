@@ -1255,3 +1255,43 @@ FUN: scopeTest -> int:
 BLOCK START
 VAR: result5 -> int = 0
 BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END
+FUN: scopeTest -> int:
+BLOCK START
+VAR: result5 -> int = 0
+BLOCK END

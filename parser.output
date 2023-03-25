@@ -17,20 +17,20 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-   52 Primary: ID
-   53        | NUMBER
-   54        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   55        | ID LEFTBRACKET Expr RIGHTBRACKET
+   53 Primary: ID
+   54        | NUMBER
+   55        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
+   56        | ID LEFTBRACKET Expr RIGHTBRACKET
 
-   56 UnaryOp: MINUS
-   57        | UNARYNOT
+   57 UnaryOp: MINUS
+   58        | UNARYNOT
 
-   58 BinaryOp: PLUS
-   59         | MINUS
-   60         | MULTIPLY
-   61         | DIVIDE
-   62         | LOGICALAND
-   63         | LOGICALOR
+   59 BinaryOp: PLUS
+   60         | MINUS
+   61         | MULTIPLY
+   62         | DIVIDE
+   63         | LOGICALAND
+   64         | LOGICALOR
 
 
 Rules useless in parser due to conflicts
@@ -38,23 +38,24 @@ Rules useless in parser due to conflicts
    27 FunCall: ε
 
 
-State 0 conflicts: 13 shift/reduce, 1 reduce/reduce
-State 16 conflicts: 13 shift/reduce, 9 reduce/reduce
-State 18 conflicts: 6 shift/reduce, 1 reduce/reduce
-State 50 conflicts: 10 shift/reduce
-State 59 conflicts: 6 shift/reduce
-State 60 conflicts: 6 shift/reduce
+State 0 conflicts: 14 shift/reduce, 1 reduce/reduce
+State 17 conflicts: 14 shift/reduce, 10 reduce/reduce
+State 19 conflicts: 7 shift/reduce, 1 reduce/reduce
+State 33 conflicts: 6 shift/reduce
+State 52 conflicts: 10 shift/reduce
 State 61 conflicts: 6 shift/reduce
 State 62 conflicts: 6 shift/reduce
-State 63 conflicts: 10 shift/reduce
-State 64 conflicts: 10 shift/reduce
+State 63 conflicts: 6 shift/reduce
+State 64 conflicts: 6 shift/reduce
 State 65 conflicts: 10 shift/reduce
 State 66 conflicts: 10 shift/reduce
 State 67 conflicts: 10 shift/reduce
 State 68 conflicts: 10 shift/reduce
-State 81 conflicts: 10 shift/reduce
-State 90 conflicts: 13 shift/reduce, 1 reduce/reduce
-State 92 conflicts: 1 shift/reduce
+State 69 conflicts: 10 shift/reduce
+State 70 conflicts: 10 shift/reduce
+State 83 conflicts: 10 shift/reduce
+State 92 conflicts: 14 shift/reduce, 1 reduce/reduce
+State 94 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -114,19 +115,20 @@ Grammar
    36     | MINUS NUMBER
    37     | ID
    38     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   39     | ID LEFTBRACKET Expr RIGHTBRACKET
-   40     | ID EQUAL Expr
-   41     | ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
-   42     | Expr PLUS Expr
-   43     | Expr MINUS Expr
-   44     | Expr MULTIPLY Expr
-   45     | Expr DIVIDE Expr
-   46     | Expr EQUAL_TO Expr
-   47     | Expr NOT_EQUAL_TO Expr
-   48     | Expr LESS_THAN Expr
-   49     | Expr LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr GREATER_THAN Expr
-   51     | Expr GREATER_THAN_OR_EQUAL_TO Expr
+   39     | UNARYNOT Expr
+   40     | ID LEFTBRACKET Expr RIGHTBRACKET
+   41     | ID EQUAL Expr
+   42     | ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
+   43     | Expr PLUS Expr
+   44     | Expr MINUS Expr
+   45     | Expr MULTIPLY Expr
+   46     | Expr DIVIDE Expr
+   47     | Expr EQUAL_TO Expr
+   48     | Expr NOT_EQUAL_TO Expr
+   49     | Expr LESS_THAN Expr
+   50     | Expr LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr GREATER_THAN Expr
+   52     | Expr GREATER_THAN_OR_EQUAL_TO Expr
 
 
 Terminals, with rules where they appear
@@ -140,22 +142,22 @@ Terminals, with rules where they appear
     BOOL <string> (262) 15
     STRING <string> (263) 17
     VOID <string> (264) 18
-    ID <string> (265) 20 21 22 23 26 30 32 33 34 37 39 40 41
+    ID <string> (265) 20 21 22 23 26 30 32 33 34 37 40 41 42
     RETURN <string> (266) 25
     SEMICOLON <character> (267) 9 10 11 12 32 33 34
     COMMA <character> (268) 20 22
-    EQUAL <character> (269) 33 40 41
-    PLUS <character> (270) 42
-    MINUS <character> (271) 36 43
-    MULTIPLY <character> (272) 44
-    DIVIDE <character> (273) 45
+    EQUAL <character> (269) 33 41 42
+    PLUS <character> (270) 43
+    MINUS <character> (271) 36 44
+    MULTIPLY <character> (272) 45
+    DIVIDE <character> (273) 46
     LEFTPARENTHESIS <character> (274) 26 30 38
     RIGHTPARENTHESIS <character> (275) 26 30 38
     LEFTCURLYBRACKET <character> (276) 31
     RIGHCURLYBRACKET <character> (277) 31
-    LEFTBRACKET <character> (278) 34 39 41
-    RIGHTBRACKET <character> (279) 34 39 41
-    UNARYNOT <character> (280)
+    LEFTBRACKET <character> (278) 34 40 42
+    RIGHTBRACKET <character> (279) 34 40 42
+    UNARYNOT <character> (280) 39
     LOGICALAND <string> (281)
     LOGICALOR <string> (282)
     NUMBER <string> (283) 35 36
@@ -163,12 +165,12 @@ Terminals, with rules where they appear
     FUN <string> (285) 30
     IF <string> (286)
     WHILE <string> (287)
-    LESS_THAN <string> (288) 48
-    GREATER_THAN <string> (289) 50
-    LESS_THAN_OR_EQUAL_TO <string> (290) 49
-    GREATER_THAN_OR_EQUAL_TO <string> (291) 51
-    EQUAL_TO <string> (292) 46
-    NOT_EQUAL_TO <string> (293) 47
+    LESS_THAN <string> (288) 49
+    GREATER_THAN <string> (289) 51
+    LESS_THAN_OR_EQUAL_TO <string> (290) 50
+    GREATER_THAN_OR_EQUAL_TO <string> (291) 52
+    EQUAL_TO <string> (292) 47
+    NOT_EQUAL_TO <string> (293) 48
 
 
 Nonterminals, with rules where they appear
@@ -221,8 +223,8 @@ Nonterminals, with rules where they appear
         on left: 32 33 34
         on right: 5
     Expr <ast> (55)
-        on left: 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51
-        on right: 10 25 33 34 38 39 40 41 42 43 44 45 46 47 48 49 50 51
+        on left: 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52
+        on right: 10 25 33 34 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52
 
 
 State 0
@@ -240,8 +242,9 @@ State 0
     SEMICOLON        shift, and go to state 9
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-    FUN              shift, and go to state 13
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+    FUN              shift, and go to state 14
 
     INT              [reduce using rule 7 (StmtList)]
     FLOAT            [reduce using rule 7 (StmtList)]
@@ -255,21 +258,22 @@ State 0
     SEMICOLON        [reduce using rule 27 (FunCall)]
     MINUS            [reduce using rule 7 (StmtList)]
     LEFTPARENTHESIS  [reduce using rule 7 (StmtList)]
+    UNARYNOT         [reduce using rule 7 (StmtList)]
     NUMBER           [reduce using rule 7 (StmtList)]
     FUN              [reduce using rule 7 (StmtList)]
     $default         reduce using rule 7 (StmtList)
 
-    Program     go to state 14
-    DeclList    go to state 15
-    Decl        go to state 16
-    StmtList    go to state 17
-    Stmt        go to state 18
-    Type        go to state 19
-    ReturnStmt  go to state 20
-    FunCall     go to state 21
-    FunDecl     go to state 22
-    VarDecl     go to state 23
-    Expr        go to state 24
+    Program     go to state 15
+    DeclList    go to state 16
+    Decl        go to state 17
+    StmtList    go to state 18
+    Stmt        go to state 19
+    Type        go to state 20
+    ReturnStmt  go to state 21
+    FunCall     go to state 22
+    FunDecl     go to state 23
+    VarDecl     go to state 24
+    Expr        go to state 25
 
 
 State 1
@@ -318,13 +322,13 @@ State 7
 
    26 FunCall: ID • LEFTPARENTHESIS Param RIGHTPARENTHESIS
    37 Expr: ID •
-   39     | ID • LEFTBRACKET Expr RIGHTBRACKET
-   40     | ID • EQUAL Expr
-   41     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
+   40     | ID • LEFTBRACKET Expr RIGHTBRACKET
+   41     | ID • EQUAL Expr
+   42     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
 
-    EQUAL            shift, and go to state 25
-    LEFTPARENTHESIS  shift, and go to state 26
-    LEFTBRACKET      shift, and go to state 27
+    EQUAL            shift, and go to state 26
+    LEFTPARENTHESIS  shift, and go to state 27
+    LEFTBRACKET      shift, and go to state 28
 
     $default  reduce using rule 37 (Expr)
 
@@ -333,12 +337,13 @@ State 8
 
    25 ReturnStmt: RETURN • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
-    Expr  go to state 29
+    Expr  go to state 30
 
 
 State 9
@@ -352,29 +357,43 @@ State 10
 
    36 Expr: MINUS • NUMBER
 
-    NUMBER  shift, and go to state 30
+    NUMBER  shift, and go to state 31
 
 
 State 11
 
    38 Expr: LEFTPARENTHESIS • Expr RIGHTPARENTHESIS
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
-    Expr  go to state 31
+    Expr  go to state 32
 
 
 State 12
+
+   39 Expr: UNARYNOT • Expr
+
+    ID               shift, and go to state 29
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+
+    Expr  go to state 33
+
+
+State 13
 
    35 Expr: NUMBER •
 
     $default  reduce using rule 35 (Expr)
 
 
-State 13
+State 14
 
    30 FunDecl: FUN • Type ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
 
@@ -385,24 +404,24 @@ State 13
     STRING  shift, and go to state 5
     VOID    shift, and go to state 6
 
-    Type  go to state 32
-
-
-State 14
-
-    0 $accept: Program • $end
-
-    $end  shift, and go to state 33
+    Type  go to state 34
 
 
 State 15
+
+    0 $accept: Program • $end
+
+    $end  shift, and go to state 35
+
+
+State 16
 
     1 Program: DeclList •
 
     $default  reduce using rule 1 (Program)
 
 
-State 16
+State 17
 
     2 DeclList: Decl • DeclList
     3         | Decl •
@@ -418,8 +437,9 @@ State 16
     SEMICOLON        shift, and go to state 9
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-    FUN              shift, and go to state 13
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+    FUN              shift, and go to state 14
 
     $end              reduce using rule 3 (DeclList)
     $end              [reduce using rule 7 (StmtList)]
@@ -442,31 +462,33 @@ State 16
     LEFTPARENTHESIS   [reduce using rule 7 (StmtList)]
     RIGHCURLYBRACKET  reduce using rule 3 (DeclList)
     RIGHCURLYBRACKET  [reduce using rule 7 (StmtList)]
+    UNARYNOT          [reduce using rule 3 (DeclList)]
+    UNARYNOT          [reduce using rule 7 (StmtList)]
     NUMBER            [reduce using rule 3 (DeclList)]
     NUMBER            [reduce using rule 7 (StmtList)]
     FUN               [reduce using rule 7 (StmtList)]
     $default          reduce using rule 3 (DeclList)
 
-    DeclList    go to state 34
-    Decl        go to state 16
-    StmtList    go to state 17
-    Stmt        go to state 18
-    Type        go to state 19
-    ReturnStmt  go to state 20
-    FunCall     go to state 21
-    FunDecl     go to state 22
-    VarDecl     go to state 23
-    Expr        go to state 24
+    DeclList    go to state 36
+    Decl        go to state 17
+    StmtList    go to state 18
+    Stmt        go to state 19
+    Type        go to state 20
+    ReturnStmt  go to state 21
+    FunCall     go to state 22
+    FunDecl     go to state 23
+    VarDecl     go to state 24
+    Expr        go to state 25
 
 
-State 17
+State 18
 
     6 Decl: StmtList •
 
     $default  reduce using rule 6 (Decl)
 
 
-State 18
+State 19
 
     8 StmtList: Stmt • StmtList
 
@@ -475,7 +497,8 @@ State 18
     SEMICOLON        shift, and go to state 9
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     ID               [reduce using rule 7 (StmtList)]
     RETURN           [reduce using rule 7 (StmtList)]
@@ -483,93 +506,95 @@ State 18
     SEMICOLON        [reduce using rule 27 (FunCall)]
     MINUS            [reduce using rule 7 (StmtList)]
     LEFTPARENTHESIS  [reduce using rule 7 (StmtList)]
+    UNARYNOT         [reduce using rule 7 (StmtList)]
     NUMBER           [reduce using rule 7 (StmtList)]
     $default         reduce using rule 7 (StmtList)
 
-    StmtList    go to state 35
-    Stmt        go to state 18
-    ReturnStmt  go to state 20
-    FunCall     go to state 21
-    Expr        go to state 24
+    StmtList    go to state 37
+    Stmt        go to state 19
+    ReturnStmt  go to state 21
+    FunCall     go to state 22
+    Expr        go to state 25
 
 
-State 19
+State 20
 
    32 VarDecl: Type • ID SEMICOLON
    33        | Type • ID EQUAL Expr SEMICOLON
    34        | Type • ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
 
-    ID  shift, and go to state 36
-
-
-State 20
-
-   11 Stmt: ReturnStmt • SEMICOLON
-
-    SEMICOLON  shift, and go to state 37
+    ID  shift, and go to state 38
 
 
 State 21
 
-   12 Stmt: FunCall • SEMICOLON
+   11 Stmt: ReturnStmt • SEMICOLON
 
-    SEMICOLON  shift, and go to state 38
+    SEMICOLON  shift, and go to state 39
 
 
 State 22
+
+   12 Stmt: FunCall • SEMICOLON
+
+    SEMICOLON  shift, and go to state 40
+
+
+State 23
 
     4 Decl: FunDecl •
 
     $default  reduce using rule 4 (Decl)
 
 
-State 23
+State 24
 
     5 Decl: VarDecl •
 
     $default  reduce using rule 5 (Decl)
 
 
-State 24
-
-   10 Stmt: Expr • SEMICOLON
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-
-    SEMICOLON                 shift, and go to state 39
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
-
-
 State 25
 
-   40 Expr: ID EQUAL • Expr
+   10 Stmt: Expr • SEMICOLON
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    ID               shift, and go to state 28
-    MINUS            shift, and go to state 10
-    LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-
-    Expr  go to state 50
+    SEMICOLON                 shift, and go to state 41
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
 
 State 26
+
+   41 Expr: ID EQUAL • Expr
+
+    ID               shift, and go to state 29
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+
+    Expr  go to state 52
+
+
+State 27
 
    26 FunCall: ID LEFTPARENTHESIS • Param RIGHTPARENTHESIS
 
@@ -582,460 +607,471 @@ State 26
 
     $default  reduce using rule 24 (Param)
 
-    Type   go to state 51
-    Param  go to state 52
-
-
-State 27
-
-   39 Expr: ID LEFTBRACKET • Expr RIGHTBRACKET
-   41     | ID LEFTBRACKET • Expr RIGHTBRACKET EQUAL Expr
-
-    ID               shift, and go to state 28
-    MINUS            shift, and go to state 10
-    LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-
-    Expr  go to state 53
+    Type   go to state 53
+    Param  go to state 54
 
 
 State 28
 
-   37 Expr: ID •
-   39     | ID • LEFTBRACKET Expr RIGHTBRACKET
-   40     | ID • EQUAL Expr
-   41     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
+   40 Expr: ID LEFTBRACKET • Expr RIGHTBRACKET
+   42     | ID LEFTBRACKET • Expr RIGHTBRACKET EQUAL Expr
 
-    EQUAL        shift, and go to state 25
-    LEFTBRACKET  shift, and go to state 27
+    ID               shift, and go to state 29
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
-    $default  reduce using rule 37 (Expr)
+    Expr  go to state 55
 
 
 State 29
 
-   25 ReturnStmt: RETURN Expr •
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   37 Expr: ID •
+   40     | ID • LEFTBRACKET Expr RIGHTBRACKET
+   41     | ID • EQUAL Expr
+   42     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    EQUAL        shift, and go to state 26
+    LEFTBRACKET  shift, and go to state 28
+
+    $default  reduce using rule 37 (Expr)
+
+
+State 30
+
+   25 ReturnStmt: RETURN Expr •
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     $default  reduce using rule 25 (ReturnStmt)
 
 
-State 30
+State 31
 
    36 Expr: MINUS NUMBER •
 
     $default  reduce using rule 36 (Expr)
 
 
-State 31
-
-   38 Expr: LEFTPARENTHESIS Expr • RIGHTPARENTHESIS
-   42     | Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    RIGHTPARENTHESIS          shift, and go to state 54
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
-
-
 State 32
 
-   30 FunDecl: FUN Type • ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
+   38 Expr: LEFTPARENTHESIS Expr • RIGHTPARENTHESIS
+   43     | Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    ID  shift, and go to state 55
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    RIGHTPARENTHESIS          shift, and go to state 56
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
 
 State 33
+
+   39 Expr: UNARYNOT Expr •
+   43     | Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+    LESS_THAN                 [reduce using rule 39 (Expr)]
+    GREATER_THAN              [reduce using rule 39 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 39 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 39 (Expr)]
+    EQUAL_TO                  [reduce using rule 39 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 39 (Expr)]
+    $default                  reduce using rule 39 (Expr)
+
+
+State 34
+
+   30 FunDecl: FUN Type • ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
+
+    ID  shift, and go to state 57
+
+
+State 35
 
     0 $accept: Program $end •
 
     $default  accept
 
 
-State 34
+State 36
 
     2 DeclList: Decl DeclList •
 
     $default  reduce using rule 2 (DeclList)
 
 
-State 35
+State 37
 
     8 StmtList: Stmt StmtList •
 
     $default  reduce using rule 8 (StmtList)
 
 
-State 36
+State 38
 
    32 VarDecl: Type ID • SEMICOLON
    33        | Type ID • EQUAL Expr SEMICOLON
    34        | Type ID • LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
 
-    SEMICOLON    shift, and go to state 56
-    EQUAL        shift, and go to state 57
-    LEFTBRACKET  shift, and go to state 58
+    SEMICOLON    shift, and go to state 58
+    EQUAL        shift, and go to state 59
+    LEFTBRACKET  shift, and go to state 60
 
 
-State 37
+State 39
 
    11 Stmt: ReturnStmt SEMICOLON •
 
     $default  reduce using rule 11 (Stmt)
 
 
-State 38
+State 40
 
    12 Stmt: FunCall SEMICOLON •
 
     $default  reduce using rule 12 (Stmt)
 
 
-State 39
+State 41
 
    10 Stmt: Expr SEMICOLON •
 
     $default  reduce using rule 10 (Stmt)
 
 
-State 40
-
-   42 Expr: Expr PLUS • Expr
-
-    ID               shift, and go to state 28
-    MINUS            shift, and go to state 10
-    LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-
-    Expr  go to state 59
-
-
-State 41
-
-   43 Expr: Expr MINUS • Expr
-
-    ID               shift, and go to state 28
-    MINUS            shift, and go to state 10
-    LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-
-    Expr  go to state 60
-
-
 State 42
 
-   44 Expr: Expr MULTIPLY • Expr
+   43 Expr: Expr PLUS • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 61
 
 
 State 43
 
-   45 Expr: Expr DIVIDE • Expr
+   44 Expr: Expr MINUS • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 62
 
 
 State 44
 
-   48 Expr: Expr LESS_THAN • Expr
+   45 Expr: Expr MULTIPLY • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 63
 
 
 State 45
 
-   50 Expr: Expr GREATER_THAN • Expr
+   46 Expr: Expr DIVIDE • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 64
 
 
 State 46
 
-   49 Expr: Expr LESS_THAN_OR_EQUAL_TO • Expr
+   49 Expr: Expr LESS_THAN • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 65
 
 
 State 47
 
-   51 Expr: Expr GREATER_THAN_OR_EQUAL_TO • Expr
+   51 Expr: Expr GREATER_THAN • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 66
 
 
 State 48
 
-   46 Expr: Expr EQUAL_TO • Expr
+   50 Expr: Expr LESS_THAN_OR_EQUAL_TO • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 67
 
 
 State 49
 
-   47 Expr: Expr NOT_EQUAL_TO • Expr
+   52 Expr: Expr GREATER_THAN_OR_EQUAL_TO • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     Expr  go to state 68
 
 
 State 50
 
-   40 Expr: ID EQUAL Expr •
-   42     | Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   47 Expr: Expr EQUAL_TO • Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    ID               shift, and go to state 29
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
-    PLUS                      [reduce using rule 40 (Expr)]
-    MINUS                     [reduce using rule 40 (Expr)]
-    MULTIPLY                  [reduce using rule 40 (Expr)]
-    DIVIDE                    [reduce using rule 40 (Expr)]
-    LESS_THAN                 [reduce using rule 40 (Expr)]
-    GREATER_THAN              [reduce using rule 40 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 40 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 40 (Expr)]
-    EQUAL_TO                  [reduce using rule 40 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 40 (Expr)]
-    $default                  reduce using rule 40 (Expr)
+    Expr  go to state 69
 
 
 State 51
 
-   22 Param: Type • ID COMMA Param
-   23      | Type • ID
+   48 Expr: Expr NOT_EQUAL_TO • Expr
 
-    ID  shift, and go to state 69
+    ID               shift, and go to state 29
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+
+    Expr  go to state 70
 
 
 State 52
 
-   26 FunCall: ID LEFTPARENTHESIS Param • RIGHTPARENTHESIS
+   41 Expr: ID EQUAL Expr •
+   43     | Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    RIGHTPARENTHESIS  shift, and go to state 70
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+    PLUS                      [reduce using rule 41 (Expr)]
+    MINUS                     [reduce using rule 41 (Expr)]
+    MULTIPLY                  [reduce using rule 41 (Expr)]
+    DIVIDE                    [reduce using rule 41 (Expr)]
+    LESS_THAN                 [reduce using rule 41 (Expr)]
+    GREATER_THAN              [reduce using rule 41 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 41 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 41 (Expr)]
+    EQUAL_TO                  [reduce using rule 41 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 41 (Expr)]
+    $default                  reduce using rule 41 (Expr)
 
 
 State 53
 
-   39 Expr: ID LEFTBRACKET Expr • RIGHTBRACKET
-   41     | ID LEFTBRACKET Expr • RIGHTBRACKET EQUAL Expr
-   42     | Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   22 Param: Type • ID COMMA Param
+   23      | Type • ID
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    RIGHTBRACKET              shift, and go to state 71
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    ID  shift, and go to state 71
 
 
 State 54
+
+   26 FunCall: ID LEFTPARENTHESIS Param • RIGHTPARENTHESIS
+
+    RIGHTPARENTHESIS  shift, and go to state 72
+
+
+State 55
+
+   40 Expr: ID LEFTBRACKET Expr • RIGHTBRACKET
+   42     | ID LEFTBRACKET Expr • RIGHTBRACKET EQUAL Expr
+   43     | Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    RIGHTBRACKET              shift, and go to state 73
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+
+State 56
 
    38 Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS •
 
     $default  reduce using rule 38 (Expr)
 
 
-State 55
+State 57
 
    30 FunDecl: FUN Type ID • $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
 
     $default  reduce using rule 28 ($@1)
 
-    $@1  go to state 72
+    $@1  go to state 74
 
 
-State 56
+State 58
 
    32 VarDecl: Type ID SEMICOLON •
 
     $default  reduce using rule 32 (VarDecl)
 
 
-State 57
+State 59
 
    33 VarDecl: Type ID EQUAL • Expr SEMICOLON
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
-    Expr  go to state 73
-
-
-State 58
-
-   34 VarDecl: Type ID LEFTBRACKET • Expr RIGHTBRACKET SEMICOLON
-
-    ID               shift, and go to state 28
-    MINUS            shift, and go to state 10
-    LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-
-    Expr  go to state 74
-
-
-State 59
-
-   42 Expr: Expr • PLUS Expr
-   42     | Expr PLUS Expr •
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
-
-    LESS_THAN                 [reduce using rule 42 (Expr)]
-    GREATER_THAN              [reduce using rule 42 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 42 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 42 (Expr)]
-    EQUAL_TO                  [reduce using rule 42 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 42 (Expr)]
-    $default                  reduce using rule 42 (Expr)
+    Expr  go to state 75
 
 
 State 60
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   43     | Expr MINUS Expr •
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   34 VarDecl: Type ID LEFTBRACKET • Expr RIGHTBRACKET SEMICOLON
 
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    ID               shift, and go to state 29
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+
+    Expr  go to state 76
+
+
+State 61
+
+   43 Expr: Expr • PLUS Expr
+   43     | Expr PLUS Expr •
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     LESS_THAN                 [reduce using rule 43 (Expr)]
     GREATER_THAN              [reduce using rule 43 (Expr)]
@@ -1046,26 +1082,28 @@ State 60
     $default                  reduce using rule 43 (Expr)
 
 
-State 61
+State 62
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   44     | Expr MULTIPLY Expr •
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   44     | Expr MINUS Expr •
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     LESS_THAN                 [reduce using rule 44 (Expr)]
     GREATER_THAN              [reduce using rule 44 (Expr)]
@@ -1076,26 +1114,26 @@ State 61
     $default                  reduce using rule 44 (Expr)
 
 
-State 62
+State 63
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   45     | Expr DIVIDE Expr •
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   45     | Expr MULTIPLY Expr •
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     LESS_THAN                 [reduce using rule 45 (Expr)]
     GREATER_THAN              [reduce using rule 45 (Expr)]
@@ -1106,106 +1144,60 @@ State 62
     $default                  reduce using rule 45 (Expr)
 
 
-State 63
-
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   48     | Expr LESS_THAN Expr •
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
-
-    PLUS                      [reduce using rule 48 (Expr)]
-    MINUS                     [reduce using rule 48 (Expr)]
-    MULTIPLY                  [reduce using rule 48 (Expr)]
-    DIVIDE                    [reduce using rule 48 (Expr)]
-    LESS_THAN                 [reduce using rule 48 (Expr)]
-    GREATER_THAN              [reduce using rule 48 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 48 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 48 (Expr)]
-    EQUAL_TO                  [reduce using rule 48 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 48 (Expr)]
-    $default                  reduce using rule 48 (Expr)
-
-
 State 64
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   50     | Expr GREATER_THAN Expr •
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   46     | Expr DIVIDE Expr •
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
-    PLUS                      [reduce using rule 50 (Expr)]
-    MINUS                     [reduce using rule 50 (Expr)]
-    MULTIPLY                  [reduce using rule 50 (Expr)]
-    DIVIDE                    [reduce using rule 50 (Expr)]
-    LESS_THAN                 [reduce using rule 50 (Expr)]
-    GREATER_THAN              [reduce using rule 50 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 50 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 50 (Expr)]
-    EQUAL_TO                  [reduce using rule 50 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 50 (Expr)]
-    $default                  reduce using rule 50 (Expr)
+    LESS_THAN                 [reduce using rule 46 (Expr)]
+    GREATER_THAN              [reduce using rule 46 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 46 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 46 (Expr)]
+    EQUAL_TO                  [reduce using rule 46 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 46 (Expr)]
+    $default                  reduce using rule 46 (Expr)
 
 
 State 65
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   49     | Expr LESS_THAN_OR_EQUAL_TO Expr •
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   49     | Expr LESS_THAN Expr •
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     PLUS                      [reduce using rule 49 (Expr)]
     MINUS                     [reduce using rule 49 (Expr)]
@@ -1222,28 +1214,28 @@ State 65
 
 State 66
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   51     | Expr GREATER_THAN_OR_EQUAL_TO Expr •
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   51     | Expr GREATER_THAN Expr •
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     PLUS                      [reduce using rule 51 (Expr)]
     MINUS                     [reduce using rule 51 (Expr)]
@@ -1260,66 +1252,104 @@ State 66
 
 State 67
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   46     | Expr EQUAL_TO Expr •
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   50     | Expr LESS_THAN_OR_EQUAL_TO Expr •
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
-    PLUS                      [reduce using rule 46 (Expr)]
-    MINUS                     [reduce using rule 46 (Expr)]
-    MULTIPLY                  [reduce using rule 46 (Expr)]
-    DIVIDE                    [reduce using rule 46 (Expr)]
-    LESS_THAN                 [reduce using rule 46 (Expr)]
-    GREATER_THAN              [reduce using rule 46 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 46 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 46 (Expr)]
-    EQUAL_TO                  [reduce using rule 46 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 46 (Expr)]
-    $default                  reduce using rule 46 (Expr)
+    PLUS                      [reduce using rule 50 (Expr)]
+    MINUS                     [reduce using rule 50 (Expr)]
+    MULTIPLY                  [reduce using rule 50 (Expr)]
+    DIVIDE                    [reduce using rule 50 (Expr)]
+    LESS_THAN                 [reduce using rule 50 (Expr)]
+    GREATER_THAN              [reduce using rule 50 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 50 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 50 (Expr)]
+    EQUAL_TO                  [reduce using rule 50 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 50 (Expr)]
+    $default                  reduce using rule 50 (Expr)
 
 
 State 68
 
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   47     | Expr NOT_EQUAL_TO Expr •
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   52     | Expr GREATER_THAN_OR_EQUAL_TO Expr •
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+    PLUS                      [reduce using rule 52 (Expr)]
+    MINUS                     [reduce using rule 52 (Expr)]
+    MULTIPLY                  [reduce using rule 52 (Expr)]
+    DIVIDE                    [reduce using rule 52 (Expr)]
+    LESS_THAN                 [reduce using rule 52 (Expr)]
+    GREATER_THAN              [reduce using rule 52 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 52 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 52 (Expr)]
+    EQUAL_TO                  [reduce using rule 52 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 52 (Expr)]
+    $default                  reduce using rule 52 (Expr)
+
+
+State 69
+
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   47     | Expr EQUAL_TO Expr •
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
     PLUS                      [reduce using rule 47 (Expr)]
     MINUS                     [reduce using rule 47 (Expr)]
@@ -1334,95 +1364,133 @@ State 68
     $default                  reduce using rule 47 (Expr)
 
 
-State 69
+State 70
+
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   48     | Expr NOT_EQUAL_TO Expr •
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+    PLUS                      [reduce using rule 48 (Expr)]
+    MINUS                     [reduce using rule 48 (Expr)]
+    MULTIPLY                  [reduce using rule 48 (Expr)]
+    DIVIDE                    [reduce using rule 48 (Expr)]
+    LESS_THAN                 [reduce using rule 48 (Expr)]
+    GREATER_THAN              [reduce using rule 48 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 48 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 48 (Expr)]
+    EQUAL_TO                  [reduce using rule 48 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 48 (Expr)]
+    $default                  reduce using rule 48 (Expr)
+
+
+State 71
 
    22 Param: Type ID • COMMA Param
    23      | Type ID •
 
-    COMMA  shift, and go to state 75
+    COMMA  shift, and go to state 77
 
     $default  reduce using rule 23 (Param)
 
 
-State 70
+State 72
 
    26 FunCall: ID LEFTPARENTHESIS Param RIGHTPARENTHESIS •
 
     $default  reduce using rule 26 (FunCall)
 
 
-State 71
-
-   39 Expr: ID LEFTBRACKET Expr RIGHTBRACKET •
-   41     | ID LEFTBRACKET Expr RIGHTBRACKET • EQUAL Expr
-
-    EQUAL  shift, and go to state 76
-
-    $default  reduce using rule 39 (Expr)
-
-
-State 72
-
-   30 FunDecl: FUN Type ID $@1 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
-
-    LEFTPARENTHESIS  shift, and go to state 77
-
-
 State 73
 
-   33 VarDecl: Type ID EQUAL Expr • SEMICOLON
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   40 Expr: ID LEFTBRACKET Expr RIGHTBRACKET •
+   42     | ID LEFTBRACKET Expr RIGHTBRACKET • EQUAL Expr
 
-    SEMICOLON                 shift, and go to state 78
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    EQUAL  shift, and go to state 78
+
+    $default  reduce using rule 40 (Expr)
 
 
 State 74
 
-   34 VarDecl: Type ID LEFTBRACKET Expr • RIGHTBRACKET SEMICOLON
-   42 Expr: Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   30 FunDecl: FUN Type ID $@1 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    RIGHTBRACKET              shift, and go to state 79
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    LEFTPARENTHESIS  shift, and go to state 79
 
 
 State 75
+
+   33 VarDecl: Type ID EQUAL Expr • SEMICOLON
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    SEMICOLON                 shift, and go to state 80
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+
+State 76
+
+   34 VarDecl: Type ID LEFTBRACKET Expr • RIGHTBRACKET SEMICOLON
+   43 Expr: Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    RIGHTBRACKET              shift, and go to state 81
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
+
+
+State 77
 
    22 Param: Type ID COMMA • Param
 
@@ -1435,23 +1503,24 @@ State 75
 
     $default  reduce using rule 24 (Param)
 
-    Type   go to state 51
-    Param  go to state 80
+    Type   go to state 53
+    Param  go to state 82
 
 
-State 76
+State 78
 
-   41 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL • Expr
+   42 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL • Expr
 
-    ID               shift, and go to state 28
+    ID               shift, and go to state 29
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
-    Expr  go to state 81
+    Expr  go to state 83
 
 
-State 77
+State 79
 
    30 FunDecl: FUN Type ID $@1 LEFTPARENTHESIS • ParamList RIGHTPARENTHESIS $@2 Block
 
@@ -1464,111 +1533,111 @@ State 77
 
     $default  reduce using rule 19 (ParamList)
 
-    Type       go to state 82
-    ParamList  go to state 83
+    Type       go to state 84
+    ParamList  go to state 85
 
 
-State 78
+State 80
 
    33 VarDecl: Type ID EQUAL Expr SEMICOLON •
 
     $default  reduce using rule 33 (VarDecl)
 
 
-State 79
+State 81
 
    34 VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET • SEMICOLON
 
-    SEMICOLON  shift, and go to state 84
+    SEMICOLON  shift, and go to state 86
 
 
-State 80
+State 82
 
    22 Param: Type ID COMMA Param •
 
     $default  reduce using rule 22 (Param)
 
 
-State 81
+State 83
 
-   41 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr •
-   42     | Expr • PLUS Expr
-   43     | Expr • MINUS Expr
-   44     | Expr • MULTIPLY Expr
-   45     | Expr • DIVIDE Expr
-   46     | Expr • EQUAL_TO Expr
-   47     | Expr • NOT_EQUAL_TO Expr
-   48     | Expr • LESS_THAN Expr
-   49     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   50     | Expr • GREATER_THAN Expr
-   51     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   42 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr •
+   43     | Expr • PLUS Expr
+   44     | Expr • MINUS Expr
+   45     | Expr • MULTIPLY Expr
+   46     | Expr • DIVIDE Expr
+   47     | Expr • EQUAL_TO Expr
+   48     | Expr • NOT_EQUAL_TO Expr
+   49     | Expr • LESS_THAN Expr
+   50     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   51     | Expr • GREATER_THAN Expr
+   52     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
 
-    PLUS                      shift, and go to state 40
-    MINUS                     shift, and go to state 41
-    MULTIPLY                  shift, and go to state 42
-    DIVIDE                    shift, and go to state 43
-    LESS_THAN                 shift, and go to state 44
-    GREATER_THAN              shift, and go to state 45
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 46
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 47
-    EQUAL_TO                  shift, and go to state 48
-    NOT_EQUAL_TO              shift, and go to state 49
+    PLUS                      shift, and go to state 42
+    MINUS                     shift, and go to state 43
+    MULTIPLY                  shift, and go to state 44
+    DIVIDE                    shift, and go to state 45
+    LESS_THAN                 shift, and go to state 46
+    GREATER_THAN              shift, and go to state 47
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 48
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 49
+    EQUAL_TO                  shift, and go to state 50
+    NOT_EQUAL_TO              shift, and go to state 51
 
-    PLUS                      [reduce using rule 41 (Expr)]
-    MINUS                     [reduce using rule 41 (Expr)]
-    MULTIPLY                  [reduce using rule 41 (Expr)]
-    DIVIDE                    [reduce using rule 41 (Expr)]
-    LESS_THAN                 [reduce using rule 41 (Expr)]
-    GREATER_THAN              [reduce using rule 41 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 41 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 41 (Expr)]
-    EQUAL_TO                  [reduce using rule 41 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 41 (Expr)]
-    $default                  reduce using rule 41 (Expr)
+    PLUS                      [reduce using rule 42 (Expr)]
+    MINUS                     [reduce using rule 42 (Expr)]
+    MULTIPLY                  [reduce using rule 42 (Expr)]
+    DIVIDE                    [reduce using rule 42 (Expr)]
+    LESS_THAN                 [reduce using rule 42 (Expr)]
+    GREATER_THAN              [reduce using rule 42 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 42 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 42 (Expr)]
+    EQUAL_TO                  [reduce using rule 42 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 42 (Expr)]
+    $default                  reduce using rule 42 (Expr)
 
 
-State 82
+State 84
 
    20 ParamList: Type • ID COMMA ParamList
    21          | Type • ID
 
-    ID  shift, and go to state 85
+    ID  shift, and go to state 87
 
 
-State 83
+State 85
 
    30 FunDecl: FUN Type ID $@1 LEFTPARENTHESIS ParamList • RIGHTPARENTHESIS $@2 Block
 
-    RIGHTPARENTHESIS  shift, and go to state 86
+    RIGHTPARENTHESIS  shift, and go to state 88
 
 
-State 84
+State 86
 
    34 VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON •
 
     $default  reduce using rule 34 (VarDecl)
 
 
-State 85
+State 87
 
    20 ParamList: Type ID • COMMA ParamList
    21          | Type ID •
 
-    COMMA  shift, and go to state 87
+    COMMA  shift, and go to state 89
 
     $default  reduce using rule 21 (ParamList)
 
 
-State 86
+State 88
 
    30 FunDecl: FUN Type ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS • $@2 Block
 
     $default  reduce using rule 29 ($@2)
 
-    $@2  go to state 88
+    $@2  go to state 90
 
 
-State 87
+State 89
 
    20 ParamList: Type ID COMMA • ParamList
 
@@ -1581,27 +1650,27 @@ State 87
 
     $default  reduce using rule 19 (ParamList)
 
-    Type       go to state 82
-    ParamList  go to state 89
+    Type       go to state 84
+    ParamList  go to state 91
 
 
-State 88
+State 90
 
    30 FunDecl: FUN Type ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 • Block
 
-    LEFTCURLYBRACKET  shift, and go to state 90
+    LEFTCURLYBRACKET  shift, and go to state 92
 
-    Block  go to state 91
+    Block  go to state 93
 
 
-State 89
+State 91
 
    20 ParamList: Type ID COMMA ParamList •
 
     $default  reduce using rule 20 (ParamList)
 
 
-State 90
+State 92
 
    31 Block: LEFTCURLYBRACKET • DeclList StmtList RIGHCURLYBRACKET
 
@@ -1616,8 +1685,9 @@ State 90
     SEMICOLON        shift, and go to state 9
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
-    FUN              shift, and go to state 13
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+    FUN              shift, and go to state 14
 
     INT              [reduce using rule 7 (StmtList)]
     FLOAT            [reduce using rule 7 (StmtList)]
@@ -1631,30 +1701,31 @@ State 90
     SEMICOLON        [reduce using rule 27 (FunCall)]
     MINUS            [reduce using rule 7 (StmtList)]
     LEFTPARENTHESIS  [reduce using rule 7 (StmtList)]
+    UNARYNOT         [reduce using rule 7 (StmtList)]
     NUMBER           [reduce using rule 7 (StmtList)]
     FUN              [reduce using rule 7 (StmtList)]
     $default         reduce using rule 7 (StmtList)
 
-    DeclList    go to state 92
-    Decl        go to state 16
-    StmtList    go to state 17
-    Stmt        go to state 18
-    Type        go to state 19
-    ReturnStmt  go to state 20
-    FunCall     go to state 21
-    FunDecl     go to state 22
-    VarDecl     go to state 23
-    Expr        go to state 24
+    DeclList    go to state 94
+    Decl        go to state 17
+    StmtList    go to state 18
+    Stmt        go to state 19
+    Type        go to state 20
+    ReturnStmt  go to state 21
+    FunCall     go to state 22
+    FunDecl     go to state 23
+    VarDecl     go to state 24
+    Expr        go to state 25
 
 
-State 91
+State 93
 
    30 FunDecl: FUN Type ID $@1 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@2 Block •
 
     $default  reduce using rule 30 (FunDecl)
 
 
-State 92
+State 94
 
    31 Block: LEFTCURLYBRACKET DeclList • StmtList RIGHCURLYBRACKET
 
@@ -1663,26 +1734,27 @@ State 92
     SEMICOLON        shift, and go to state 9
     MINUS            shift, and go to state 10
     LEFTPARENTHESIS  shift, and go to state 11
-    NUMBER           shift, and go to state 12
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
 
     SEMICOLON  [reduce using rule 27 (FunCall)]
     $default   reduce using rule 7 (StmtList)
 
-    StmtList    go to state 93
-    Stmt        go to state 18
-    ReturnStmt  go to state 20
-    FunCall     go to state 21
-    Expr        go to state 24
+    StmtList    go to state 95
+    Stmt        go to state 19
+    ReturnStmt  go to state 21
+    FunCall     go to state 22
+    Expr        go to state 25
 
 
-State 93
+State 95
 
    31 Block: LEFTCURLYBRACKET DeclList StmtList • RIGHCURLYBRACKET
 
-    RIGHCURLYBRACKET  shift, and go to state 94
+    RIGHCURLYBRACKET  shift, and go to state 96
 
 
-State 94
+State 96
 
    31 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET •
 

@@ -312,6 +312,43 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 	| MINUS NUMBER       { $$ = $2; sprintf($$->value, "-%s", $2); sprintf($$->nodeType, "%s", "number"); }
 	| ID                { $$ = $1; sprintf($$->value, "%s", $1); }
 	| LEFTPARENTHESIS Expr RIGHTPARENTHESIS %prec UNARYNOT   {$$ = $2; sprintf($$->value, "%s", $2->value);}
+	| UNARYNOT Expr { $$ = $2;
+
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($2, currentScope);
+
+		// Check if Expr $1's nodeType is a number or a variable
+		if(strcmp($2->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $2->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($2->value, "%s", getValue(inSymTab1));
+		}
+
+		char stringVal[50];
+		// check if 0 or 1, if so, flip it
+		if(strcmp($2->value, "0") == 0)
+			sprintf(stringVal, "%s", "1");
+		else if(strcmp($2->value, "1") == 0)
+			sprintf(stringVal, "%s", "0");
+		else
+			printf("SEMANTIC ERROR: Unary not can only be applied to 0 or 1.\n This was a %s\n", $2->value);
+
+		// Generate AST for the addition
+		// $$ = AST_BinaryExpression("!", NULL, $2); 
+
+		// Perform the addition, and update the value of the expression
+		sprintf($$->value, "%s", stringVal);
+  
+	}
 	| ID LEFTBRACKET Expr RIGHTBRACKET 
 	{
 		int inSymTab = found($1, currentScope);
