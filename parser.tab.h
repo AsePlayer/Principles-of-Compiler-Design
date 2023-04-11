@@ -83,13 +83,14 @@ extern int yydebug;
     WRITE = 284,                   /* WRITE  */
     FUN = 285,                     /* FUN  */
     IF = 286,                      /* IF  */
-    WHILE = 287,                   /* WHILE  */
-    LESS_THAN = 288,               /* LESS_THAN  */
-    GREATER_THAN = 289,            /* GREATER_THAN  */
-    LESS_THAN_OR_EQUAL_TO = 290,   /* LESS_THAN_OR_EQUAL_TO  */
-    GREATER_THAN_OR_EQUAL_TO = 291, /* GREATER_THAN_OR_EQUAL_TO  */
-    EQUAL_TO = 292,                /* EQUAL_TO  */
-    NOT_EQUAL_TO = 293             /* NOT_EQUAL_TO  */
+    ELSE = 287,                    /* ELSE  */
+    WHILE = 288,                   /* WHILE  */
+    LESS_THAN = 289,               /* LESS_THAN  */
+    GREATER_THAN = 290,            /* GREATER_THAN  */
+    LESS_THAN_OR_EQUAL_TO = 291,   /* LESS_THAN_OR_EQUAL_TO  */
+    GREATER_THAN_OR_EQUAL_TO = 292, /* GREATER_THAN_OR_EQUAL_TO  */
+    EQUAL_TO = 293,                /* EQUAL_TO  */
+    NOT_EQUAL_TO = 294             /* NOT_EQUAL_TO  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -105,7 +106,7 @@ union YYSTYPE
 	char* string;
 	struct AST* ast;
 
-#line 109 "parser.tab.h"
+#line 110 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

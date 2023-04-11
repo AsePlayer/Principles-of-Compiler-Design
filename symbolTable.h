@@ -115,16 +115,19 @@ int found(char itemName[50], char scope[50]){
 const char* getVariableType(char itemName[50], char scope[50]){
 	//char *name = "int";
 	//return name;
-
+	printf("Looking for variable %s in scope %s.\n", itemName, scope);
 	for(int i=0; i<SYMTAB_SIZE; i++){
 		int str1 = strcmp(symTab.symTabItems[i].itemName, itemName); 
 		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
 		int str2 = strcmp(symTab.symTabItems[i].scope,scope); 
 		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
 		if( str1 == 0 && str2 == 0){
+			printf("Found variable %s in scope %s. The type is %s\n", itemName, scope, symTab.symTabItems[i].itemType);
 			return symTab.symTabItems[i].itemType; // found the ID in the table
+
 		}
 	}
+	printf("ERROR: Variable %s does not exist in scope %s.\n", itemName, scope);
 	return NULL;
 }
 

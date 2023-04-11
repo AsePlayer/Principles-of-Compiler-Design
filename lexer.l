@@ -86,6 +86,7 @@ ws          {delim}+
 "else" 	{words++; 
 		 chars += strlen(yytext);
 		 printf("%s : ELSE\n", yytext);
+		 return ELSE;
 		}
 
 "while"	{words++; 
