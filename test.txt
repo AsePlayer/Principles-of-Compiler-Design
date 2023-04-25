@@ -1,17 +1,13 @@
-int hey;
-hey = 3 / 5;
-float hi;
-hi = 3 / 5;
-float goat;
-goat = 3.5 / 1.25;
-bool boolin;
-boolin = (3 < 5 || 55 <= 3);
+int value = (20 > 5);
+int tuff;
+tuff = 5;
 
-int arr[2];
-arr[1] = 5;
-arr[2] = 5.0;
-while(2 == 2 && 1 == 2) {
-
+int rff;
+if (value <= 5) {
+    write(5);
+    writeln();
+    writeln();
+    write(9);
 }
 
-int peen = 5.0;
+ 

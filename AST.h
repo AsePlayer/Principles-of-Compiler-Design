@@ -8,6 +8,8 @@ struct AST{
 	char RHS[50];
 	char value[50];
 	char defaultVal[50];
+
+	char condition[50]; // for if statements
 	
 	struct AST * left;
 	struct AST * right;

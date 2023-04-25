@@ -81,16 +81,17 @@ extern int yydebug;
     LOGICALOR = 282,               /* LOGICALOR  */
     NUMBER = 283,                  /* NUMBER  */
     WRITE = 284,                   /* WRITE  */
-    FUN = 285,                     /* FUN  */
-    IF = 286,                      /* IF  */
-    ELSE = 287,                    /* ELSE  */
-    WHILE = 288,                   /* WHILE  */
-    LESS_THAN = 289,               /* LESS_THAN  */
-    GREATER_THAN = 290,            /* GREATER_THAN  */
-    LESS_THAN_OR_EQUAL_TO = 291,   /* LESS_THAN_OR_EQUAL_TO  */
-    GREATER_THAN_OR_EQUAL_TO = 292, /* GREATER_THAN_OR_EQUAL_TO  */
-    EQUAL_TO = 293,                /* EQUAL_TO  */
-    NOT_EQUAL_TO = 294             /* NOT_EQUAL_TO  */
+    WRITELN = 285,                 /* WRITELN  */
+    FUN = 286,                     /* FUN  */
+    IF = 287,                      /* IF  */
+    ELSE = 288,                    /* ELSE  */
+    WHILE = 289,                   /* WHILE  */
+    LESS_THAN = 290,               /* LESS_THAN  */
+    GREATER_THAN = 291,            /* GREATER_THAN  */
+    LESS_THAN_OR_EQUAL_TO = 292,   /* LESS_THAN_OR_EQUAL_TO  */
+    GREATER_THAN_OR_EQUAL_TO = 293, /* GREATER_THAN_OR_EQUAL_TO  */
+    EQUAL_TO = 294,                /* EQUAL_TO  */
+    NOT_EQUAL_TO = 295             /* NOT_EQUAL_TO  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -106,7 +107,7 @@ union YYSTYPE
 	char* string;
 	struct AST* ast;
 
-#line 110 "parser.tab.h"
+#line 111 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

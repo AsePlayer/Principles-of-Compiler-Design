@@ -1,3 +1,7 @@
+.data
+	value: .word 1
+	tuff: .word 0
+	rff: .word 0
 .text
 main:
 # -----------------------
@@ -17,3 +21,17 @@ li $v0,10    # call code for terminate
 syscall      # system call (terminate)
 .end main
 # -----------------
+ifTrue:
+li $a0,5
+li $v0,1
+syscall
+li $a0,10
+li $v0,11
+syscall
+li $a0,10
+li $v0,11
+syscall
+li $a0,9
+li $v0,1
+syscall
+jr $ra

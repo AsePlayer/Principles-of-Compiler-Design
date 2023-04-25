@@ -47,6 +47,12 @@ ws          {delim}+
 		 return INT;
 		}
 
+"string"	{words++; chars += strlen(yytext);
+		 printf("%s : TYPE\n", yytext);
+		 yylval.string = strdup(yytext);
+		 return STRING;
+		}
+
 "bool"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
 		 yylval.string = strdup(yytext);
@@ -75,6 +81,12 @@ ws          {delim}+
 		 chars += strlen(yytext);
 		 printf("%s : KEYWORD\n", yytext);
 		 return WRITE;
+		}
+
+"writeln" {words++; 
+		 chars += strlen(yytext);
+		 printf("%s : KEYWORD\n", yytext);
+		 return WRITELN;
 		}
 
 "if" 	{words++; 

@@ -15,8 +15,8 @@ extern FILE* yyin;
 
 FILE * IRcode;
 FILE * MIPScode;
+  
  
-
 void yyerror(const char* s);
 char currentScope[50] = "global"; // "global" or the name of the function
 int semanticCheckPassed = 1; // flags to record correctness of semantic checks
@@ -44,7 +44,7 @@ int semanticCheckPassed = 1; // flags to record correctness of semantic checks
 %token <string> LOGICALAND
 %token <string> LOGICALOR
 %token <string> NUMBER
-%token <string> WRITE
+%token <string> WRITE WRITELN
 %token <string> FUN
 %token <string> IF ELSE WHILE 
 %token <string> LESS_THAN GREATER_THAN LESS_THAN_OR_EQUAL_TO GREATER_THAN_OR_EQUAL_TO EQUAL_TO NOT_EQUAL_TO
@@ -151,8 +151,8 @@ FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS {
 | 
 ;
 
-IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block { 
-	printf("\n RECOGNIZED RULE: If statement %s\n", $3);
+IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS {
+printf("\n RECOGNIZED RULE: If statement %s\n", $3);
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($3->value, currentScope); 
 		// Check if Expr $3's nodeType is a number or a variable
@@ -191,11 +191,23 @@ IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block {
 		// Generate AST for the less than expression 
 
 		sprintf($3->value, "%s", stringVal);
-		$$ = AST_BinaryExpression("if", $5, $3);  
+
+
+		// (char id1[50], char* condition, char id2[50])
+		// emitIR($3->value, $1->value, $5->value);
+		emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS);
+
+		// print $3 left and right values
+		printf("left: %s\n", $3->left);
+		printf("right: %s\n", $3->right);
+} 
+Block {
+			$$ = AST_BinaryExpression("if", $6, $3);  
 		// print the AST
 		printf("\n--- Abstract Syntax Tree ---\n\n");
 		printAST($$,0);
-		
+		emitMIPSEndIfStatement();
+
 };
 
 IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block ELSE Block { 
@@ -254,12 +266,12 @@ WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block {
 		// Numbers don't exist in the symbol table. Skip this check.
 	}
 	// Variable is not in the symbol table
-	else if(inSymTab1 == -1) {
+	else if(inSymTab1 == -1) { 
 		// Variable is not in the symbol table
 		printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
 		semanticCheckPassed = 0;
 	}
-	// Variable is in the symbol table
+	// Variable is in the symbol table 
 	else if(inSymTab1 != -1) {
 		// Update the value according to the symbol table
 		sprintf($3->value, "%s", getValue(inSymTab1));
@@ -367,10 +379,12 @@ VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 									showSymTable();
 									
 								  // ---- SEMANTIC ACTIONS by PARSER ----
-								    $$ = AST_Type("Type",$1->nodeType, $1->value);
 									printf("-----------> %s\n", $$->LHS);
 
 									emitVariableDeclaration(currentScope, $1, $2, "0");
+
+									emitMIPSVariableDeclaration($2, $1, $1->value); 
+								    $$ = AST_Type("Type", $1->nodeType, $1->value);
 								}
 | Type ID EQUAL Expr SEMICOLON { printf("\n RECOGNIZED RULE: Variable declaration %s\n", $2);
 									// Symbol Table 
@@ -394,13 +408,16 @@ VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
 									}
 									else
 										printf("SEMANTIC ERROR: Var %s is already in the symbol table", $2);
-									showSymTable();
+									showSymTable(); 
 									
 								  // ---- SEMANTIC ACTIONS by PARSER ----
 								    $$ = AST_Type("Type",$1,$2);
 									printf("-----------> %s", $$->LHS);
 
 									emitVariableDeclaration(currentScope, $1, $2, $4->value);
+									// emitMIPSVariableDeclaration(char* id, char* type, char* value)
+									emitMIPSVariableDeclaration($2, $1, $4->value);
+
 								}
 | Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON { 
     // Symbol Table
@@ -547,7 +564,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		else if (inSymTab == -1) {
 			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
 			semanticCheckPassed = 0;
-		}
+		} 
 		else {
 			// print the Expr
 			printf( "Expr: %s", $3->value);
@@ -559,15 +576,17 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 			}
 			else if(!strcmp(getVariableType($1, currentScope), "float")) {
 				float trunc = atof($3->value);
-				sprintf($3->value, "%f", trunc);
+				sprintf($3->value, "%f", trunc); 
 			}
  
             updateItem($1, $3->value, currentScope);
-            $$ = AST_BinaryExpression("=", $1, $3->value);
+            $$ = AST_BinaryExpression("=", $1, $3->value); 
         }
 
 		emitAssignment(currentScope, $1, $3->value);
-	 
+		// emitMIPSVariableUpdate(char* id, char* value)
+		emitMIPSVariableUpdate($1, $3->value);
+	  
      }
 	 | ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr {
 		 // Update the value of the variable in the symbol table
@@ -604,12 +623,12 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 
 					$$ = AST_BinaryExpression("[]", $1, value); 
 				}
-		}
+		} 
 
 		emitAssignment(currentScope, $1, $3->value);
 		
 	 }
-     | Expr PLUS Expr   { 
+     | Expr PLUS Expr   {  
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($1, currentScope);
 		int inSymTab2 = found($3, currentScope);
@@ -645,7 +664,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 			sprintf($3->value, "%s", getValue(inSymTab2));
 		}
 		// Generate AST for the addition
-		$$ = AST_BinaryExpression("+", $1, $3); 
+		$$ = AST_BinaryExpression("+", $1->value, $3->value); 
 
 		// Perform the addition, and update the value of the expression
 		char stringVal[50];
@@ -694,7 +713,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// Perform the addition
 		sprintf(stringVal, "%d", atoi($1->value) - atoi($3->value));
 		// Generate AST for the multiplication
-		$$ = AST_BinaryExpression("-", $1, $3); 
+		$$ = AST_BinaryExpression("-", $1->value, $3->value); 
 		// Update the value of the expression
 		sprintf($$->value, "%s", stringVal);
 
@@ -746,7 +765,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// Perform the addition
 		sprintf(stringVal, "%d", atoi($1->value) * atoi($3->value));
 		// Generate AST for the multiplication
-		$$ = AST_BinaryExpression("*", $1, $3); 
+		$$ = AST_BinaryExpression("*", $1->value, $3->value); 
 		// Update the value of the expression
 		sprintf($$->value, "%s", stringVal);
 
@@ -807,7 +826,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 
 
 			// Generate AST for the addition
-			$$ = AST_BinaryExpression("/", $1, $3);  
+			$$ = AST_BinaryExpression("/", $1->value, $3->value);  
 			sprintf($$->value, "%s", stringVal);
 		}
 
@@ -862,8 +881,9 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3); 
+		$$ = AST_BinaryExpression("number", $1->value, $3->value); 
 		sprintf($$->value, "%s", stringVal);
+		sprintf($$->condition, "%s", "==");
 	 }
 	 | Expr NOT_EQUAL_TO Expr {
 		// Check if the variables are in the symbol table
@@ -913,8 +933,11 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3);
+		$$ = AST_BinaryExpression("number", $1->value, $3->value);
+		// $$->left->nodeType = "=="; do this for array not string
+		strcpy($$->left->nodeType, "!=");
 		sprintf($$->value, "%s", stringVal);
+		sprintf($$->condition, "%s", "!=");
 	 }
 	 | Expr LESS_THAN Expr {
 		// Check if the variables are in the symbol table
@@ -964,8 +987,9 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3);
+		$$ = AST_BinaryExpression("number", $1->value, $3->value);
 		sprintf($$->value, "%s", stringVal);
+		sprintf($$->condition, "%s", "<");
 	 }
 	 | Expr LESS_THAN_OR_EQUAL_TO Expr {
 		// Check if the variables are in the symbol table
@@ -1015,8 +1039,9 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3);
+		$$ = AST_BinaryExpression("number", $1->value, $3->value);
 		sprintf($$->value, "%s", stringVal); 
+		sprintf($$->condition, "%s", "<=");
 	 }
 	 | Expr GREATER_THAN Expr {
 		// Check if the variables are in the symbol table
@@ -1066,8 +1091,9 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression(">", $1, $3);
+		$$ = AST_BinaryExpression(">", $1->value, $3->value);
 		sprintf($$->value, "%s", stringVal);
+		sprintf($$->condition, "%s", ">");
 	 }
 	 | Expr GREATER_THAN_OR_EQUAL_TO Expr {
 		// Check if the variables are in the symbol table
@@ -1117,8 +1143,9 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		}
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3);
+		$$ = AST_BinaryExpression("number", $1->value, $3->value);
 		sprintf($$->value, "%s", stringVal);
+		sprintf($$->condition, "%s", ">=");
 	 }
 	 | Expr LOGICALAND Expr {
 		// Check if the variables are in the symbol table
@@ -1172,7 +1199,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 				printf("ATTEMPTED: %s && %s", $1->value, $3->value);
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3);
+		$$ = AST_BinaryExpression("number", $1->value, $3->value);
 		sprintf($$->value, "%s", stringVal);
 	 }
 	 | Expr LOGICALOR Expr {
@@ -1229,10 +1256,40 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		printf("ATTEMPTED: %s || %s", $1->value, $3->value);
 
 		// Generate AST for the less than expression
-		$$ = AST_BinaryExpression("number", $1, $3);
+		$$ = AST_BinaryExpression("number", $1->value, $3->value);
 		sprintf($$->value, "%s", stringVal);
 	 }	 
+	 |  WRITE Expr {
+		// Check if the variable is in the symbol table
+		int inSymTab = found($2, currentScope);
+		// Variable is not in the symbol table
+		if(inSymTab == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $2->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab != -1) {
+			// Update the value according to the symbol table
+			sprintf($2->value, "%s", getValue(inSymTab));
+		}
 
+		// Generate AST for the write statement
+		$$ = AST_Write($2->nodeType, $2->value, ""); 
+		
+		// Generate IR code for the write statement
+		// emitWrite($2);
+
+		// Generate MIPS code for the write statement
+		emitMIPSWriteId($2->value); 
+	 }
+	 | WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS {
+		// Generate AST for the writeln statement
+		$$ = AST_Write("newline", "", "");
+		// Generate MIPS code for the write statement
+		emitMIPSNewLine(); 
+
+	 }  
 ;
 
 UnaryOp: MINUS
@@ -1276,11 +1333,13 @@ int main(int argc, char**argv)
 
 	// Add the closing part required for any MIPS file
 	emitEndOfAssemblyCode();
+	combineMIPSFiles(); 
+	 
 	showSymTable();
 }
-
-void yyerror(const char* s) {
-	fprintf(stderr, "Parse error: %s\n", s);
+  
+void yyerror(const char* s) { 
+	fprintf(stderr, "Parse error: %s\n", s); 
 	exit(1);
 }
 
