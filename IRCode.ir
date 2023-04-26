@@ -6601,3 +6601,278 @@ BINARY: 2 - 1
 BINARY: 5 * 5
 BINARY: 5 * 5
 BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+BINARY: 5 * 5
+BINARY: 25 * 5
+BINARY: 125 / 5
+BINARY: 25.000000 + 5
+BINARY: 1 * 2
+BINARY: 2 * 3
+BINARY: 6 * 4
+BINARY: 24 * 5
+BINARY: 120 * 6
+BINARY: 720 * 7
+BINARY: 5040 * 8
+BINARY: 40320 * 9
+BINARY: 362880 * 10
+BINARY: 1 - 2
+BINARY: -1 + 3
+BINARY: 2 - 4
+BINARY: -2 + 5
+BINARY: 3 - 6
+BINARY: -3 + 7
+BINARY: 4 - 8
+BINARY: 9 * 10
+BINARY: -4 - 90
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+BINARY: 5 * 5
+BINARY: 25 * 5
+BINARY: 125 / 5
+BINARY: 25.000000 + 5
+BINARY: 1 * 2
+BINARY: 2 * 3
+BINARY: 6 * 4
+BINARY: 24 * 5
+BINARY: 120 * 6
+BINARY: 720 * 7
+BINARY: 5040 * 8
+BINARY: 40320 * 9
+BINARY: 362880 * 10
+BINARY: 1 - 2
+BINARY: -1 + 3
+BINARY: 2 - 4
+BINARY: -2 + 5
+BINARY: 3 - 6
+BINARY: -3 + 7
+BINARY: 4 - 8
+BINARY: 9 * 10
+BINARY: -4 - 90
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+BINARY: 5 * 5
+BINARY: 25 * 5
+BINARY: 125 / 5
+BINARY: 25.000000 + 5
+BINARY: 1 * 2
+BINARY: 2 * 3
+BINARY: 6 * 4
+BINARY: 24 * 5
+BINARY: 120 * 6
+BINARY: 720 * 7
+BINARY: 5040 * 8
+BINARY: 40320 * 9
+BINARY: 362880 * 10
+BINARY: 1 - 2
+BINARY: -1 + 3
+BINARY: 2 - 4
+BINARY: -2 + 5
+BINARY: 3 - 6
+BINARY: -3 + 7
+BINARY: 4 - 8
+BINARY: 9 * 10
+BINARY: -4 - 90
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+BINARY: 5 * 5
+BINARY: 25 * 5
+BINARY: 125 / 5
+BINARY: 25.000000 + 5
+BINARY: 1 * 2
+BINARY: 2 * 3
+BINARY: 6 * 4
+BINARY: 24 * 5
+BINARY: 120 * 6
+BINARY: 720 * 7
+BINARY: 5040 * 8
+BINARY: 40320 * 9
+BINARY: 362880 * 10
+BINARY: 1 - 2
+BINARY: -1 + 3
+BINARY: 2 - 4
+BINARY: -2 + 5
+BINARY: 3 - 6
+BINARY: -3 + 7
+BINARY: 4 - 8
+BINARY: 9 * 10
+BINARY: -4 - 90
+
+
+#### IR Code ####
+
+EQUAL: arr = 2
+EQUAL: arr = 3
+EQUAL: arr = 4
+BINARY: 5 * 5
+BINARY: 25 * 5
+BINARY: 125 / 5
+BINARY: 25.000000 + 5
+BINARY: 1 * 2
+BINARY: 2 * 3
+BINARY: 6 * 4
+BINARY: 24 * 5
+BINARY: 120 * 6
+BINARY: 720 * 7
+BINARY: 5040 * 8
+BINARY: 40320 * 9
+BINARY: 362880 * 10
+BINARY: 1 - 2
+BINARY: -1 + 3
+BINARY: 2 - 4
+BINARY: -2 + 5
+BINARY: 3 - 6
+BINARY: -3 + 7
+BINARY: 4 - 8
+BINARY: 9 * 10
+BINARY: -4 - 90

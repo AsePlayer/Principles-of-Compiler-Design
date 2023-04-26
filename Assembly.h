@@ -109,11 +109,6 @@ void emitMIPSNewLine() {
     fprintf(MIPScode, "syscall\n");
 }
 
-void emitMIPSFunctionDeclaration(char* functionName, char* returnValue) {
-    // Write the function declaration to the MIPScode file
-    fprintf(MIPSlabels, "%s:\n", functionName);
-}
-
 void emitMIPSIfStatement(char id1[50], char condition[50], char id2[50], char boolean[50]) {
     fclose(MIPScode);
     MIPScode = fopen("MIPScode.asm", "a");
@@ -146,6 +141,37 @@ void emitMIPSIfStatement(char id1[50], char condition[50], char id2[50], char bo
 
 }
 
+void emitMIPSWhileLoop(char id1[50], char condition[50], char id2[50], char boolean[50]) {
+
+}
+
+void emitMIPSArrayDeclaration(char * id, char * size) {
+    // Write the array declaration to the MIPScode file
+    fprintf(MIPSdata, "\t%s: .space %s\n", id, size);
+}
+
+void emitMIPSArrayUpdateValue(char * id, char * index, char * value) {
+    // Write the array update to the MIPScode file
+    fprintf(MIPScode, "li $t0, %s\n", value);
+    fprintf(MIPScode, "li $t1, %s\n", index);
+    fprintf(MIPScode, "li $t2, %s\n", id);
+    fprintf(MIPScode, "add $t3, $t1, $t2\n");
+    fprintf(MIPScode, "sw $t0, 0($t3)\n");
+}
+
+void emitMIPSArrayValuePrint(char * id, char * index) {
+    // Write the array value print to the MIPScode file
+    fprintf(MIPScode, "li $t0, %s\n", index);
+    fprintf(MIPScode, "li $t1, %s\n", id);
+    fprintf(MIPScode, "add $t2, $t0, $t1\n");
+    fprintf(MIPScode, "lw $a0, 0($t2)\n");
+    fprintf(MIPScode, "li $v0, 1\n");
+    fprintf(MIPScode, "syscall\n");
+    fprintf(MIPScode, "li $a0, 10\n");
+    fprintf(MIPScode, "li $v0, 11\n");
+    fprintf(MIPScode, "syscall\n");
+}
+
 void emitMIPSElseStatement(char boolean[50]) {
     fclose(MIPScode);
     MIPScode = fopen("MIPScode.asm", "a");
@@ -157,6 +183,13 @@ void emitMIPSElseStatement(char boolean[50]) {
     MIPScode = fopen("MIPSlabels.asm", "a");
     fprintf(MIPScode, "ifTrue_%d:\n", ifCounter);
 
+}
+
+void emitMIPSFunctionDeclaration(char * functionName, char * returnValue) {
+    // Write the function to the MIPScode file
+    fclose(MIPScode);
+    MIPScode = fopen("MIPSlabels.asm", "a");
+    fprintf(MIPScode, "%s:\n", functionName);
 }
 
 void emitMIPSIfElseStatement(char id1[50], char condition[50], char id2[50], char boolean[50]) {
@@ -176,6 +209,18 @@ void emitMIPSEndIfStatement() {
 
     fclose(MIPScode);
     MIPScode = fopen("MIPScode.asm", "a");
+}
+
+void emitMIPSEndFunction() {
+    // Write the end function to the MIPScode file
+    fprintf(MIPScode, "jr $ra\n");
+    fclose(MIPScode);
+    MIPScode = fopen("MIPScode.asm", "a");
+}
+
+void emitMIPSFunctionCall(char * functionName) {
+    // Write the function call to the MIPScode file
+    fprintf(MIPScode, "jal %s\n", functionName);
 }
 
 void emitEndOfAssemblyCode(){

@@ -146,6 +146,11 @@ FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS {
 	// Symbol Table
 
 	// IR GOTO Label
+
+	emitMIPSFunctionCall($1);
+	$$ = $1; 
+
+
  
 }
 | 
@@ -344,10 +349,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", $3);
 																// $$ = AST_Fun("Fun", $2, $3);
 																
 																//printf("-----------> %s", $$->LHS);
+																emitMIPSFunctionDeclaration($3, $2);
 																
 }  
 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS {emitFunctionBlockStart();}  Block	{  
-											// change current scope back to global
+											// change current scope back to global 
 											
 											$$ = AST_Fun("Fun", $2, $3);
 											// $$->right = AST_Block("Block", $8, $8); 
@@ -364,6 +370,8 @@ LEFTPARENTHESIS ParamList RIGHTPARENTHESIS {emitFunctionBlockStart();}  Block	{
 											// emit function name
 											emitFunctionBlockEnd();
 											strcpy(currentScope, "global"); 
+
+											emitMIPSEndFunction();  
 										} 
 ; 
  
@@ -482,6 +490,12 @@ VarDecl:	Type ID SEMICOLON	{ printf("\n RECOGNIZED RULE: Variable declaration %s
     // ---- SEMANTIC ACTIONS by PARSER ----
     $$ = AST_Type("[]", $1, $2);
     //printf("-----------> %s", $$->LHS);
+
+	// turn number into string
+	char arraySize[3];
+	sprintf(arraySize, "%d", atoi($4->value) * 4);
+	emitMIPSArrayDeclaration($2, arraySize); 
+
 }; 
 
 
@@ -618,7 +632,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		 // Update the value of the variable in the symbol table
 		int inSymTab = found($1, currentScope);  
 
-		// check if Expr nodeType is a number
+		// check if Expr nodeType is a number 
 		if (inSymTab == -1) {
 			printf("SEMANTIC ERROR: Array %s is not in the symbol table\n", $1);
 			semanticCheckPassed = 0;
@@ -650,10 +664,12 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 					$$ = AST_BinaryExpression("[]", $1, value); 
 				}
 		} 
-
+ 
 		emitAssignment(currentScope, $1, $3->value);
+		// emitMIPSArrayUpdateValue(char * id, char * index, char * value)
+		// emitMIPSArrayUpdateValue($1, $3->value, $6->value);
 		
-	 }
+	 } 
      | Expr PLUS Expr   {  
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($1, currentScope);
@@ -663,7 +679,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		if(strcmp($1->nodeType, "number") == 0) {
 			// Numbers don't exist in the symbol table. Skip this check.
 		}
-		// Variable is not in the symbol table
+		// Variable is not in the symbol table 
 		else if(inSymTab1 == -1) {
 			// Variable is not in the symbol table
 			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $1->value);

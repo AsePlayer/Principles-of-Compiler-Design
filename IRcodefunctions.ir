@@ -1907,3 +1907,96 @@ BLOCK START
 VAR: result7 -> int = 0
 BLOCK END
 BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: mygood -> int:
+BLOCK START
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
+FUN: trueFunction -> int:
+BLOCK START
+BINARY: 3 * 2
+BINARY: 6 - 1
+BLOCK END
+FUN: falseFunction -> int:
+BLOCK START
+BINARY: 5 - 1
+BLOCK END
