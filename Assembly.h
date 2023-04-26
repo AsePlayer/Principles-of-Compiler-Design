@@ -98,8 +98,6 @@ void emitMIPSWriteId(char * id){
     fprintf(MIPScode, "li $a0,%s\n", id);
     fprintf(MIPScode, "li $v0,1\n");
     fprintf(MIPScode, "syscall\n");
-
-
 }
 
 void emitMIPSNewLine() {
@@ -116,43 +114,68 @@ void emitMIPSFunctionDeclaration(char* functionName, char* returnValue) {
     fprintf(MIPSlabels, "%s:\n", functionName);
 }
 
-void emitMIPSIfStatement(char id1[50], char condition[50], char id2[50]) {
+void emitMIPSIfStatement(char id1[50], char condition[50], char id2[50], char boolean[50]) {
+    fclose(MIPScode);
+    MIPScode = fopen("MIPScode.asm", "a");
     // Write the if statement to the MIPScode file
     fprintf(MIPScode, "li $t1,%s\n", id1);
     fprintf(MIPScode, "li $t2,%s\n", id2);
 
     // check if condition is ==, !=, <, >, <=, >=
     if        (strcmp(condition, "==") == 0) {
-        fprintf(MIPScode, "beq $t1, $t2, ifTrue\n");
+        fprintf(MIPScode, "beq $t1, $t2, ifTrue_%d\n", ifCounter);
     } else if (strcmp(condition, "!=") == 0) {
-        fprintf(MIPScode, "bne $t1, $t2, ifTrue\n");
+        fprintf(MIPScode, "bne $t1, $t2, ifTrue_%d\n", ifCounter);
     } else if (strcmp(condition, "<") == 0) {
-        fprintf(MIPScode, "blt $t1, $t2, ifTrue\n");
+        fprintf(MIPScode, "blt $t1, $t2, ifTrue_%d\n", ifCounter);
     } else if (strcmp(condition, ">") == 0) {
-        fprintf(MIPScode, "bgt $t1, $t2, ifTrue\n");
+        fprintf(MIPScode, "bgt $t1, $t2, ifTrue_%d\n", ifCounter);
     } else if (strcmp(condition, "<=") == 0) {
-        fprintf(MIPScode, "ble $t1, $t2, ifTrue\n");
+        fprintf(MIPScode, "ble $t1, $t2, ifTrue_%d\n", ifCounter);
     } else if (strcmp(condition, ">=") == 0) {
-        fprintf(MIPScode, "bge $t1, $t2, ifTrue\n");
+        fprintf(MIPScode, "bge $t1, $t2, ifTrue_%d\n", ifCounter);
+    } else if (atoi(boolean) == 1) {
+        fprintf(MIPScode, "beq $zero, $zero, ifTrue_%d\n", ifCounter);
     }
+      
     fclose(MIPScode);
     MIPScode = fopen("MIPSlabels.asm", "a");
-    fprintf(MIPScode, "ifTrue:\n");
+    fprintf(MIPScode, "ifTrue_%d:\n", ifCounter);
+    ifCounter++;
     // fprintf(MIPScode, "j ifFalse\n");
 
 }
 
-void emitMIPSEndIfStatement() {
-    // Write the end if statement to the MIPScode file
-    fprintf(MIPScode, "jr $ra\n");
+void emitMIPSElseStatement(char boolean[50]) {
     fclose(MIPScode);
     MIPScode = fopen("MIPScode.asm", "a");
+    if(atoi(boolean) == 0) {
+        fprintf(MIPScode, "beq $zero, $zero, ifTrue_%d\n", ifCounter);
+    }
+
+    fclose(MIPScode);
+    MIPScode = fopen("MIPSlabels.asm", "a");
+    fprintf(MIPScode, "ifTrue_%d:\n", ifCounter);
+
 }
 
-void emitMIPSElseStatement() {
-    // Write the else statement to the MIPScode file
-    fprintf(MIPScode, "j ifFalse\n");
-    // fprintf(MIPScode, "ifTrue:\n");
+void emitMIPSIfElseStatement(char id1[50], char condition[50], char id2[50], char boolean[50]) {
+    fclose(MIPScode);
+    MIPScode = fopen("MIPSlabels.asm", "a");
+    if(atoi(boolean) == 1) {
+        fprintf(MIPScode, "beq $zero, $zero, ifFalse_%d\n", ifCounter);
+    }
+    else {
+        emitMIPSIfStatement(id1, condition, id2, boolean);
+    }
+}
+
+void emitMIPSEndIfStatement() {
+    // Write the end if statement to the MIPScode file
+    // fprintf(MIPScode, "jr $ra\n");
+
+    fclose(MIPScode);
+    MIPScode = fopen("MIPScode.asm", "a");
 }
 
 void emitEndOfAssemblyCode(){
@@ -197,6 +220,8 @@ void combineMIPSFiles(){
     while ((c = fgetc(MIPSlabels)) != EOF) {
         fputc(c, MIPSfinal);
     }
+
+    fprintf(MIPSfinal, "jr $ra\n");
 
     // close the files
     fclose(MIPScode);

@@ -6134,3 +6134,470 @@ VAR: value -> int = 1
 VAR: tuff -> int = 0
 EQUAL: tuff = 5
 VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+
+
+#### IR Code ####
+
+VAR: value -> int = 1
+VAR: tuff -> int = 0
+EQUAL: tuff = 5
+VAR: rff -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5

@@ -1,6 +1,8 @@
 Nonterminals useless in grammar
 
     IfElseStmt
+    $@2
+    $@3
     Primary
     UnaryOp
     BinaryOp
@@ -14,22 +16,26 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-   62 IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block ELSE Block
+   62 $@2: ε
 
-   63 Primary: ID
-   64        | NUMBER
-   65        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   66        | ID LEFTBRACKET Expr RIGHTBRACKET
+   63 $@3: ε
 
-   67 UnaryOp: MINUS
-   68        | UNARYNOT
+   64 IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@2 Block ELSE $@3 Block
 
-   69 BinaryOp: PLUS
-   70         | MINUS
-   71         | MULTIPLY
-   72         | DIVIDE
-   73         | LOGICALAND
-   74         | LOGICALOR
+   65 Primary: ID
+   66        | NUMBER
+   67        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
+   68        | ID LEFTBRACKET Expr RIGHTBRACKET
+
+   69 UnaryOp: MINUS
+   70        | UNARYNOT
+
+   71 BinaryOp: PLUS
+   72         | MINUS
+   73         | MULTIPLY
+   74         | DIVIDE
+   75         | LOGICALAND
+   76         | LOGICALOR
 
 
 Rules useless in parser due to conflicts
@@ -96,11 +102,11 @@ Grammar
 
    32 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block
 
-   33 $@2: ε
+   33 $@4: ε
 
-   34 $@3: ε
+   34 $@5: ε
 
-   35 FunDecl: FUN Type ID $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
 
    36 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET
 
@@ -222,10 +228,10 @@ Nonterminals, with rules where they appear
     FunDecl <ast> (55)
         on left: 35
         on right: 4
-    $@2 (56)
+    $@4 (56)
         on left: 33
         on right: 35
-    $@3 (57)
+    $@5 (57)
         on left: 34
         on right: 35
     Block <ast> (58)
@@ -445,7 +451,7 @@ State 15
 
 State 16
 
-   35 FunDecl: FUN • Type ID $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN • Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
 
     INT     shift, and go to state 1
     FLOAT   shift, and go to state 2
@@ -882,7 +888,7 @@ State 41
 
 State 42
 
-   35 FunDecl: FUN Type • ID $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN Type • ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
 
     ID  shift, and go to state 70
 
@@ -1257,11 +1263,11 @@ State 69
 
 State 70
 
-   35 FunDecl: FUN Type ID • $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN Type ID • $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
 
-    $default  reduce using rule 33 ($@2)
+    $default  reduce using rule 33 ($@4)
 
-    $@2  go to state 91
+    $@4  go to state 91
 
 
 State 71
@@ -1679,7 +1685,7 @@ State 90
 
 State 91
 
-   35 FunDecl: FUN Type ID $@2 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN Type ID $@4 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
 
     LEFTPARENTHESIS  shift, and go to state 98
 
@@ -1798,7 +1804,7 @@ State 97
 
 State 98
 
-   35 FunDecl: FUN Type ID $@2 LEFTPARENTHESIS • ParamList RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS • ParamList RIGHTPARENTHESIS $@5 Block
 
     INT     shift, and go to state 1
     FLOAT   shift, and go to state 2
@@ -1962,7 +1968,7 @@ State 106
 
 State 107
 
-   35 FunDecl: FUN Type ID $@2 LEFTPARENTHESIS ParamList • RIGHTPARENTHESIS $@3 Block
+   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList • RIGHTPARENTHESIS $@5 Block
 
     RIGHTPARENTHESIS  shift, and go to state 112
 
@@ -2017,11 +2023,11 @@ State 111
 
 State 112
 
-   35 FunDecl: FUN Type ID $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS • $@3 Block
+   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS • $@5 Block
 
-    $default  reduce using rule 34 ($@3)
+    $default  reduce using rule 34 ($@5)
 
-    $@3  go to state 115
+    $@5  go to state 115
 
 
 State 113
@@ -2050,7 +2056,7 @@ State 114
 
 State 115
 
-   35 FunDecl: FUN Type ID $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 • Block
+   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 • Block
 
     LEFTCURLYBRACKET  shift, and go to state 100
 
@@ -2073,6 +2079,6 @@ State 117
 
 State 118
 
-   35 FunDecl: FUN Type ID $@2 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@3 Block •
+   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block •
 
     $default  reduce using rule 35 (FunDecl)

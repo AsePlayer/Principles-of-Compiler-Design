@@ -152,7 +152,7 @@ FunCall:	ID LEFTPARENTHESIS Param RIGHTPARENTHESIS {
 ;
 
 IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS {
-printf("\n RECOGNIZED RULE: If statement %s\n", $3);
+		printf("\n RECOGNIZED RULE: If statement %s\n", $3);
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($3->value, currentScope); 
 		// Check if Expr $3's nodeType is a number or a variable
@@ -186,23 +186,11 @@ printf("\n RECOGNIZED RULE: If statement %s\n", $3);
 			// do not emit IR code for if statement 
 		}
 
-		// printf("ATTEMPTED: %s || %s", $1->value, $3->value);
-
-		// Generate AST for the less than expression 
-
 		sprintf($3->value, "%s", stringVal);
-
-
-		// (char id1[50], char* condition, char id2[50])
-		// emitIR($3->value, $1->value, $5->value);
-		emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS);
-
-		// print $3 left and right values
-		printf("left: %s\n", $3->left);
-		printf("right: %s\n", $3->right);
+		emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS, stringVal); 
 } 
 Block {
-			$$ = AST_BinaryExpression("if", $6, $3);  
+		$$ = AST_BinaryExpression("if", $6, $3);  
 		// print the AST
 		printf("\n--- Abstract Syntax Tree ---\n\n");
 		printAST($$,0);
@@ -210,8 +198,47 @@ Block {
 
 };
 
-IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block ELSE Block { 
-	printf("\n RECOGNIZED RULE: If statement %s\n", $3);
+IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS {
+	printf("\n RECOGNIZED RULE: IfElse statement %s\n", $3);
+		// Check if the variables are in the symbol table
+		int inSymTab1 = found($3->value, currentScope); 
+		// Check if Expr $3's nodeType is a number or a variable
+		if(strcmp($3->nodeType, "number") == 0) {
+			// Numbers don't exist in the symbol table. Skip this check.
+		}
+		// Variable is not in the symbol table
+		else if(inSymTab1 == -1) {
+			// Variable is not in the symbol table
+			printf("SEMANTIC ERROR: Variable %s is not in the symbol table\n", $3->value);
+			semanticCheckPassed = 0;
+		}
+		// Variable is in the symbol table
+		else if(inSymTab1 != -1) {
+			// Update the value according to the symbol table
+			sprintf($3->value, "%s", getValue(inSymTab1));
+		}
+
+		// Check if the expression is true or false
+		char stringVal[50];
+		if(atoi($3->value)) {
+			sprintf(stringVal, "%d", 1);
+			printf("TRUE\n");
+			emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS, stringVal); 
+
+			// emit IR code for if statement
+		}
+		else {
+			sprintf(stringVal, "%d", 0);
+			printf("FALSE\n"); 
+
+			// do not emit IR code for if statement 
+		}
+
+		sprintf($3->value, "%s", stringVal);
+
+} 
+Block ELSE {
+		printf("\n RECOGNIZED RULE: Else statement %s\n", $3);
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($3->value, currentScope); 
 		// Check if Expr $3's nodeType is a number or a variable
@@ -241,20 +268,19 @@ IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block ELSE Block {
 		else {
 			sprintf(stringVal, "%d", 0);
 			printf("FALSE\n"); 
+			emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS, stringVal); 
 
 			// do not emit IR code for if statement 
 		}
 
-		// printf("ATTEMPTED: %s || %s", $1->value, $3->value);
-
-		// Generate AST for the less than expression 
-
 		sprintf($3->value, "%s", stringVal);
-		$$ = AST_BinaryExpression("if", $5, $3);  
+} Block {
+		$$ = AST_BinaryExpression("if", $6, $3);   
 		// print the AST
 		printf("\n--- Abstract Syntax Tree ---\n\n");
 		printAST($$,0);
-		
+		emitMIPSEndIfStatement(); 
+
 };
 
 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block { 
@@ -935,8 +961,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// Generate AST for the less than expression
 		$$ = AST_BinaryExpression("number", $1->value, $3->value);
 		// $$->left->nodeType = "=="; do this for array not string
-		strcpy($$->left->nodeType, "!=");
-		sprintf($$->value, "%s", stringVal);
+		sprintf($$->value, "%s", stringVal); 
 		sprintf($$->condition, "%s", "!=");
 	 }
 	 | Expr LESS_THAN Expr {
@@ -1272,7 +1297,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		else if(inSymTab != -1) {
 			// Update the value according to the symbol table
 			sprintf($2->value, "%s", getValue(inSymTab));
-		}
+		}  
 
 		// Generate AST for the write statement
 		$$ = AST_Write($2->nodeType, $2->value, ""); 
@@ -1281,15 +1306,15 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// emitWrite($2);
 
 		// Generate MIPS code for the write statement
-		emitMIPSWriteId($2->value); 
+		emitMIPSWriteId($2->value);
 	 }
-	 | WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS {
+	 | WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS {  
 		// Generate AST for the writeln statement
 		$$ = AST_Write("newline", "", "");
 		// Generate MIPS code for the write statement
-		emitMIPSNewLine(); 
+		emitMIPSNewLine();  
 
-	 }  
+	 } 
 ;
 
 UnaryOp: MINUS
