@@ -9,7 +9,7 @@ This program requires the following software to be installed on your system:
 
 # Installation
 To install the C- Compiler, clone the repository:
-git clone https://github.com/yourusername/c-compiler.git
+git clone https://github.com/AsePlayer/Principles-of-Compiler-Design
 
 # Usage
 Write C- code into the test.txt file
