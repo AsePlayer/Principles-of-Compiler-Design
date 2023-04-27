@@ -6876,3 +6876,206 @@ BINARY: -3 + 7
 BINARY: 4 - 8
 BINARY: 9 * 10
 BINARY: -4 - 90
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+VAR: i -> int = 5
+BINARY: 5 - 1
+EQUAL: i = 4
+
+
+#### IR Code ####
+
+VAR: i -> int = 5
+BINARY: 5 - 1
+EQUAL: i = 4
+
+
+#### IR Code ####
+
+VAR: i -> int = 5
+BINARY: 5 - 1
+EQUAL: i = 4
+
+
+#### IR Code ####
+
+VAR: i -> int = 5
+BINARY: 5 - 1
+EQUAL: i = 4
+
+
+#### IR Code ####
+
+VAR: i -> int = 5
+BINARY: 5 - 1
+EQUAL: i = 4
+
+
+#### IR Code ####
+
+
+
+#### IR Code ####
+
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+VAR: thirteen -> int = 0
+BINARY: 5 + 3
+BINARY: 8 * 2
+BINARY: 60 / 5
+BINARY: 12.000000 / 4
+BINARY: 16 - 3.000000
+EQUAL: thirteen = 13
+
+
+#### IR Code ####
+
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: bruh -> int = 5
+VAR: bruh2 -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: bruh -> int = 5
+VAR: bruh2 -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: bruh -> int = 5
+VAR: bruh2 -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: bruh -> int = 5
+VAR: bruh2 -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5
+
+
+#### IR Code ####
+
+VAR: bruh -> int = 5
+VAR: bruh2 -> int = 0
+BINARY: 2 - 1
+BINARY: 5 * 5
+BINARY: 5 * 5
+BINARY: 5 * 5

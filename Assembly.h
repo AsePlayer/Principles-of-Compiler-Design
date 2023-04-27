@@ -142,7 +142,41 @@ void emitMIPSIfStatement(char id1[50], char condition[50], char id2[50], char bo
 }
 
 void emitMIPSWhileLoop(char id1[50], char condition[50], char id2[50], char boolean[50]) {
+    fclose(MIPScode);
+    MIPScode = fopen("MIPScode.asm", "a");
+    // Write the while loop to the MIPScode file
+    fprintf(MIPScode, "li $t1,%s\n", id1);
+    fprintf(MIPScode, "li $t2,%s\n", id2);
 
+    // check if condition is ==, !=, <, >, <=, >=
+    if        (strcmp(condition, "==") == 0) {
+        fprintf(MIPScode, "beq $t1, $t2, whileTrue_%d\n", whileCounter);
+    } else if (strcmp(condition, "!=") == 0) {
+        fprintf(MIPScode, "bne $t1, $t2, whileTrue_%d\n", whileCounter);
+    } else if (strcmp(condition, "<") == 0) {
+        fprintf(MIPScode, "blt $t1, $t2, whileTrue_%d\n", whileCounter);
+    } else if (strcmp(condition, ">") == 0) {
+        fprintf(MIPScode, "bgt $t1, $t2, whileTrue_%d\n", whileCounter);
+    } else if (strcmp(condition, "<=") == 0) {
+        fprintf(MIPScode, "ble $t1, $t2, whileTrue_%d\n", whileCounter);
+    } else if (strcmp(condition, ">=") == 0) {
+        fprintf(MIPScode, "bge $t1, $t2, whileTrue_%d\n", whileCounter);
+    } else if (atoi(boolean) == 0) {
+        // fprintf(MIPScode, "beq $zero, $zero, endWhile_%d\n", whileCounter);
+    }
+    fprintf(MIPScode, "beq $zero, $zero, endWhile_%d\n", whileCounter);
+
+    // fclose(MIPScode);
+    // MIPScode = fopen("MIPSlabels.asm", "a");
+    fprintf(MIPScode, "whileTrue_%d:\n", whileCounter);
+    whileCounter++;
+    // fprintf(MIPScode, "j whileFalse\n");
+}
+
+void emitMIPSEndWhileLoop() {
+    // Write the end of the while loop to the MIPScode file
+    fprintf(MIPScode, "j whileTrue_%d\n", whileCounter-1);
+    fprintf(MIPScode, "endWhile_%d:\n", whileCounter-1);
 }
 
 void emitMIPSArrayDeclaration(char * id, char * size) {

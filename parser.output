@@ -16,26 +16,26 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-   62 $@2: ε
+   63 $@2: ε
 
-   63 $@3: ε
+   64 $@3: ε
 
-   64 IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@2 Block ELSE $@3 Block
+   65 IfElseStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@2 Block ELSE $@3 Block
 
-   65 Primary: ID
-   66        | NUMBER
-   67        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   68        | ID LEFTBRACKET Expr RIGHTBRACKET
+   66 Primary: ID
+   67        | NUMBER
+   68        | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
+   69        | ID LEFTBRACKET Expr RIGHTBRACKET
 
-   69 UnaryOp: MINUS
-   70        | UNARYNOT
+   70 UnaryOp: MINUS
+   71        | UNARYNOT
 
-   71 BinaryOp: PLUS
-   72         | MINUS
-   73         | MULTIPLY
-   74         | DIVIDE
-   75         | LOGICALAND
-   76         | LOGICALOR
+   72 BinaryOp: PLUS
+   73         | MINUS
+   74         | MULTIPLY
+   75         | DIVIDE
+   76         | LOGICALAND
+   77         | LOGICALOR
 
 
 Rules useless in parser due to conflicts
@@ -48,9 +48,9 @@ State 21 conflicts: 18 shift/reduce, 12 reduce/reduce
 State 23 conflicts: 9 shift/reduce, 1 reduce/reduce
 State 40 conflicts: 12 shift/reduce
 State 64 conflicts: 12 shift/reduce
-State 100 conflicts: 18 shift/reduce, 1 reduce/reduce
-State 105 conflicts: 12 shift/reduce
-State 109 conflicts: 1 shift/reduce
+State 104 conflicts: 12 shift/reduce
+State 107 conflicts: 18 shift/reduce, 1 reduce/reduce
+State 113 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -100,42 +100,44 @@ Grammar
 
    31 IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@1 Block
 
-   32 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block
+   32 $@4: ε
 
-   33 $@4: ε
+   33 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@4 Block
 
    34 $@5: ε
 
-   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
+   35 $@6: ε
 
-   36 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET
+   36 FunDecl: FUN Type ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block
 
-   37 VarDecl: Type ID SEMICOLON
-   38        | Type ID EQUAL Expr SEMICOLON
-   39        | Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
+   37 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET
 
-   40 Expr: NUMBER
-   41     | MINUS NUMBER
-   42     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
-   43     | UNARYNOT Expr
-   44     | ID
-   45     | ID LEFTBRACKET Expr RIGHTBRACKET
-   46     | ID EQUAL Expr
-   47     | ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
-   48     | Expr PLUS Expr
-   49     | Expr MINUS Expr
-   50     | Expr MULTIPLY Expr
-   51     | Expr DIVIDE Expr
-   52     | Expr EQUAL_TO Expr
-   53     | Expr NOT_EQUAL_TO Expr
-   54     | Expr LESS_THAN Expr
-   55     | Expr LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr GREATER_THAN Expr
-   57     | Expr GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr LOGICALAND Expr
-   59     | Expr LOGICALOR Expr
-   60     | WRITE Expr
-   61     | WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS
+   38 VarDecl: Type ID SEMICOLON
+   39        | Type ID EQUAL Expr SEMICOLON
+   40        | Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
+
+   41 Expr: NUMBER
+   42     | MINUS NUMBER
+   43     | LEFTPARENTHESIS Expr RIGHTPARENTHESIS
+   44     | UNARYNOT Expr
+   45     | ID
+   46     | ID LEFTBRACKET Expr RIGHTBRACKET
+   47     | ID EQUAL Expr
+   48     | ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
+   49     | Expr PLUS Expr
+   50     | Expr MINUS Expr
+   51     | Expr MULTIPLY Expr
+   52     | Expr DIVIDE Expr
+   53     | Expr EQUAL_TO Expr
+   54     | Expr NOT_EQUAL_TO Expr
+   55     | Expr LESS_THAN Expr
+   56     | Expr LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr GREATER_THAN Expr
+   58     | Expr GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr LOGICALAND Expr
+   60     | Expr LOGICALOR Expr
+   61     | WRITE Expr
+   62     | WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS
 
 
 Terminals, with rules where they appear
@@ -149,37 +151,37 @@ Terminals, with rules where they appear
     BOOL <string> (262) 17
     STRING <string> (263) 19
     VOID <string> (264) 20
-    ID <string> (265) 22 23 24 25 28 35 37 38 39 44 45 46 47
+    ID <string> (265) 22 23 24 25 28 36 38 39 40 45 46 47 48
     RETURN <string> (266) 27
-    SEMICOLON <character> (267) 11 12 13 14 37 38 39
+    SEMICOLON <character> (267) 11 12 13 14 38 39 40
     COMMA <character> (268) 22 24
-    EQUAL <character> (269) 38 46 47
-    PLUS <character> (270) 48
-    MINUS <character> (271) 41 49
-    MULTIPLY <character> (272) 50
-    DIVIDE <character> (273) 51
-    LEFTPARENTHESIS <character> (274) 28 31 32 35 42 61
-    RIGHTPARENTHESIS <character> (275) 28 31 32 35 42 61
-    LEFTCURLYBRACKET <character> (276) 36
-    RIGHCURLYBRACKET <character> (277) 36
-    LEFTBRACKET <character> (278) 39 45 47
-    RIGHTBRACKET <character> (279) 39 45 47
-    UNARYNOT <character> (280) 43
-    LOGICALAND <string> (281) 58
-    LOGICALOR <string> (282) 59
-    NUMBER <string> (283) 40 41
-    WRITE <string> (284) 60
-    WRITELN <string> (285) 61
-    FUN <string> (286) 35
+    EQUAL <character> (269) 39 47 48
+    PLUS <character> (270) 49
+    MINUS <character> (271) 42 50
+    MULTIPLY <character> (272) 51
+    DIVIDE <character> (273) 52
+    LEFTPARENTHESIS <character> (274) 28 31 33 36 43 62
+    RIGHTPARENTHESIS <character> (275) 28 31 33 36 43 62
+    LEFTCURLYBRACKET <character> (276) 37
+    RIGHCURLYBRACKET <character> (277) 37
+    LEFTBRACKET <character> (278) 40 46 48
+    RIGHTBRACKET <character> (279) 40 46 48
+    UNARYNOT <character> (280) 44
+    LOGICALAND <string> (281) 59
+    LOGICALOR <string> (282) 60
+    NUMBER <string> (283) 41 42
+    WRITE <string> (284) 61
+    WRITELN <string> (285) 62
+    FUN <string> (286) 36
     IF <string> (287) 31
     ELSE <string> (288)
-    WHILE <string> (289) 32
-    LESS_THAN <string> (290) 54
-    GREATER_THAN <string> (291) 56
-    LESS_THAN_OR_EQUAL_TO <string> (292) 55
-    GREATER_THAN_OR_EQUAL_TO <string> (293) 57
-    EQUAL_TO <string> (294) 52
-    NOT_EQUAL_TO <string> (295) 53
+    WHILE <string> (289) 33
+    LESS_THAN <string> (290) 55
+    GREATER_THAN <string> (291) 57
+    LESS_THAN_OR_EQUAL_TO <string> (292) 56
+    GREATER_THAN_OR_EQUAL_TO <string> (293) 58
+    EQUAL_TO <string> (294) 53
+    NOT_EQUAL_TO <string> (295) 54
 
 
 Nonterminals, with rules where they appear
@@ -191,22 +193,22 @@ Nonterminals, with rules where they appear
         on right: 0
     DeclList <ast> (43)
         on left: 2 3
-        on right: 1 2 36
+        on right: 1 2 37
     Decl <ast> (44)
         on left: 4 5 6 7 8
         on right: 2 3
     StmtList <ast> (45)
         on left: 9 10
-        on right: 6 10 36
+        on right: 6 10 37
     Stmt <ast> (46)
         on left: 11 12 13 14
         on right: 10
     Type <ast> (47)
         on left: 15 16 17 18 19 20
-        on right: 22 23 24 25 35 37 38 39
+        on right: 22 23 24 25 36 38 39 40
     ParamList <ast> (48)
         on left: 21 22 23
-        on right: 22 35
+        on right: 22 36
     Param <ast> (49)
         on left: 24 25 26
         on right: 24 28
@@ -223,26 +225,29 @@ Nonterminals, with rules where they appear
         on left: 30
         on right: 31
     WhileStmt <ast> (54)
-        on left: 32
-        on right: 8
-    FunDecl <ast> (55)
-        on left: 35
-        on right: 4
-    $@4 (56)
         on left: 33
-        on right: 35
+        on right: 8
+    $@4 (55)
+        on left: 32
+        on right: 33
+    FunDecl <ast> (56)
+        on left: 36
+        on right: 4
     $@5 (57)
         on left: 34
-        on right: 35
-    Block <ast> (58)
-        on left: 36
-        on right: 31 32 35
-    VarDecl <ast> (59)
-        on left: 37 38 39
+        on right: 36
+    $@6 (58)
+        on left: 35
+        on right: 36
+    Block <ast> (59)
+        on left: 37
+        on right: 31 33 36
+    VarDecl <ast> (60)
+        on left: 38 39 40
         on right: 5
-    Expr <ast> (60)
-        on left: 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61
-        on right: 12 27 31 32 38 39 42 43 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60
+    Expr <ast> (61)
+        on left: 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62
+        on right: 12 27 31 33 39 40 43 44 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61
 
 
 State 0
@@ -349,16 +354,16 @@ State 6
 State 7
 
    28 FunCall: ID • LEFTPARENTHESIS Param RIGHTPARENTHESIS
-   44 Expr: ID •
-   45     | ID • LEFTBRACKET Expr RIGHTBRACKET
-   46     | ID • EQUAL Expr
-   47     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
+   45 Expr: ID •
+   46     | ID • LEFTBRACKET Expr RIGHTBRACKET
+   47     | ID • EQUAL Expr
+   48     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
 
     EQUAL            shift, and go to state 32
     LEFTPARENTHESIS  shift, and go to state 33
     LEFTBRACKET      shift, and go to state 34
 
-    $default  reduce using rule 44 (Expr)
+    $default  reduce using rule 45 (Expr)
 
 
 State 8
@@ -385,14 +390,14 @@ State 9
 
 State 10
 
-   41 Expr: MINUS • NUMBER
+   42 Expr: MINUS • NUMBER
 
     NUMBER  shift, and go to state 37
 
 
 State 11
 
-   42 Expr: LEFTPARENTHESIS • Expr RIGHTPARENTHESIS
+   43 Expr: LEFTPARENTHESIS • Expr RIGHTPARENTHESIS
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -407,7 +412,7 @@ State 11
 
 State 12
 
-   43 Expr: UNARYNOT • Expr
+   44 Expr: UNARYNOT • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -422,14 +427,14 @@ State 12
 
 State 13
 
-   40 Expr: NUMBER •
+   41 Expr: NUMBER •
 
-    $default  reduce using rule 40 (Expr)
+    $default  reduce using rule 41 (Expr)
 
 
 State 14
 
-   60 Expr: WRITE • Expr
+   61 Expr: WRITE • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -444,14 +449,14 @@ State 14
 
 State 15
 
-   61 Expr: WRITELN • LEFTPARENTHESIS RIGHTPARENTHESIS
+   62 Expr: WRITELN • LEFTPARENTHESIS RIGHTPARENTHESIS
 
     LEFTPARENTHESIS  shift, and go to state 41
 
 
 State 16
 
-   35 FunDecl: FUN • Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
+   36 FunDecl: FUN • Type ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block
 
     INT     shift, and go to state 1
     FLOAT   shift, and go to state 2
@@ -472,7 +477,7 @@ State 17
 
 State 18
 
-   32 WhileStmt: WHILE • LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block
+   33 WhileStmt: WHILE • LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@4 Block
 
     LEFTPARENTHESIS  shift, and go to state 44
 
@@ -605,9 +610,9 @@ State 23
 
 State 24
 
-   37 VarDecl: Type • ID SEMICOLON
-   38        | Type • ID EQUAL Expr SEMICOLON
-   39        | Type • ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
+   38 VarDecl: Type • ID SEMICOLON
+   39        | Type • ID EQUAL Expr SEMICOLON
+   40        | Type • ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
 
     ID  shift, and go to state 48
 
@@ -657,18 +662,18 @@ State 30
 State 31
 
    12 Stmt: Expr • SEMICOLON
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     SEMICOLON                 shift, and go to state 51
     PLUS                      shift, and go to state 52
@@ -687,7 +692,7 @@ State 31
 
 State 32
 
-   46 Expr: ID EQUAL • Expr
+   47 Expr: ID EQUAL • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -719,8 +724,8 @@ State 33
 
 State 34
 
-   45 Expr: ID LEFTBRACKET • Expr RIGHTBRACKET
-   47     | ID LEFTBRACKET • Expr RIGHTBRACKET EQUAL Expr
+   46 Expr: ID LEFTBRACKET • Expr RIGHTBRACKET
+   48     | ID LEFTBRACKET • Expr RIGHTBRACKET EQUAL Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -735,32 +740,32 @@ State 34
 
 State 35
 
-   44 Expr: ID •
-   45     | ID • LEFTBRACKET Expr RIGHTBRACKET
-   46     | ID • EQUAL Expr
-   47     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
+   45 Expr: ID •
+   46     | ID • LEFTBRACKET Expr RIGHTBRACKET
+   47     | ID • EQUAL Expr
+   48     | ID • LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr
 
     EQUAL        shift, and go to state 32
     LEFTBRACKET  shift, and go to state 34
 
-    $default  reduce using rule 44 (Expr)
+    $default  reduce using rule 45 (Expr)
 
 
 State 36
 
    27 ReturnStmt: RETURN Expr •
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -780,26 +785,26 @@ State 36
 
 State 37
 
-   41 Expr: MINUS NUMBER •
+   42 Expr: MINUS NUMBER •
 
-    $default  reduce using rule 41 (Expr)
+    $default  reduce using rule 42 (Expr)
 
 
 State 38
 
-   42 Expr: LEFTPARENTHESIS Expr • RIGHTPARENTHESIS
-   48     | Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   43 Expr: LEFTPARENTHESIS Expr • RIGHTPARENTHESIS
+   49     | Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -818,38 +823,38 @@ State 38
 
 State 39
 
-   43 Expr: UNARYNOT Expr •
-   48     | Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   44 Expr: UNARYNOT Expr •
+   49     | Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
-    $default  reduce using rule 43 (Expr)
+    $default  reduce using rule 44 (Expr)
 
 
 State 40
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
-   60     | WRITE Expr •
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+   61     | WRITE Expr •
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -864,31 +869,31 @@ State 40
     EQUAL_TO                  shift, and go to state 62
     NOT_EQUAL_TO              shift, and go to state 63
 
-    PLUS                      [reduce using rule 60 (Expr)]
-    MINUS                     [reduce using rule 60 (Expr)]
-    MULTIPLY                  [reduce using rule 60 (Expr)]
-    DIVIDE                    [reduce using rule 60 (Expr)]
-    LOGICALAND                [reduce using rule 60 (Expr)]
-    LOGICALOR                 [reduce using rule 60 (Expr)]
-    LESS_THAN                 [reduce using rule 60 (Expr)]
-    GREATER_THAN              [reduce using rule 60 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 60 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 60 (Expr)]
-    EQUAL_TO                  [reduce using rule 60 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 60 (Expr)]
-    $default                  reduce using rule 60 (Expr)
+    PLUS                      [reduce using rule 61 (Expr)]
+    MINUS                     [reduce using rule 61 (Expr)]
+    MULTIPLY                  [reduce using rule 61 (Expr)]
+    DIVIDE                    [reduce using rule 61 (Expr)]
+    LOGICALAND                [reduce using rule 61 (Expr)]
+    LOGICALOR                 [reduce using rule 61 (Expr)]
+    LESS_THAN                 [reduce using rule 61 (Expr)]
+    GREATER_THAN              [reduce using rule 61 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 61 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 61 (Expr)]
+    EQUAL_TO                  [reduce using rule 61 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 61 (Expr)]
+    $default                  reduce using rule 61 (Expr)
 
 
 State 41
 
-   61 Expr: WRITELN LEFTPARENTHESIS • RIGHTPARENTHESIS
+   62 Expr: WRITELN LEFTPARENTHESIS • RIGHTPARENTHESIS
 
     RIGHTPARENTHESIS  shift, and go to state 69
 
 
 State 42
 
-   35 FunDecl: FUN Type • ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
+   36 FunDecl: FUN Type • ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block
 
     ID  shift, and go to state 70
 
@@ -910,7 +915,7 @@ State 43
 
 State 44
 
-   32 WhileStmt: WHILE LEFTPARENTHESIS • Expr RIGHTPARENTHESIS Block
+   33 WhileStmt: WHILE LEFTPARENTHESIS • Expr RIGHTPARENTHESIS $@4 Block
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -946,9 +951,9 @@ State 47
 
 State 48
 
-   37 VarDecl: Type ID • SEMICOLON
-   38        | Type ID • EQUAL Expr SEMICOLON
-   39        | Type ID • LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
+   38 VarDecl: Type ID • SEMICOLON
+   39        | Type ID • EQUAL Expr SEMICOLON
+   40        | Type ID • LEFTBRACKET Expr RIGHTBRACKET SEMICOLON
 
     SEMICOLON    shift, and go to state 73
     EQUAL        shift, and go to state 74
@@ -978,7 +983,7 @@ State 51
 
 State 52
 
-   48 Expr: Expr PLUS • Expr
+   49 Expr: Expr PLUS • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -993,7 +998,7 @@ State 52
 
 State 53
 
-   49 Expr: Expr MINUS • Expr
+   50 Expr: Expr MINUS • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1008,7 +1013,7 @@ State 53
 
 State 54
 
-   50 Expr: Expr MULTIPLY • Expr
+   51 Expr: Expr MULTIPLY • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1023,7 +1028,7 @@ State 54
 
 State 55
 
-   51 Expr: Expr DIVIDE • Expr
+   52 Expr: Expr DIVIDE • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1038,7 +1043,7 @@ State 55
 
 State 56
 
-   58 Expr: Expr LOGICALAND • Expr
+   59 Expr: Expr LOGICALAND • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1053,7 +1058,7 @@ State 56
 
 State 57
 
-   59 Expr: Expr LOGICALOR • Expr
+   60 Expr: Expr LOGICALOR • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1068,7 +1073,7 @@ State 57
 
 State 58
 
-   54 Expr: Expr LESS_THAN • Expr
+   55 Expr: Expr LESS_THAN • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1083,7 +1088,7 @@ State 58
 
 State 59
 
-   56 Expr: Expr GREATER_THAN • Expr
+   57 Expr: Expr GREATER_THAN • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1098,7 +1103,7 @@ State 59
 
 State 60
 
-   55 Expr: Expr LESS_THAN_OR_EQUAL_TO • Expr
+   56 Expr: Expr LESS_THAN_OR_EQUAL_TO • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1113,7 +1118,7 @@ State 60
 
 State 61
 
-   57 Expr: Expr GREATER_THAN_OR_EQUAL_TO • Expr
+   58 Expr: Expr GREATER_THAN_OR_EQUAL_TO • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1128,7 +1133,7 @@ State 61
 
 State 62
 
-   52 Expr: Expr EQUAL_TO • Expr
+   53 Expr: Expr EQUAL_TO • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1143,7 +1148,7 @@ State 62
 
 State 63
 
-   53 Expr: Expr NOT_EQUAL_TO • Expr
+   54 Expr: Expr NOT_EQUAL_TO • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1158,19 +1163,19 @@ State 63
 
 State 64
 
-   46 Expr: ID EQUAL Expr •
-   48     | Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   47 Expr: ID EQUAL Expr •
+   49     | Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -1185,19 +1190,19 @@ State 64
     EQUAL_TO                  shift, and go to state 62
     NOT_EQUAL_TO              shift, and go to state 63
 
-    PLUS                      [reduce using rule 46 (Expr)]
-    MINUS                     [reduce using rule 46 (Expr)]
-    MULTIPLY                  [reduce using rule 46 (Expr)]
-    DIVIDE                    [reduce using rule 46 (Expr)]
-    LOGICALAND                [reduce using rule 46 (Expr)]
-    LOGICALOR                 [reduce using rule 46 (Expr)]
-    LESS_THAN                 [reduce using rule 46 (Expr)]
-    GREATER_THAN              [reduce using rule 46 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 46 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 46 (Expr)]
-    EQUAL_TO                  [reduce using rule 46 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 46 (Expr)]
-    $default                  reduce using rule 46 (Expr)
+    PLUS                      [reduce using rule 47 (Expr)]
+    MINUS                     [reduce using rule 47 (Expr)]
+    MULTIPLY                  [reduce using rule 47 (Expr)]
+    DIVIDE                    [reduce using rule 47 (Expr)]
+    LOGICALAND                [reduce using rule 47 (Expr)]
+    LOGICALOR                 [reduce using rule 47 (Expr)]
+    LESS_THAN                 [reduce using rule 47 (Expr)]
+    GREATER_THAN              [reduce using rule 47 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 47 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 47 (Expr)]
+    EQUAL_TO                  [reduce using rule 47 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 47 (Expr)]
+    $default                  reduce using rule 47 (Expr)
 
 
 State 65
@@ -1217,20 +1222,20 @@ State 66
 
 State 67
 
-   45 Expr: ID LEFTBRACKET Expr • RIGHTBRACKET
-   47     | ID LEFTBRACKET Expr • RIGHTBRACKET EQUAL Expr
-   48     | Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   46 Expr: ID LEFTBRACKET Expr • RIGHTBRACKET
+   48     | ID LEFTBRACKET Expr • RIGHTBRACKET EQUAL Expr
+   49     | Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -1249,42 +1254,42 @@ State 67
 
 State 68
 
-   42 Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS •
+   43 Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS •
 
-    $default  reduce using rule 42 (Expr)
+    $default  reduce using rule 43 (Expr)
 
 
 State 69
 
-   61 Expr: WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS •
+   62 Expr: WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS •
 
-    $default  reduce using rule 61 (Expr)
+    $default  reduce using rule 62 (Expr)
 
 
 State 70
 
-   35 FunDecl: FUN Type ID • $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
+   36 FunDecl: FUN Type ID • $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block
 
-    $default  reduce using rule 33 ($@4)
+    $default  reduce using rule 34 ($@5)
 
-    $@4  go to state 91
+    $@5  go to state 91
 
 
 State 71
 
    31 IfStmt: IF LEFTPARENTHESIS Expr • RIGHTPARENTHESIS $@1 Block
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -1303,19 +1308,19 @@ State 71
 
 State 72
 
-   32 WhileStmt: WHILE LEFTPARENTHESIS Expr • RIGHTPARENTHESIS Block
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   33 WhileStmt: WHILE LEFTPARENTHESIS Expr • RIGHTPARENTHESIS $@4 Block
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -1334,14 +1339,14 @@ State 72
 
 State 73
 
-   37 VarDecl: Type ID SEMICOLON •
+   38 VarDecl: Type ID SEMICOLON •
 
-    $default  reduce using rule 37 (VarDecl)
+    $default  reduce using rule 38 (VarDecl)
 
 
 State 74
 
-   38 VarDecl: Type ID EQUAL • Expr SEMICOLON
+   39 VarDecl: Type ID EQUAL • Expr SEMICOLON
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1356,7 +1361,7 @@ State 74
 
 State 75
 
-   39 VarDecl: Type ID LEFTBRACKET • Expr RIGHTBRACKET SEMICOLON
+   40 VarDecl: Type ID LEFTBRACKET • Expr RIGHTBRACKET SEMICOLON
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1371,41 +1376,19 @@ State 75
 
 State 76
 
-   48 Expr: Expr • PLUS Expr
-   48     | Expr PLUS Expr •
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
-
-    MULTIPLY  shift, and go to state 54
-    DIVIDE    shift, and go to state 55
-
-    $default  reduce using rule 48 (Expr)
-
-
-State 77
-
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   49     | Expr MINUS Expr •
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   49     | Expr PLUS Expr •
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     MULTIPLY  shift, and go to state 54
     DIVIDE    shift, and go to state 55
@@ -1413,59 +1396,81 @@ State 77
     $default  reduce using rule 49 (Expr)
 
 
-State 78
+State 77
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   50     | Expr MULTIPLY Expr •
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   50     | Expr MINUS Expr •
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+
+    MULTIPLY  shift, and go to state 54
+    DIVIDE    shift, and go to state 55
 
     $default  reduce using rule 50 (Expr)
 
 
-State 79
+State 78
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   51     | Expr DIVIDE Expr •
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   51     | Expr MULTIPLY Expr •
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     $default  reduce using rule 51 (Expr)
 
 
+State 79
+
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   52     | Expr DIVIDE Expr •
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+
+    $default  reduce using rule 52 (Expr)
+
+
 State 80
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   58     | Expr LOGICALAND Expr •
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   59     | Expr LOGICALAND Expr •
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -1478,24 +1483,24 @@ State 80
     EQUAL_TO                  shift, and go to state 62
     NOT_EQUAL_TO              shift, and go to state 63
 
-    $default  reduce using rule 58 (Expr)
+    $default  reduce using rule 59 (Expr)
 
 
 State 81
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
-   59     | Expr LOGICALOR Expr •
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+   60     | Expr LOGICALOR Expr •
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
@@ -1509,72 +1514,24 @@ State 81
     EQUAL_TO                  shift, and go to state 62
     NOT_EQUAL_TO              shift, and go to state 63
 
-    $default  reduce using rule 59 (Expr)
+    $default  reduce using rule 60 (Expr)
 
 
 State 82
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   54     | Expr LESS_THAN Expr •
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
-
-    PLUS      shift, and go to state 52
-    MINUS     shift, and go to state 53
-    MULTIPLY  shift, and go to state 54
-    DIVIDE    shift, and go to state 55
-
-    $default  reduce using rule 54 (Expr)
-
-
-State 83
-
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   56     | Expr GREATER_THAN Expr •
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
-
-    PLUS      shift, and go to state 52
-    MINUS     shift, and go to state 53
-    MULTIPLY  shift, and go to state 54
-    DIVIDE    shift, and go to state 55
-
-    $default  reduce using rule 56 (Expr)
-
-
-State 84
-
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   55     | Expr LESS_THAN_OR_EQUAL_TO Expr •
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   55     | Expr LESS_THAN Expr •
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS      shift, and go to state 52
     MINUS     shift, and go to state 53
@@ -1584,21 +1541,21 @@ State 84
     $default  reduce using rule 55 (Expr)
 
 
-State 85
+State 83
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   57     | Expr GREATER_THAN_OR_EQUAL_TO Expr •
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   57     | Expr GREATER_THAN Expr •
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS      shift, and go to state 52
     MINUS     shift, and go to state 53
@@ -1608,45 +1565,69 @@ State 85
     $default  reduce using rule 57 (Expr)
 
 
-State 86
+State 84
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   52     | Expr EQUAL_TO Expr •
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   56     | Expr LESS_THAN_OR_EQUAL_TO Expr •
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS      shift, and go to state 52
     MINUS     shift, and go to state 53
     MULTIPLY  shift, and go to state 54
     DIVIDE    shift, and go to state 55
 
-    $default  reduce using rule 52 (Expr)
+    $default  reduce using rule 56 (Expr)
 
 
-State 87
+State 85
 
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   53     | Expr NOT_EQUAL_TO Expr •
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   58     | Expr GREATER_THAN_OR_EQUAL_TO Expr •
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+
+    PLUS      shift, and go to state 52
+    MINUS     shift, and go to state 53
+    MULTIPLY  shift, and go to state 54
+    DIVIDE    shift, and go to state 55
+
+    $default  reduce using rule 58 (Expr)
+
+
+State 86
+
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   53     | Expr EQUAL_TO Expr •
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS      shift, and go to state 52
     MINUS     shift, and go to state 53
@@ -1654,6 +1635,30 @@ State 87
     DIVIDE    shift, and go to state 55
 
     $default  reduce using rule 53 (Expr)
+
+
+State 87
+
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   54     | Expr NOT_EQUAL_TO Expr •
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+
+    PLUS      shift, and go to state 52
+    MINUS     shift, and go to state 53
+    MULTIPLY  shift, and go to state 54
+    DIVIDE    shift, and go to state 55
+
+    $default  reduce using rule 54 (Expr)
 
 
 State 88
@@ -1675,17 +1680,17 @@ State 89
 
 State 90
 
-   45 Expr: ID LEFTBRACKET Expr RIGHTBRACKET •
-   47     | ID LEFTBRACKET Expr RIGHTBRACKET • EQUAL Expr
+   46 Expr: ID LEFTBRACKET Expr RIGHTBRACKET •
+   48     | ID LEFTBRACKET Expr RIGHTBRACKET • EQUAL Expr
 
     EQUAL  shift, and go to state 97
 
-    $default  reduce using rule 45 (Expr)
+    $default  reduce using rule 46 (Expr)
 
 
 State 91
 
-   35 FunDecl: FUN Type ID $@4 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block
+   36 FunDecl: FUN Type ID $@5 • LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block
 
     LEFTPARENTHESIS  shift, and go to state 98
 
@@ -1701,30 +1706,30 @@ State 92
 
 State 93
 
-   32 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS • Block
+   33 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS • $@4 Block
 
-    LEFTCURLYBRACKET  shift, and go to state 100
+    $default  reduce using rule 32 ($@4)
 
-    Block  go to state 101
+    $@4  go to state 100
 
 
 State 94
 
-   38 VarDecl: Type ID EQUAL Expr • SEMICOLON
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   39 VarDecl: Type ID EQUAL Expr • SEMICOLON
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
-    SEMICOLON                 shift, and go to state 102
+    SEMICOLON                 shift, and go to state 101
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
     MULTIPLY                  shift, and go to state 54
@@ -1741,25 +1746,25 @@ State 94
 
 State 95
 
-   39 VarDecl: Type ID LEFTBRACKET Expr • RIGHTBRACKET SEMICOLON
-   48 Expr: Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
+   40 VarDecl: Type ID LEFTBRACKET Expr • RIGHTBRACKET SEMICOLON
+   49 Expr: Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
 
     PLUS                      shift, and go to state 52
     MINUS                     shift, and go to state 53
     MULTIPLY                  shift, and go to state 54
     DIVIDE                    shift, and go to state 55
-    RIGHTBRACKET              shift, and go to state 103
+    RIGHTBRACKET              shift, and go to state 102
     LOGICALAND                shift, and go to state 56
     LOGICALOR                 shift, and go to state 57
     LESS_THAN                 shift, and go to state 58
@@ -1784,12 +1789,12 @@ State 96
     $default  reduce using rule 26 (Param)
 
     Type   go to state 65
-    Param  go to state 104
+    Param  go to state 103
 
 
 State 97
 
-   47 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL • Expr
+   48 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL • Expr
 
     ID               shift, and go to state 35
     MINUS            shift, and go to state 10
@@ -1799,12 +1804,12 @@ State 97
     WRITE            shift, and go to state 14
     WRITELN          shift, and go to state 15
 
-    Expr  go to state 105
+    Expr  go to state 104
 
 
 State 98
 
-   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS • ParamList RIGHTPARENTHESIS $@5 Block
+   36 FunDecl: FUN Type ID $@5 LEFTPARENTHESIS • ParamList RIGHTPARENTHESIS $@6 Block
 
     INT     shift, and go to state 1
     FLOAT   shift, and go to state 2
@@ -1815,22 +1820,111 @@ State 98
 
     $default  reduce using rule 21 (ParamList)
 
-    Type       go to state 106
-    ParamList  go to state 107
+    Type       go to state 105
+    ParamList  go to state 106
 
 
 State 99
 
    31 IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@1 • Block
 
-    LEFTCURLYBRACKET  shift, and go to state 100
+    LEFTCURLYBRACKET  shift, and go to state 107
 
     Block  go to state 108
 
 
 State 100
 
-   36 Block: LEFTCURLYBRACKET • DeclList StmtList RIGHCURLYBRACKET
+   33 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@4 • Block
+
+    LEFTCURLYBRACKET  shift, and go to state 107
+
+    Block  go to state 109
+
+
+State 101
+
+   39 VarDecl: Type ID EQUAL Expr SEMICOLON •
+
+    $default  reduce using rule 39 (VarDecl)
+
+
+State 102
+
+   40 VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET • SEMICOLON
+
+    SEMICOLON  shift, and go to state 110
+
+
+State 103
+
+   24 Param: Type ID COMMA Param •
+
+    $default  reduce using rule 24 (Param)
+
+
+State 104
+
+   48 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr •
+   49     | Expr • PLUS Expr
+   50     | Expr • MINUS Expr
+   51     | Expr • MULTIPLY Expr
+   52     | Expr • DIVIDE Expr
+   53     | Expr • EQUAL_TO Expr
+   54     | Expr • NOT_EQUAL_TO Expr
+   55     | Expr • LESS_THAN Expr
+   56     | Expr • LESS_THAN_OR_EQUAL_TO Expr
+   57     | Expr • GREATER_THAN Expr
+   58     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
+   59     | Expr • LOGICALAND Expr
+   60     | Expr • LOGICALOR Expr
+
+    PLUS                      shift, and go to state 52
+    MINUS                     shift, and go to state 53
+    MULTIPLY                  shift, and go to state 54
+    DIVIDE                    shift, and go to state 55
+    LOGICALAND                shift, and go to state 56
+    LOGICALOR                 shift, and go to state 57
+    LESS_THAN                 shift, and go to state 58
+    GREATER_THAN              shift, and go to state 59
+    LESS_THAN_OR_EQUAL_TO     shift, and go to state 60
+    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 61
+    EQUAL_TO                  shift, and go to state 62
+    NOT_EQUAL_TO              shift, and go to state 63
+
+    PLUS                      [reduce using rule 48 (Expr)]
+    MINUS                     [reduce using rule 48 (Expr)]
+    MULTIPLY                  [reduce using rule 48 (Expr)]
+    DIVIDE                    [reduce using rule 48 (Expr)]
+    LOGICALAND                [reduce using rule 48 (Expr)]
+    LOGICALOR                 [reduce using rule 48 (Expr)]
+    LESS_THAN                 [reduce using rule 48 (Expr)]
+    GREATER_THAN              [reduce using rule 48 (Expr)]
+    LESS_THAN_OR_EQUAL_TO     [reduce using rule 48 (Expr)]
+    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 48 (Expr)]
+    EQUAL_TO                  [reduce using rule 48 (Expr)]
+    NOT_EQUAL_TO              [reduce using rule 48 (Expr)]
+    $default                  reduce using rule 48 (Expr)
+
+
+State 105
+
+   22 ParamList: Type • ID COMMA ParamList
+   23          | Type • ID
+
+    ID  shift, and go to state 111
+
+
+State 106
+
+   36 FunDecl: FUN Type ID $@5 LEFTPARENTHESIS ParamList • RIGHTPARENTHESIS $@6 Block
+
+    RIGHTPARENTHESIS  shift, and go to state 112
+
+
+State 107
+
+   37 Block: LEFTCURLYBRACKET • DeclList StmtList RIGHCURLYBRACKET
 
     INT              shift, and go to state 1
     FLOAT            shift, and go to state 2
@@ -1872,7 +1966,7 @@ State 100
     WHILE            [reduce using rule 9 (StmtList)]
     $default         reduce using rule 9 (StmtList)
 
-    DeclList    go to state 109
+    DeclList    go to state 113
     Decl        go to state 21
     StmtList    go to state 22
     Stmt        go to state 23
@@ -1886,93 +1980,6 @@ State 100
     Expr        go to state 31
 
 
-State 101
-
-   32 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block •
-
-    $default  reduce using rule 32 (WhileStmt)
-
-
-State 102
-
-   38 VarDecl: Type ID EQUAL Expr SEMICOLON •
-
-    $default  reduce using rule 38 (VarDecl)
-
-
-State 103
-
-   39 VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET • SEMICOLON
-
-    SEMICOLON  shift, and go to state 110
-
-
-State 104
-
-   24 Param: Type ID COMMA Param •
-
-    $default  reduce using rule 24 (Param)
-
-
-State 105
-
-   47 Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr •
-   48     | Expr • PLUS Expr
-   49     | Expr • MINUS Expr
-   50     | Expr • MULTIPLY Expr
-   51     | Expr • DIVIDE Expr
-   52     | Expr • EQUAL_TO Expr
-   53     | Expr • NOT_EQUAL_TO Expr
-   54     | Expr • LESS_THAN Expr
-   55     | Expr • LESS_THAN_OR_EQUAL_TO Expr
-   56     | Expr • GREATER_THAN Expr
-   57     | Expr • GREATER_THAN_OR_EQUAL_TO Expr
-   58     | Expr • LOGICALAND Expr
-   59     | Expr • LOGICALOR Expr
-
-    PLUS                      shift, and go to state 52
-    MINUS                     shift, and go to state 53
-    MULTIPLY                  shift, and go to state 54
-    DIVIDE                    shift, and go to state 55
-    LOGICALAND                shift, and go to state 56
-    LOGICALOR                 shift, and go to state 57
-    LESS_THAN                 shift, and go to state 58
-    GREATER_THAN              shift, and go to state 59
-    LESS_THAN_OR_EQUAL_TO     shift, and go to state 60
-    GREATER_THAN_OR_EQUAL_TO  shift, and go to state 61
-    EQUAL_TO                  shift, and go to state 62
-    NOT_EQUAL_TO              shift, and go to state 63
-
-    PLUS                      [reduce using rule 47 (Expr)]
-    MINUS                     [reduce using rule 47 (Expr)]
-    MULTIPLY                  [reduce using rule 47 (Expr)]
-    DIVIDE                    [reduce using rule 47 (Expr)]
-    LOGICALAND                [reduce using rule 47 (Expr)]
-    LOGICALOR                 [reduce using rule 47 (Expr)]
-    LESS_THAN                 [reduce using rule 47 (Expr)]
-    GREATER_THAN              [reduce using rule 47 (Expr)]
-    LESS_THAN_OR_EQUAL_TO     [reduce using rule 47 (Expr)]
-    GREATER_THAN_OR_EQUAL_TO  [reduce using rule 47 (Expr)]
-    EQUAL_TO                  [reduce using rule 47 (Expr)]
-    NOT_EQUAL_TO              [reduce using rule 47 (Expr)]
-    $default                  reduce using rule 47 (Expr)
-
-
-State 106
-
-   22 ParamList: Type • ID COMMA ParamList
-   23          | Type • ID
-
-    ID  shift, and go to state 111
-
-
-State 107
-
-   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList • RIGHTPARENTHESIS $@5 Block
-
-    RIGHTPARENTHESIS  shift, and go to state 112
-
-
 State 108
 
    31 IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@1 Block •
@@ -1982,33 +1989,16 @@ State 108
 
 State 109
 
-   36 Block: LEFTCURLYBRACKET DeclList • StmtList RIGHCURLYBRACKET
+   33 WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@4 Block •
 
-    ID               shift, and go to state 7
-    RETURN           shift, and go to state 8
-    SEMICOLON        shift, and go to state 9
-    MINUS            shift, and go to state 10
-    LEFTPARENTHESIS  shift, and go to state 11
-    UNARYNOT         shift, and go to state 12
-    NUMBER           shift, and go to state 13
-    WRITE            shift, and go to state 14
-    WRITELN          shift, and go to state 15
-
-    SEMICOLON  [reduce using rule 29 (FunCall)]
-    $default   reduce using rule 9 (StmtList)
-
-    StmtList    go to state 113
-    Stmt        go to state 23
-    ReturnStmt  go to state 25
-    FunCall     go to state 26
-    Expr        go to state 31
+    $default  reduce using rule 33 (WhileStmt)
 
 
 State 110
 
-   39 VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON •
+   40 VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON •
 
-    $default  reduce using rule 39 (VarDecl)
+    $default  reduce using rule 40 (VarDecl)
 
 
 State 111
@@ -2023,18 +2013,35 @@ State 111
 
 State 112
 
-   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS • $@5 Block
+   36 FunDecl: FUN Type ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS • $@6 Block
 
-    $default  reduce using rule 34 ($@5)
+    $default  reduce using rule 35 ($@6)
 
-    $@5  go to state 115
+    $@6  go to state 115
 
 
 State 113
 
-   36 Block: LEFTCURLYBRACKET DeclList StmtList • RIGHCURLYBRACKET
+   37 Block: LEFTCURLYBRACKET DeclList • StmtList RIGHCURLYBRACKET
 
-    RIGHCURLYBRACKET  shift, and go to state 116
+    ID               shift, and go to state 7
+    RETURN           shift, and go to state 8
+    SEMICOLON        shift, and go to state 9
+    MINUS            shift, and go to state 10
+    LEFTPARENTHESIS  shift, and go to state 11
+    UNARYNOT         shift, and go to state 12
+    NUMBER           shift, and go to state 13
+    WRITE            shift, and go to state 14
+    WRITELN          shift, and go to state 15
+
+    SEMICOLON  [reduce using rule 29 (FunCall)]
+    $default   reduce using rule 9 (StmtList)
+
+    StmtList    go to state 116
+    Stmt        go to state 23
+    ReturnStmt  go to state 25
+    FunCall     go to state 26
+    Expr        go to state 31
 
 
 State 114
@@ -2050,24 +2057,24 @@ State 114
 
     $default  reduce using rule 21 (ParamList)
 
-    Type       go to state 106
+    Type       go to state 105
     ParamList  go to state 117
 
 
 State 115
 
-   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 • Block
+   36 FunDecl: FUN Type ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 • Block
 
-    LEFTCURLYBRACKET  shift, and go to state 100
+    LEFTCURLYBRACKET  shift, and go to state 107
 
     Block  go to state 118
 
 
 State 116
 
-   36 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET •
+   37 Block: LEFTCURLYBRACKET DeclList StmtList • RIGHCURLYBRACKET
 
-    $default  reduce using rule 36 (Block)
+    RIGHCURLYBRACKET  shift, and go to state 119
 
 
 State 117
@@ -2079,6 +2086,13 @@ State 117
 
 State 118
 
-   35 FunDecl: FUN Type ID $@4 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@5 Block •
+   36 FunDecl: FUN Type ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block •
 
-    $default  reduce using rule 35 (FunDecl)
+    $default  reduce using rule 36 (FunDecl)
+
+
+State 119
+
+   37 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET •
+
+    $default  reduce using rule 37 (Block)

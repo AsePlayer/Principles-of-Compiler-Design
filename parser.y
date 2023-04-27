@@ -3,13 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "symbolTable.h"
 #include "AST.h"
 #include "IRcode.h"
 #include "Assembly.h"
 
-extern int yylex();
+
+extern int yylex(); 
 extern int yyparse();
 extern FILE* yyin; 
 
@@ -77,7 +79,7 @@ DeclList:	Decl DeclList	{ $1->left = $2;
 							  $$ = $1;
 							}
 	| Decl	{ $$ = $1; }
-;
+; 
 
 Decl:	FunDecl 
 	| VarDecl 
@@ -288,7 +290,7 @@ Block ELSE {
 
 };
 
-WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block { 
+WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS {	
 	printf("Recognized rule: While statement %s\n", $3->value);
 	// Check if the variables are in the symbol table
 	int inSymTab1 = found($3->value, currentScope);
@@ -309,19 +311,25 @@ WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS Block {
 	}
 
 	// Check if the expression is true or false
-	char stringVal[50];
-	if(atoi($3->value)) {
+	char stringVal[50]; 
+	if(atoi($3->value)) { 
 		sprintf(stringVal, "%d", 1);
-		printf("TRUE\n");
+		printf("TRUE\n"); 
 
 		// emit IR code for if statement
-	}
+	} 
 	else {
 		sprintf(stringVal, "%d", 0);
 		printf("FALSE\n"); 
 
 		// do not emit IR code for if statement 
 	}
+	emitMIPSWhileLoop($3->LHS, $3->condition, $3->RHS, stringVal);
+} Block {  
+
+	$$ = AST_BinaryExpression("while", $6, $3);
+	// emitMIPSWhileLoop(char id1[50], char condition[50], char id2[50], char boolean[50])
+	emitMIPSEndWhileLoop();
 };
 
 
@@ -373,11 +381,11 @@ LEFTPARENTHESIS ParamList RIGHTPARENTHESIS {emitFunctionBlockStart();}  Block	{
 
 											emitMIPSEndFunction();  
 										} 
-; 
+;  
  
 Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET { 
 	$$ = AST_Block("Block", $2, $3); 
-	// print the AST
+	// print the AST 
 	printf("\n--- Abstract Syntax Tree 2 ---\n\n");
 	printAST($$,0);
 	while($2->left != NULL) {
@@ -1351,17 +1359,20 @@ int main(int argc, char**argv)
 {
 	strcpy(currentScope, "global");
 /*
-	#ifdef YYDEBUG
-		yydebug = 1;
+	#ifdef YYDEBUG 
+		yydebug = 1; 
 	#endif
 */
 	printf("\n\n##### COMPILER STARTED #####\n\n");
+	clock_t start_time, end_time;
+    double cpu_time_used;
+	start_time = clock();
 	 
-	if (argc > 1){
+	if (argc > 1){ 
 	  if(!(yyin = fopen(argv[1], "r")))
           {
 		perror(argv[1]);
-		return(1);
+		return(1); 
 	  }
 	} 
 
@@ -1377,6 +1388,13 @@ int main(int argc, char**argv)
 	combineMIPSFiles(); 
 	 
 	showSymTable();
+
+	end_time = clock();
+
+    cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+    printf("CPU time used: %f seconds\n", cpu_time_used); 
+	/* printf("Start time: %ld\n", start_time);
+	printf("End time: %ld\n", end_time); */
 }
   
 void yyerror(const char* s) { 
