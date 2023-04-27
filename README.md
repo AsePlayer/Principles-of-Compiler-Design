@@ -1,5 +1,5 @@
 # C- Compiler
-This is a C- compiler built using the C language. It takes in C- code and generates assembly code.
+This is a C- compiler built using the C language as well as flex and bison. It takes in C- code and generates assembly code.
 
 # Getting Started
 Prerequisites
