@@ -14,7 +14,7 @@
 extern int yylex(); 
 extern int yyparse();
 extern FILE* yyin; 
-
+ 
 FILE * IRcode;
 FILE * MIPScode;
   
@@ -185,6 +185,8 @@ IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS {
 			printf("TRUE\n");
 
 			// emit IR code for if statement
+			emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS, stringVal); 
+			sprintf($3->value, "%s", stringVal);
 		}
 		else {
 			sprintf(stringVal, "%d", 0);
@@ -193,8 +195,8 @@ IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS {
 			// do not emit IR code for if statement 
 		}
 
-		sprintf($3->value, "%s", stringVal);
-		emitMIPSIfStatement($3->LHS, $3->condition, $3->RHS, stringVal); 
+		
+		
 } 
 Block {
 		$$ = AST_BinaryExpression("if", $6, $3);  
@@ -827,6 +829,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found($1, currentScope);
 		int inSymTab2 = found($3, currentScope);
+		int round_value = 0;
 
 		// Check if Expr $1's nodeType is a number or a variable
 		if(strcmp($1->nodeType, "number") == 0) {
@@ -870,9 +873,14 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 			sprintf(stringVal, "%f", atof($1->value) / atof($3->value));
 			// type coercion for floats 
 			if(strchr($1->nodeType, 'float') != NULL || strchr($3->nodeType, 'float') != NULL || strchr($$->nodeType, 'float') != NULL) {
-			} 
+				sprintf(stringVal, "%f", atof($1->value) / atof($3->value));
+			}
+			else
+			{
+				sprintf(stringVal, "%d", (int)(atof($1->value) / atof($3->value)));
+			}
 			
-			sprintf(stringVal, "%f", atof($1->value) / atof($3->value));
+			
 
 
 			// Generate AST for the addition
@@ -1338,7 +1346,7 @@ Expr: NUMBER            { $$ = $1; sprintf($$->value, "%s", $1); sprintf($$->nod
 		// Generate MIPS code for the write statement
 		emitMIPSNewLine();  
 
-	 } 
+	 }
 ;
 
 UnaryOp: MINUS
