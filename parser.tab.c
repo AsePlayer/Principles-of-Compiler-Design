@@ -84,7 +84,7 @@
 extern int yylex(); 
 extern int yyparse();
 extern FILE* yyin; 
-
+ 
 FILE * IRcode;
 FILE * MIPScode;
   
@@ -575,10 +575,10 @@ static const yytype_int16 yyrline[] =
        0,    71,    71,    78,    81,    84,    85,    86,    87,    88,
       91,    92,    97,    98,    99,   100,   103,   104,   105,   106,
      107,   108,   111,   112,   115,   120,   121,   122,   125,   146,
-     158,   161,   161,   293,   293,   336,   363,   336,   386,   411,
-     431,   464,   519,   520,   521,   522,   559,   575,   603,   639,
-     681,   727,   773,   826,   886,   938,   991,  1043,  1095,  1147,
-    1199,  1254,  1311,  1335
+     158,   161,   161,   295,   295,   338,   365,   338,   388,   413,
+     433,   466,   521,   522,   523,   524,   561,   577,   605,   641,
+     683,   729,   775,   828,   894,   946,   999,  1051,  1103,  1155,
+    1207,  1262,  1319,  1343
 };
 #endif
 
@@ -1445,6 +1445,8 @@ yyreduce:
 			printf("TRUE\n");
 
 			// emit IR code for if statement
+			emitMIPSIfStatement((yyvsp[-1].ast)->LHS, (yyvsp[-1].ast)->condition, (yyvsp[-1].ast)->RHS, stringVal); 
+			sprintf((yyvsp[-1].ast)->value, "%s", stringVal);
 		}
 		else {
 			sprintf(stringVal, "%d", 0);
@@ -1453,14 +1455,14 @@ yyreduce:
 			// do not emit IR code for if statement 
 		}
 
-		sprintf((yyvsp[-1].ast)->value, "%s", stringVal);
-		emitMIPSIfStatement((yyvsp[-1].ast)->LHS, (yyvsp[-1].ast)->condition, (yyvsp[-1].ast)->RHS, stringVal); 
+		
+		
 }
-#line 1460 "parser.tab.c"
+#line 1462 "parser.tab.c"
     break;
 
   case 32: /* IfStmt: IF LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@1 Block  */
-#line 199 "parser.y"
+#line 201 "parser.y"
       {
 		(yyval.ast) = AST_BinaryExpression("if", (yyvsp[0].ast), (yyvsp[-3].ast));  
 		// print the AST
@@ -1469,11 +1471,11 @@ yyreduce:
 		emitMIPSEndIfStatement();
 
 }
-#line 1473 "parser.tab.c"
+#line 1475 "parser.tab.c"
     break;
 
   case 33: /* $@4: %empty  */
-#line 293 "parser.y"
+#line 295 "parser.y"
                                                        {	
 	printf("Recognized rule: While statement %s\n", (yyvsp[-1].ast)->value);
 	// Check if the variables are in the symbol table
@@ -1510,22 +1512,22 @@ yyreduce:
 	}
 	emitMIPSWhileLoop((yyvsp[-1].ast)->LHS, (yyvsp[-1].ast)->condition, (yyvsp[-1].ast)->RHS, stringVal);
 }
-#line 1514 "parser.tab.c"
+#line 1516 "parser.tab.c"
     break;
 
   case 34: /* WhileStmt: WHILE LEFTPARENTHESIS Expr RIGHTPARENTHESIS $@4 Block  */
-#line 328 "parser.y"
+#line 330 "parser.y"
         {  
 
 	(yyval.ast) = AST_BinaryExpression("while", (yyvsp[0].ast), (yyvsp[-3].ast));
 	// emitMIPSWhileLoop(char id1[50], char condition[50], char id2[50], char boolean[50])
 	emitMIPSEndWhileLoop();
 }
-#line 1525 "parser.tab.c"
+#line 1527 "parser.tab.c"
     break;
 
   case 35: /* $@5: %empty  */
-#line 336 "parser.y"
+#line 338 "parser.y"
                             {
 printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 																// Symbol Table
@@ -1553,17 +1555,17 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 																emitMIPSFunctionDeclaration((yyvsp[0].string), (yyvsp[-1].ast));
 																
 }
-#line 1557 "parser.tab.c"
+#line 1559 "parser.tab.c"
     break;
 
   case 36: /* $@6: %empty  */
-#line 363 "parser.y"
+#line 365 "parser.y"
                                            {emitFunctionBlockStart();}
-#line 1563 "parser.tab.c"
+#line 1565 "parser.tab.c"
     break;
 
   case 37: /* FunDecl: FUN Type ID $@5 LEFTPARENTHESIS ParamList RIGHTPARENTHESIS $@6 Block  */
-#line 363 "parser.y"
+#line 365 "parser.y"
                                                                                 {  
 											// change current scope back to global 
 											
@@ -1585,11 +1587,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 
 											emitMIPSEndFunction();  
 										}
-#line 1589 "parser.tab.c"
+#line 1591 "parser.tab.c"
     break;
 
   case 38: /* Block: LEFTCURLYBRACKET DeclList StmtList RIGHCURLYBRACKET  */
-#line 386 "parser.y"
+#line 388 "parser.y"
                                                            { 
 	(yyval.ast) = AST_Block("Block", (yyvsp[-2].ast), (yyvsp[-1].ast)); 
 	// print the AST 
@@ -1612,11 +1614,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 
 	// loop through the statement list and look for return statements
 }
-#line 1616 "parser.tab.c"
+#line 1618 "parser.tab.c"
     break;
 
   case 39: /* VarDecl: Type ID SEMICOLON  */
-#line 411 "parser.y"
+#line 413 "parser.y"
                                         { printf("\n RECOGNIZED RULE: Variable declaration %s\n", (yyvsp[-1].string));
 									// Symbol Table
 									symTabAccess();
@@ -1637,11 +1639,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 									emitMIPSVariableDeclaration((yyvsp[-1].string), (yyvsp[-2].ast), (yyvsp[-2].ast)->value); 
 								    (yyval.ast) = AST_Type("Type", (yyvsp[-2].ast)->nodeType, (yyvsp[-2].ast)->value);
 								}
-#line 1641 "parser.tab.c"
+#line 1643 "parser.tab.c"
     break;
 
   case 40: /* VarDecl: Type ID EQUAL Expr SEMICOLON  */
-#line 431 "parser.y"
+#line 433 "parser.y"
                                { printf("\n RECOGNIZED RULE: Variable declaration %s\n", (yyvsp[-3].string));
 									// Symbol Table 
 									symTabAccess();
@@ -1675,11 +1677,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 									emitMIPSVariableDeclaration((yyvsp[-3].string), (yyvsp[-4].ast), (yyvsp[-1].ast)->value);
 
 								}
-#line 1679 "parser.tab.c"
+#line 1681 "parser.tab.c"
     break;
 
   case 41: /* VarDecl: Type ID LEFTBRACKET Expr RIGHTBRACKET SEMICOLON  */
-#line 464 "parser.y"
+#line 466 "parser.y"
                                                   { 
     // Symbol Table
     symTabAccess();
@@ -1724,29 +1726,29 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 	emitMIPSArrayDeclaration((yyvsp[-4].string), arraySize); 
 
 }
-#line 1728 "parser.tab.c"
+#line 1730 "parser.tab.c"
     break;
 
   case 42: /* Expr: NUMBER  */
-#line 519 "parser.y"
+#line 521 "parser.y"
                         { (yyval.ast) = (yyvsp[0].string); sprintf((yyval.ast)->value, "%s", (yyvsp[0].string)); sprintf((yyval.ast)->nodeType, "%s", "number"); }
-#line 1734 "parser.tab.c"
+#line 1736 "parser.tab.c"
     break;
 
   case 43: /* Expr: MINUS NUMBER  */
-#line 520 "parser.y"
+#line 522 "parser.y"
                              { (yyval.ast) = (yyvsp[0].string); sprintf((yyval.ast)->value, "-%s", (yyvsp[0].string)); sprintf((yyval.ast)->nodeType, "%s", "number"); }
-#line 1740 "parser.tab.c"
+#line 1742 "parser.tab.c"
     break;
 
   case 44: /* Expr: LEFTPARENTHESIS Expr RIGHTPARENTHESIS  */
-#line 521 "parser.y"
+#line 523 "parser.y"
                                                                  {(yyval.ast) = (yyvsp[-1].ast); sprintf((yyval.ast)->value, "%s", (yyvsp[-1].ast)->value);}
-#line 1746 "parser.tab.c"
+#line 1748 "parser.tab.c"
     break;
 
   case 45: /* Expr: UNARYNOT Expr  */
-#line 522 "parser.y"
+#line 524 "parser.y"
                         { (yyval.ast) = (yyvsp[0].ast); 
 
 		// Check if the variables are in the symbol table
@@ -1784,11 +1786,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal);
   
 	}
-#line 1788 "parser.tab.c"
+#line 1790 "parser.tab.c"
     break;
 
   case 46: /* Expr: ID  */
-#line 559 "parser.y"
+#line 561 "parser.y"
              { (yyval.ast) = (yyvsp[0].string); sprintf((yyval.ast)->value, "%s", (yyvsp[0].string)); 
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[0].string), currentScope);
@@ -1804,11 +1806,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 			sprintf((yyval.ast)->value, "%s", getValue(inSymTab1));
 		}
 	}
-#line 1808 "parser.tab.c"
+#line 1810 "parser.tab.c"
     break;
 
   case 47: /* Expr: ID LEFTBRACKET Expr RIGHTBRACKET  */
-#line 576 "parser.y"
+#line 578 "parser.y"
         {
 		int inSymTab = found((yyvsp[-3].string), currentScope);
 
@@ -1836,11 +1838,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 				} 
 		} 
 	}
-#line 1840 "parser.tab.c"
+#line 1842 "parser.tab.c"
     break;
 
   case 48: /* Expr: ID EQUAL Expr  */
-#line 603 "parser.y"
+#line 605 "parser.y"
                       {
         // Update the value of the variable in the symbol table
 		int inSymTab = found((yyvsp[-2].string), currentScope);  
@@ -1877,11 +1879,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		emitMIPSVariableUpdate((yyvsp[-2].string), (yyvsp[0].ast)->value);
 	  
      }
-#line 1881 "parser.tab.c"
+#line 1883 "parser.tab.c"
     break;
 
   case 49: /* Expr: ID LEFTBRACKET Expr RIGHTBRACKET EQUAL Expr  */
-#line 639 "parser.y"
+#line 641 "parser.y"
                                                        {
 		 // Update the value of the variable in the symbol table
 		int inSymTab = found((yyvsp[-5].string), currentScope);  
@@ -1924,11 +1926,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		// emitMIPSArrayUpdateValue($1, $3->value, $6->value);
 		
 	 }
-#line 1928 "parser.tab.c"
+#line 1930 "parser.tab.c"
     break;
 
   case 50: /* Expr: Expr PLUS Expr  */
-#line 681 "parser.y"
+#line 683 "parser.y"
                         {  
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -1975,11 +1977,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		// IR time
 		emitBinaryOperation(currentScope, "+", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 		}
-#line 1979 "parser.tab.c"
+#line 1981 "parser.tab.c"
     break;
 
   case 51: /* Expr: Expr MINUS Expr  */
-#line 727 "parser.y"
+#line 729 "parser.y"
                         { 
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2026,11 +2028,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		// IR time
 		emitBinaryOperation(currentScope, "-", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 	 }
-#line 2030 "parser.tab.c"
+#line 2032 "parser.tab.c"
     break;
 
   case 52: /* Expr: Expr MULTIPLY Expr  */
-#line 773 "parser.y"
+#line 775 "parser.y"
                            {
 		printf("EXPR1 is %s", (yyvsp[-2].ast)->nodeType);
 		printf("EXPR2 is %s", (yyvsp[0].ast)->nodeType); 
@@ -2084,15 +2086,16 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		emitBinaryOperation(currentScope, "*", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 
 	 }
-#line 2088 "parser.tab.c"
+#line 2090 "parser.tab.c"
     break;
 
   case 53: /* Expr: Expr DIVIDE Expr  */
-#line 826 "parser.y"
+#line 828 "parser.y"
                         { 
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
 		int inSymTab2 = found((yyvsp[0].ast), currentScope);
+		int round_value = 0;
 
 		// Check if Expr $1's nodeType is a number or a variable
 		if(strcmp((yyvsp[-2].ast)->nodeType, "number") == 0) {
@@ -2136,9 +2139,14 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 			sprintf(stringVal, "%f", atof((yyvsp[-2].ast)->value) / atof((yyvsp[0].ast)->value));
 			// type coercion for floats 
 			if(strchr((yyvsp[-2].ast)->nodeType, 'float') != NULL || strchr((yyvsp[0].ast)->nodeType, 'float') != NULL || strchr((yyval.ast)->nodeType, 'float') != NULL) {
-			} 
+				sprintf(stringVal, "%f", atof((yyvsp[-2].ast)->value) / atof((yyvsp[0].ast)->value));
+			}
+			else
+			{
+				sprintf(stringVal, "%d", (int)(atof((yyvsp[-2].ast)->value) / atof((yyvsp[0].ast)->value)));
+			}
 			
-			sprintf(stringVal, "%f", atof((yyvsp[-2].ast)->value) / atof((yyvsp[0].ast)->value));
+			
 
 
 			// Generate AST for the addition
@@ -2149,11 +2157,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		// IR time
 		emitBinaryOperation(currentScope, "/", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
      }
-#line 2153 "parser.tab.c"
+#line 2161 "parser.tab.c"
     break;
 
   case 54: /* Expr: Expr EQUAL_TO Expr  */
-#line 886 "parser.y"
+#line 894 "parser.y"
                               {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2206,11 +2214,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal);
 		sprintf((yyval.ast)->condition, "%s", "==");
 	 }
-#line 2210 "parser.tab.c"
+#line 2218 "parser.tab.c"
     break;
 
   case 55: /* Expr: Expr NOT_EQUAL_TO Expr  */
-#line 938 "parser.y"
+#line 946 "parser.y"
                                   {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2264,11 +2272,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal); 
 		sprintf((yyval.ast)->condition, "%s", "!=");
 	 }
-#line 2268 "parser.tab.c"
+#line 2276 "parser.tab.c"
     break;
 
   case 56: /* Expr: Expr LESS_THAN Expr  */
-#line 991 "parser.y"
+#line 999 "parser.y"
                                {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2321,11 +2329,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal);
 		sprintf((yyval.ast)->condition, "%s", "<");
 	 }
-#line 2325 "parser.tab.c"
+#line 2333 "parser.tab.c"
     break;
 
   case 57: /* Expr: Expr LESS_THAN_OR_EQUAL_TO Expr  */
-#line 1043 "parser.y"
+#line 1051 "parser.y"
                                            {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2378,11 +2386,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal); 
 		sprintf((yyval.ast)->condition, "%s", "<=");
 	 }
-#line 2382 "parser.tab.c"
+#line 2390 "parser.tab.c"
     break;
 
   case 58: /* Expr: Expr GREATER_THAN Expr  */
-#line 1095 "parser.y"
+#line 1103 "parser.y"
                                   {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2435,11 +2443,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal);
 		sprintf((yyval.ast)->condition, "%s", ">");
 	 }
-#line 2439 "parser.tab.c"
+#line 2447 "parser.tab.c"
     break;
 
   case 59: /* Expr: Expr GREATER_THAN_OR_EQUAL_TO Expr  */
-#line 1147 "parser.y"
+#line 1155 "parser.y"
                                               {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2492,11 +2500,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		sprintf((yyval.ast)->value, "%s", stringVal);
 		sprintf((yyval.ast)->condition, "%s", ">=");
 	 }
-#line 2496 "parser.tab.c"
+#line 2504 "parser.tab.c"
     break;
 
   case 60: /* Expr: Expr LOGICALAND Expr  */
-#line 1199 "parser.y"
+#line 1207 "parser.y"
                                 {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2552,11 +2560,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		(yyval.ast) = AST_BinaryExpression("number", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 		sprintf((yyval.ast)->value, "%s", stringVal);
 	 }
-#line 2556 "parser.tab.c"
+#line 2564 "parser.tab.c"
     break;
 
   case 61: /* Expr: Expr LOGICALOR Expr  */
-#line 1254 "parser.y"
+#line 1262 "parser.y"
                                {
 		// Check if the variables are in the symbol table
 		int inSymTab1 = found((yyvsp[-2].ast), currentScope);
@@ -2614,11 +2622,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		(yyval.ast) = AST_BinaryExpression("number", (yyvsp[-2].ast)->value, (yyvsp[0].ast)->value);
 		sprintf((yyval.ast)->value, "%s", stringVal);
 	 }
-#line 2618 "parser.tab.c"
+#line 2626 "parser.tab.c"
     break;
 
   case 62: /* Expr: WRITE Expr  */
-#line 1311 "parser.y"
+#line 1319 "parser.y"
                        {
 		// Check if the variable is in the symbol table
 		int inSymTab = found((yyvsp[0].ast), currentScope);
@@ -2643,11 +2651,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		// Generate MIPS code for the write statement
 		emitMIPSWriteId((yyvsp[0].ast)->value);
 	 }
-#line 2647 "parser.tab.c"
+#line 2655 "parser.tab.c"
     break;
 
   case 63: /* Expr: WRITELN LEFTPARENTHESIS RIGHTPARENTHESIS  */
-#line 1335 "parser.y"
+#line 1343 "parser.y"
                                                     {  
 		// Generate AST for the writeln statement
 		(yyval.ast) = AST_Write("newline", "", "");
@@ -2655,11 +2663,11 @@ printf("\n RECOGNIZED RULE: Function declaration %s\n", (yyvsp[0].string));
 		emitMIPSNewLine();  
 
 	 }
-#line 2659 "parser.tab.c"
+#line 2667 "parser.tab.c"
     break;
 
 
-#line 2663 "parser.tab.c"
+#line 2671 "parser.tab.c"
 
       default: break;
     }
@@ -2852,7 +2860,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 1356 "parser.y"
+#line 1364 "parser.y"
 
 
 int main(int argc, char**argv)
