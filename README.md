@@ -64,6 +64,7 @@ callThis(/*No parameters for this function*/);
 ```
 
 ## Output
+![Symbol table picture](symbol_table_screenshot.jpg)
 ```
 1
 2
@@ -71,6 +72,8 @@ callThis(/*No parameters for this function*/);
 4
 6
 ```
+
+
 
 ## Features
 
