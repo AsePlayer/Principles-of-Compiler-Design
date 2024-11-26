@@ -34,6 +34,13 @@ ws          {delim}+
 								}
 							}
 						}
+
+"//".*    {
+                chars += strlen(yytext);
+                printf("%s : COMMENT\n", yytext);
+                // Ignore the rest of the line
+            }
+
 						
 "void"	{words++; chars += strlen(yytext);
 		 printf("%s : TYPE\n", yytext);
