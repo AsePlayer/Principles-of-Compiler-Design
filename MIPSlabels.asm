@@ -1,79 +1,42 @@
 ifTrue_0:
-li $a0,4
-li $v0,1
-syscall
-li $a0,10
-li $v0,11
-syscall
-li $a0,2
-li $v0,1
-syscall
-li $a0,10
-li $v0,11
-syscall
-li $a0,0
-li $v0,1
-syscall
-ifTrue_1:
 li $a0,10
 li $v0,11
 syscall
 li $a0,1
 li $v0,1
 syscall
-ifTrue_2:
+ifTrue_1:
 li $a0,10
 li $v0,11
 syscall
 li $a0,2
 li $v0,1
 syscall
-ifTrue_3:
+la $a0, result
+li $a1, 17
+sw $a1, 0($a0)
+ifTrue_2:
 li $a0,10
 li $v0,11
 syscall
 li $a0,3
 li $v0,1
 syscall
-ifTrue_4:
+ifTrue_3:
 li $a0,10
 li $v0,11
 syscall
 li $a0,4
 li $v0,1
 syscall
-ifTrue_5:
-li $a0,10
-li $v0,11
-syscall
-li $a0,5
-li $v0,1
-syscall
-ifTrue_6:
+callThis:
+la $a0, statement
+li $a1, 6
+sw $a1, 0($a0)
 li $a0,10
 li $v0,11
 syscall
 li $a0,6
 li $v0,1
 syscall
-ifTrue_7:
-li $a0,10
-li $v0,11
-syscall
-li $a0,7
-li $v0,1
-syscall
-ifTrue_8:
-li $a0,10
-li $v0,11
-syscall
-li $a0,8
-li $v0,1
-syscall
-ifTrue_9:
-li $a0,10
-li $v0,11
-syscall
-li $a0,9
-li $v0,1
-syscall
+jr $ra

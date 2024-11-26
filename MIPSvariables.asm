@@ -1,4 +1,9 @@
 .data
-	bruh: .word 5
-	bruh2: .word 0
-	arr: .space 20
+	ten: .word 10
+	five: .word 5
+	twenty: .word 20
+	eight: .word 8
+	result: .word 0
+	x: .word 12
+	y: .word 7
+	statement: .word 0

@@ -1,49 +1,54 @@
-int bruh = 5;
-int bruh2;
-int arr[5];
+// Variable declarations
+int ten = 10;
+int five = 5;
+int twenty = 20;
+int eight = 8;
+int results[5];
+results[1] = -20;
 
-if (5 >= 6 || 5 == 5) {
-    write(4);
-    writeln();
-    write(2);
-    writeln();
-    write(0);
-}
 
-if(2 - 1 == 1 && 5 * 5 > 20) {
+// First condition: Check if a complex arithmetic operation evaluates to true
+if (ten * five + twenty - eight / 2 == 66) {
     writeln();
     write(1);
-    if(5 * 5 > 20) {
+
+    // Second condition: Check logical and comparison operations in sequence
+    if (ten >= five * 2 && five + twenty != eight * 2) {
         writeln();
         write(2);
-        if(5 * 5 < 220 && 5 == 5) {
+
+        // Third condition: Nested arithmetic and comparison operations
+        results[0] = (ten + five * (twenty - eight)) / 4;
+
+        if (results[0] > 15 && results[0] <= 20) {
             writeln();
             write(3);
-        }
-    }
-}
-
-if(5 == 5) {
-    writeln();
-    write(4);
-    if(5 != 6) {
-        writeln();
-        write(5);
-        if(5 > 4) {
-            writeln();
-            write(6);
-            if(5 >= 5) {
+            // Fourth condition: Check if the result is in-between both a and c
+            if (results[0] >= ten && results[0] <= twenty) {
                 writeln();
-                write(7);
-                if(5 < 6) {
-                    writeln();
-                    write(8);
-                    if(5 <= 5) {
-                        writeln();
-                        write(9);
-                    }
-                }
+                write(4);
             }
         }
     }
 }
+
+// Additional independent check using a different set of variables
+int x = 12;
+int y = 7;
+
+if (x - y * 3 + 4 == 5 && x / y == 1) {
+    writeln();
+    write(5);
+}
+
+// Call this function at the end
+fun int callThis() {
+    int statement;
+    statement = 6;
+    writeln();
+    write(statement);
+    return statement;
+}
+
+// Call final function
+callThis(/*No parameters for this function*/);
