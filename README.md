@@ -11,7 +11,10 @@ int ten = 10;
 int five = 5;
 int twenty = 20;
 int eight = 8;
-int result;
+
+int results[5];
+results[1] = -20;
+
 
 // First condition: Check if a complex arithmetic operation evaluates to true
 if (ten * five + twenty - eight / 2 == 66) {
@@ -24,14 +27,13 @@ if (ten * five + twenty - eight / 2 == 66) {
         write(2);
 
         // Third condition: Nested arithmetic and comparison operations
-        result = (ten + five * (twenty - eight)) / 4;
+        results[0] = (ten + five * (twenty - eight)) / 4;
 
-        if (result > 15 && result <= 20) {
+        if (results[0] > 15 && results[0] <= 20) {
             writeln();
             write(3);
-
             // Fourth condition: Check if the result is in-between both a and c
-            if (result >= ten && result <= twenty) {
+            if (results[0] >= ten && results[0] <= twenty) {
                 writeln();
                 write(4);
             }
