@@ -1,8 +1,7 @@
 # README - C- Compiler
 
 ## Overview
-
-This compiler processes a subset of C-like code with support for basic arithmetic, logical operations, variable declarations, arrays, and control flow statements (`if`, `else`). It compiles code into a sequence of intermediate steps, performing syntax analysis, lexical analysis, and symbol table management.
+This compiler processes a subset of C-like code with support for basic arithmetic, logical operations, variable declarations, arrays, and control flow statements (`if`, `else`). It compiles code into a sequence of intermediate steps, performing syntax analysis, lexical analysis, and symbol table management. The final result is runnable MIPS assembly code.
 
 ## Example C- Code
 ```c
@@ -64,7 +63,6 @@ callThis(/*No parameters for this function*/);
 ```
 
 ## Output
-![Symbol table picture](symbol_table_screenshot.jpg)
 ```
 1
 2
@@ -72,6 +70,7 @@ callThis(/*No parameters for this function*/);
 4
 6
 ```
+![Symbol table picture](symbol_table_screenshot.jpg)
 
 
 
@@ -79,7 +78,7 @@ callThis(/*No parameters for this function*/);
 
 - **Variable Declarations**: Supports variable declaration for basic types such as `int`, `char`, `bool`, and `float`. Arrays are also supported.
 - **Control Flow**: Supports conditional execution using `if` and `else`, with compound conditions combining logical (`&&`, `||`, `!`) and comparison operators (`<`, `>`, `<=`, `>=`, `==`, `!=`).
-- **Arithmetic**: Basic arithmetic operations (`+`, `-`, `*`, `/`, `%`) are supported.
+- **Arithmetic**: Basic arithmetic operations (`+`, `-`, `*`, `/`) with order of operations are supported.
 - **Write Functions**: The `write()` and `writeln()` functions are used to output values to the console.
 - **Symbol Table**: Maintains a symbol table for tracking declared variables and functions, ensuring that types and values are validated correctly. Includes support for scoping (global and function-level).
 - **Boolean Validation**: Ensures that `bool` variables are assigned only valid values ("1" or "0").
